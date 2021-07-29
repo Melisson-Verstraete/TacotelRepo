@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AdminListArticlesActivity extends AppCompatActivity {//coucou
+public class AdminListArticlesActivity extends AppCompatActivity {//coucou Linda
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
