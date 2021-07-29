@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_tacotel_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginTopStart_tacotel"
+        android:layout_marginTop="@dimen/marginTopStart_tacotel"
+        android:fontFamily="@string/tacotel_fontFamily"
+        android:text="@string/tacotel"
+        android:textSize="@dimen/label_tacotel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTopStart_tacotel"
+        android:layout_marginEnd="@dimen/marginTopStart_tacotel"
+        android:text="@string/ajout_modification_article"
+        android:textSize="@dimen/label_tacotel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider_article_admin"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/divider_marginTop"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="540dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider_article_admin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_libelle_new_article"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="0dp"
+                android:text="@string/libelle"
+                android:textSize="@dimen/label_textSize_form" />
+
+            <EditText
+                android:id="@+id/et_libelle_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginEnd="@dimen/marginStart_details"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tv_description_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:text="@string/description"
+                android:textSize="@dimen/label_textSize_form"/>
+
+            <EditText
+                android:id="@+id/et_description_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginEnd="@dimen/marginStart_details"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tv_prix_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:text="@string/prix"
+                android:textSize="@dimen/label_textSize_form"/>
+
+            <EditText
+                android:id="@+id/et_prix_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginEnd="@dimen/marginStart_details"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tv_stock_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:text="@string/stock"
+                android:textSize="@dimen/label_textSize_form"/>
+
+            <EditText
+                android:id="@+id/et_stock_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginEnd="@dimen/marginStart_details"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+
+            <TextView
+                android:id="@+id/tv_ecran_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:text="@string/taille_ecran"
+                android:textSize="@dimen/label_textSize_form"/>
+
+            <EditText
+                android:id="@+id/et_ecran_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginEnd="@dimen/marginStart_details"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tv_marque_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:text="@string/marque"
+                android:textSize="@dimen/label_textSize_form"/>
+
+            <EditText
+                android:id="@+id/et_marque_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginEnd="@dimen/marginStart_details"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tv_couleur_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:text="@string/couleur"
+                android:textSize="@dimen/label_textSize_form"/>
+
+            <EditText
+                android:id="@+id/et_couleur_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginEnd="@dimen/marginStart_details"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tv_memoire_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:text="@string/taille_memoire"
+                android:textSize="@dimen/label_textSize_form"/>
+
+            <EditText
+                android:id="@+id/et_memoire_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginEnd="@dimen/marginStart_details"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tv_image_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:text="Image"
+                android:textSize="@dimen/label_textSize_form"/>
+
+            <EditText
+                android:id="@+id/et_image_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginEnd="@dimen/marginStart_details"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/tv_categorie_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:text="@string/select_categorie"
+                android:textSize="@dimen/label_textSize_form"/>
+
+            <Spinner
+                android:id="@+id/spinner_categories_new_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginEnd="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/tv_categorie_magasin"
+                app:layout_constraintTop_toBottomOf="@+id/divider_magasin" />
+
+            <Button
+                android:id="@+id/btn_ajouter_new_article"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginStart_details"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:background="@color/color_blue_info"
+                android:onClick="goToMenu"
+                android:text="@string/ajouter"
+                android:textAllCaps="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_categories_new_article" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

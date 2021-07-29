@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_letter_bookmark">60sp</dimen>
+    <dimen name="size_title">36sp</dimen>
+    <dimen name="btn_width">137dp</dimen>
+    <dimen name="btn_height">37dp</dimen>
+    <dimen name="label_tacotel_home">70sp</dimen>
+    <dimen name="label_tacotel">24sp</dimen>
+    <dimen name="divider_marginTop">45dp</dimen>
+    <dimen name="marginStart_connexion">75dp</dimen>
+    <dimen name="marginTop_editText">12dp</dimen>
+    <dimen name="label_textSize_form">20sp</dimen>
+    <dimen name="et_width">258dp</dimen>
+    <dimen name="marginTop_label">24dp</dimen>
+    <dimen name="marginTopStart_tacotel">8dp</dimen>
+    <dimen name="marginStart_details">28dp</dimen>
+    <dimen name="marginTop_details">25dp</dimen>
+    <dimen name="et_size_form">14sp</dimen>
+</resources>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_tacotel_inscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginTopStart_tacotel"
+        android:layout_marginTop="@dimen/marginTopStart_tacotel"
+        android:fontFamily="@string/tacotel_fontFamily"
+        android:text="@string/tacotel"
+        android:textSize="@dimen/label_tacotel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_inscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTopStart_tacotel"
+        android:layout_marginEnd="@dimen/marginTopStart_tacotel"
+        android:text="@string/inscription"
+        android:textSize="@dimen/label_tacotel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider_inscription"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/divider_marginTop"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_nom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:layout_marginTop="16dp"
+        android:text="@string/nom"
+        android:textSize="@dimen/label_textSize_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider_inscription" />
+
+    <EditText
+        android:id="@+id/et_nom"
+        android:layout_width="@dimen/et_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nom" />
+
+    <TextView
+        android:id="@+id/tv_prenom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:layout_marginTop="@dimen/marginTop_label"
+        android:text="@string/prenom"
+        android:textSize="@dimen/label_textSize_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_nom" />
+
+    <EditText
+        android:id="@+id/et_prenom"
+        android:layout_width="@dimen/et_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_prenom" />
+
+    <TextView
+        android:id="@+id/tv_pseudo_inscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:layout_marginTop="@dimen/marginTop_label"
+        android:text="@string/pseudo"
+        android:textSize="@dimen/label_textSize_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_prenom" />
+
+    <EditText
+        android:id="@+id/et_pseudo_inscription"
+        android:layout_width="@dimen/et_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pseudo_inscription" />
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:layout_marginTop="@dimen/marginTop_label"
+        android:text="@string/email"
+        android:textSize="@dimen/label_textSize_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_pseudo_inscription" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="@dimen/et_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+
+    <TextView
+        android:id="@+id/tv_mdp_inscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:layout_marginTop="@dimen/marginTop_label"
+        android:text="@string/mot_de_passe"
+        android:textSize="@dimen/label_textSize_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_email" />
+
+    <EditText
+        android:id="@+id/et_mdp_inscription"
+        android:layout_width="@dimen/et_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mdp_inscription" />
+
+    <Button
+        android:id="@+id/btn_valider_inscription"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:layout_marginTop="20dp"
+        android:background="@color/color_blue_info"
+        android:text="@string/valider"
+        android:textAllCaps="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_mdp_inscription" />
+
+    <Button
+        android:id="@+id/btn_annuler_inscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="76dp"
+        android:onClick="goToFormConnexion"
+        android:text="@string/annuler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_mdp_inscription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

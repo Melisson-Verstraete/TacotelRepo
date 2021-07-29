@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_tacotel_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginTopStart_tacotel"
+        android:layout_marginTop="@dimen/marginTopStart_tacotel"
+        android:fontFamily="@string/tacotel_fontFamily"
+        android:text="@string/tacotel"
+        android:textSize="@dimen/label_tacotel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/img_home_details"
+        android:layout_width="40dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="8dp"
+        android:onClick="goToMenuFromDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/home" />
+
+    <TextView
+        android:id="@+id/tv_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTopStart_tacotel"
+        android:layout_marginEnd="@dimen/marginTopStart_tacotel"
+        android:text="@string/details"
+        android:textSize="@dimen/label_tacotel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider_details"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/divider_marginTop"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_libelle_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="Libellé"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/img_details"
+        app:layout_constraintTop_toBottomOf="@+id/divider_details" />
+
+    <ImageView
+        android:id="@+id/img_details"
+        android:layout_width="112dp"
+        android:layout_height="99dp"
+        android:layout_marginStart="@dimen/marginStart_details"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider_details"
+        app:srcCompat="@drawable/exemple_image" />
+
+    <TextView
+        android:id="@+id/tv_description_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Description"
+        app:layout_constraintStart_toEndOf="@+id/img_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_libelle_details" />
+
+    <TextView
+        android:id="@+id/tv_taille_ecran_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_details"
+        android:layout_marginTop="@dimen/marginTop_details"
+        android:text="Taille de l'écran"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_details" />
+
+    <TextView
+        android:id="@+id/tv_taille_ecran_details_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="@dimen/marginTop_details"
+        android:text="pouces"
+        app:layout_constraintStart_toEndOf="@+id/tv_taille_ecran_details"
+        app:layout_constraintTop_toBottomOf="@+id/img_details" />
+
+    <TextView
+        android:id="@+id/tv_marque_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_details"
+        android:layout_marginTop="@dimen/marginTop_details"
+        android:text="Marque: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_taille_ecran_details" />
+
+    <TextView
+        android:id="@+id/tv_marque_details_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="@dimen/marginTop_details"
+        android:text="marque de l'article"
+        app:layout_constraintStart_toEndOf="@+id/tv_marque_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_taille_ecran_details_result" />
+
+    <TextView
+        android:id="@+id/tv_memoire_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_details"
+        android:layout_marginTop="@dimen/marginTop_details"
+        android:text="Taille de la mémoire: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_marque_details" />
+
+    <TextView
+        android:id="@+id/tv_memoire_details_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/marginTop_details"
+        android:text="GB"
+        app:layout_constraintStart_toEndOf="@+id/tv_memoire_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_marque_details_result" />
+
+    <TextView
+        android:id="@+id/tv_couleur_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_details"
+        android:layout_marginTop="@dimen/marginTop_details"
+        android:text="Couleur: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_memoire_details" />
+
+    <TextView
+        android:id="@+id/tv_couleur_details_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="@dimen/marginTop_details"
+        android:text="couleur de l'article"
+        app:layout_constraintStart_toEndOf="@+id/tv_couleur_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_memoire_details_result" />
+
+    <TextView
+        android:id="@+id/tv_prix_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_details"
+        android:layout_marginTop="@dimen/marginTop_details"
+        android:text="Prix de l'article: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_couleur_details" />
+
+    <TextView
+        android:id="@+id/tv_prix_details_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="@dimen/marginTop_details"
+        android:text="€"
+        app:layout_constraintStart_toEndOf="@+id/tv_prix_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_couleur_details_result" />
+
+    <TextView
+        android:id="@+id/tv_quantite_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_details"
+        android:layout_marginTop="@dimen/marginTop_details"
+        android:text="Quantité désirée: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_prix_details" />
+
+    <EditText
+        android:id="@+id/et_quantite_details_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_quantite_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_prix_details_result" />
+
+    <Button
+        android:id="@+id/btn_retour_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_details"
+        android:layout_marginTop="60dp"
+        android:onClick="goToMagasinFromDetails"
+        android:text="@string/retour"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_quantite_details" />
+
+    <Button
+        android:id="@+id/btn_ajouter_details"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="60dp"
+        android:background="@color/color_blue_info"
+        android:text="Ajouter au panier"
+        app:layout_constraintStart_toEndOf="@+id/btn_retour_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_quantite_details" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

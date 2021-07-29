@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_tacotel_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginTopStart_tacotel"
+        android:layout_marginTop="@dimen/marginTopStart_tacotel"
+        android:fontFamily="@string/tacotel_fontFamily"
+        android:text="@string/tacotel"
+        android:textSize="@dimen/label_tacotel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTopStart_tacotel"
+        android:layout_marginEnd="@dimen/marginTopStart_tacotel"
+        android:text="@string/admin"
+        android:textSize="@dimen/label_tacotel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/divider_marginTop"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_pseudo_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:layout_marginTop="96dp"
+        android:text="@string/pseudo"
+        android:textSize="@dimen/label_textSize_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <EditText
+        android:id="@+id/et_pseudo_admin"
+        android:layout_width="@dimen/et_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:layout_marginTop="@dimen/marginTop_editText"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pseudo_admin" />
+
+    <TextView
+        android:id="@+id/tv_mdp_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:layout_marginTop="@dimen/marginTop_label"
+        android:text="@string/mot_de_passe"
+        android:textSize="@dimen/label_textSize_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_pseudo_admin" />
+
+    <EditText
+        android:id="@+id/et_mdp_admin"
+        android:layout_width="@dimen/et_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStart_connexion"
+        android:layout_marginTop="@dimen/marginTop_editText"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mdp_admin" />
+
+    <Button
+        android:id="@+id/btn_valider_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@color/color_blue_info"
+        android:onClick="goToAdminArticles"
+        android:text="@string/valider"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_mdp_admin" />
+
+    <TextView
+        android:id="@+id/tv_connexion_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:onClick="goToConnexionFromConnexionAdmin"
+        android:text="@string/se_connecter_client"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_valider_admin" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

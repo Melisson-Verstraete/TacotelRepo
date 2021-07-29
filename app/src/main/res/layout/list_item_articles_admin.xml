@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_id_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_libelle_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Libellé"
+        app:layout_constraintStart_toEndOf="@+id/tv_id_article_admin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_description_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_libelle_article_admin" />
+
+    <TextView
+        android:id="@+id/tv_prix_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:text="Prix"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_stock_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Quantité en stock: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description_article_admin" />
+
+    <TextView
+        android:id="@+id/tv_stock_result_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="qté en stock"
+        app:layout_constraintStart_toEndOf="@+id/tv_stock_article_admin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description_article_admin" />
+
+    <TextView
+        android:id="@+id/tv_ecran_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Taille de l'écran: "
+        app:layout_constraintEnd_toStartOf="@+id/tv_ecran_result_article_admin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description_article_admin" />
+
+    <TextView
+        android:id="@+id/tv_ecran_result_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:text="taille"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description_article_admin" />
+
+    <TextView
+        android:id="@+id/tv_marque_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Marque: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_stock_article_admin" />
+
+    <TextView
+        android:id="@+id/tv_marque_result_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="marque"
+        app:layout_constraintStart_toEndOf="@+id/tv_marque_article_admin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_stock_article_admin" />
+
+    <TextView
+        android:id="@+id/tv_couleur_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Couleur: "
+        app:layout_constraintStart_toEndOf="@+id/tv_marque_result_article_admin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_stock_result_article_admin" />
+
+    <TextView
+        android:id="@+id/tv_couleur_result_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="couleur"
+        app:layout_constraintStart_toEndOf="@+id/tv_couleur_article_admin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_stock_result_article_admin" />
+
+    <TextView
+        android:id="@+id/tv_memoire_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Taille de la mémoire: "
+        app:layout_constraintStart_toEndOf="@+id/tv_couleur_result_article_admin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ecran_article_admin" />
+
+    <TextView
+        android:id="@+id/tv_memoire_result_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="taille"
+        app:layout_constraintStart_toEndOf="@+id/tv_memoire_article_admin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ecran_result_article_admin" />
+
+    <TextView
+        android:id="@+id/tv_image_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Image: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_marque_article_admin" />
+
+    <TextView
+        android:id="@+id/tv_image_result_article_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="URL de l'image"
+        app:layout_constraintStart_toEndOf="@+id/tv_image_article_admin"
+        app:layout_constraintTop_toBottomOf="@+id/tv_marque_result_article_admin" />
+
+    <Button
+        android:id="@+id/btn_supprimer_article_admin"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="125dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/color_blue_info"
+        android:text="Supprimer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_image_article_admin" />
+
+    <Button
+        android:id="@+id/btn_modifier_article_admin"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="125dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/color_blue_info"
+        android:text="Modifier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_image_article_admin" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

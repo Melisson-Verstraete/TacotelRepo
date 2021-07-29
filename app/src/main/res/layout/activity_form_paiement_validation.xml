@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_tacotel_validation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginTopStart_tacotel"
+        android:layout_marginTop="@dimen/marginTopStart_tacotel"
+        android:fontFamily="@string/tacotel_fontFamily"
+        android:text="@string/tacotel"
+        android:textSize="@dimen/label_tacotel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/img_home_validation"
+        android:layout_width="40dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="8dp"
+        android:onClick="goToMenuFromPaiementValidation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/home" />
+
+    <TextView
+        android:id="@+id/tv_validation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTopStart_tacotel"
+        android:layout_marginEnd="@dimen/marginTopStart_tacotel"
+        android:text="@string/paiement_3_3"
+        android:textSize="@dimen/label_tacotel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider_validation"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/divider_marginTop"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView_paiement_validation"
+        android:layout_width="match_parent"
+        android:layout_height="540dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider_validation">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_recap_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="16dp"
+                android:text="@string/recap_panier"
+                android:textSize="@dimen/label_textSize_form"
+                android:textStyle="bold" />
+
+            <ScrollView
+                android:id="@+id/scrollView_panier_validation"
+                android:layout_width="417dp"
+                android:layout_height="202dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/lv_articles_validation"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/tv_total_a_payer_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:text="@string/total_payer"
+                android:textSize="@dimen/label_textSize_form"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_sous_total_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="@string/sous_total"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_sous_total_result_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="€"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_tva_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="@string/tva"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_tva_result_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="€"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_total_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="@string/total_ttc"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_total_result_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="€"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_adresse_liv_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:text="@string/adresse_livraison"
+                android:textSize="@dimen/label_textSize_form"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_nom1_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="NOM prénom"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_adresse1_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="rue num, cp ville"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_pays1_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="PAYS"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_adresse_fact_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:text="@string/adresse_facturation"
+                android:textSize="@dimen/label_textSize_form"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_nom2_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="NOM prénom"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_adresse2_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="rue num, cp ville"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_pays2_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="PAYS"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_infos_bancaires_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:text="@string/informations_bancaires"
+                android:textSize="@dimen/label_textSize_form"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_mode_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="type de carte"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_titulaire_compte_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="titulaire du compte"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <TextView
+                android:id="@+id/tv_num_compte_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:text="numéro de compte"
+                android:textSize="@dimen/et_size_form"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adresse_liv_validation" />
+
+            <Button
+                android:id="@+id/btn_payer_validation"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="183dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="16dp"
+                android:background="@color/color_blue_info"
+                android:onClick="goToMenuFromPaiementValidation"
+                android:text="Valider et Payer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_retour_validation" />
+
+            <Button
+                android:id="@+id/btn_retour_validation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart_details"
+                android:layout_marginTop="8dp"
+                android:onClick="goToPaiementBanqueFromPaiementValidation"
+                android:text="@string/retour"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_num_compte_validation" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

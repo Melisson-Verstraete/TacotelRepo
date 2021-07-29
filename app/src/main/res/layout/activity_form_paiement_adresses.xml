@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_tacotel_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginTopStart_tacotel"
+        android:layout_marginTop="@dimen/marginTopStart_tacotel"
+        android:fontFamily="@string/tacotel_fontFamily"
+        android:text="@string/tacotel"
+        android:textSize="@dimen/label_tacotel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/img_home_adresses"
+        android:layout_width="40dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="8dp"
+        android:onClick="goToMenuFromPaiementAdresses"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/home" />
+
+    <TextView
+        android:id="@+id/tv_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTopStart_tacotel"
+        android:layout_marginEnd="@dimen/marginTopStart_tacotel"
+        android:text="@string/paiement_1_3"
+        android:textSize="@dimen/label_tacotel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider_adresses"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/divider_marginTop"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_adresse_livraison"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/adresse_livraison"
+        android:textSize="@dimen/label_textSize_form"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider_adresses" />
+
+    <EditText
+        android:id="@+id/et_nom1_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/nom"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_adresse_livraison" />
+
+    <EditText
+        android:id="@+id/et_prenom1_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/prenom"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toEndOf="@+id/et_nom1_adresses"
+        app:layout_constraintTop_toBottomOf="@+id/tv_adresse_livraison" />
+
+    <EditText
+        android:id="@+id/et_rue1_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/rue"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_nom1_adresses" />
+
+    <EditText
+        android:id="@+id/et_numero1_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/numero"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toEndOf="@+id/et_rue1_adresses"
+        app:layout_constraintTop_toBottomOf="@+id/et_prenom1_adresses" />
+
+    <EditText
+        android:id="@+id/et_codePostal1_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/code_postal"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_rue1_adresses" />
+
+    <EditText
+        android:id="@+id/et_ville1_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/ville"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toEndOf="@+id/et_codePostal1_adresses"
+        app:layout_constraintTop_toBottomOf="@+id/et_numero1_adresses" />
+
+    <EditText
+        android:id="@+id/et_pays1_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/pays"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_codePostal1_adresses" />
+
+    <TextView
+        android:id="@+id/tv_adresse_facturation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/adresse_facturation"
+        android:textSize="@dimen/label_textSize_form"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_pays1_adresses" />
+
+    <EditText
+        android:id="@+id/et_nom2_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/nom"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_adresse_facturation" />
+
+    <EditText
+        android:id="@+id/et_prenom2_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/prenom"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toEndOf="@+id/et_nom2_adresses"
+        app:layout_constraintTop_toBottomOf="@+id/tv_adresse_facturation" />
+
+    <EditText
+        android:id="@+id/et_rue2_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/rue"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_nom2_adresses" />
+
+    <EditText
+        android:id="@+id/et_numero2_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/numero"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toEndOf="@+id/et_rue2_adresses"
+        app:layout_constraintTop_toBottomOf="@+id/et_prenom2_adresses" />
+
+    <EditText
+        android:id="@+id/et_codePostal2_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/code_postal"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_rue2_adresses" />
+
+    <EditText
+        android:id="@+id/et_ville2_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/ville"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toEndOf="@+id/et_codePostal2_adresses"
+        app:layout_constraintTop_toBottomOf="@+id/et_numero2_adresses" />
+
+    <EditText
+        android:id="@+id/et_pays2_adresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/pays"
+        android:textSize="@dimen/et_size_form"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_codePostal2_adresses" />
+
+    <Button
+        android:id="@+id/btn_adresses_similaires"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="113dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/color_blue_info"
+        android:text="Même adresse"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_prenom2_adresses"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btn_suivant_adresses"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="41dp"
+        android:background="@color/color_blue_info"
+        android:onClick="goToPaiementBanque"
+        android:text="Suivant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_ville2_adresses" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
