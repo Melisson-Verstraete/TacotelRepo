@@ -15,14 +15,14 @@
         <activity android:name=".FormInscriptionActivity"></activity>
         <activity android:name=".FormConnexionAdminActivity"></activity>
         <activity android:name=".MenuActivity"></activity>
-        <activity android:name=".MagasinActivity"></activity>
         <activity android:name=".DetailsArticleActivity"></activity>
         <activity android:name=".PanierActivity"></activity>
         <activity android:name=".FormPaiementAdressesActivity"></activity>
         <activity android:name=".FormPaiementBanqueActivity"></activity>
         <activity android:name=".FormPaiementValidationActivity"></activity>
-        <activity android:name=".AdminListArticlesActivity"></activity>
         <activity android:name=".FormAdminArticleActivity"></activity>
+        <activity android:name=".MagasinActivity"></activity>
+        <activity android:name=".AdminListArticlesActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

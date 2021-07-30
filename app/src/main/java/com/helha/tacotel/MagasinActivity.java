@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import model.Article;
 import model.Categorie;
+import repository.ArticleRepository;
 import repository.CategorieRepository;
 
 public class MagasinActivity extends AppCompatActivity {
@@ -21,6 +25,23 @@ public class MagasinActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_magasin);
+
+        List<Article> articles = new ArrayList<>();
+        ListView listView = findViewById(R.id.lv_articles);
+        ArticlesMagasinArrayAdapter articlesMagasinArrayAdapter = new ArticlesMagasinArrayAdapter(this, R.id.lv_articles, articles);
+        listView.setAdapter(articlesMagasinArrayAdapter);
+
+        ArticleRepository articleRepository = new ArticleRepository();
+
+        articleRepository.query().observe(this, new Observer<List<Article>>() {
+            @Override
+            public void onChanged(List<Article> articlesApi) {
+                Log.i("Articles", articles.toString());
+                articles.clear();
+                articles.addAll(articlesApi);
+                articlesMagasinArrayAdapter.notifyDataSetChanged();
+            }
+        });
 
         CategorieRepository categorieRepository = new CategorieRepository();
 

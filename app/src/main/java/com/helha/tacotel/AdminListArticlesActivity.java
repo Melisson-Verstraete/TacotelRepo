@@ -2,19 +2,16 @@ package com.helha.tacotel;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import api.ApiClient;
-import api.ArticleService;
 import model.Article;
 import repository.ArticleRepository;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AdminListArticlesActivity extends AppCompatActivity {
 
@@ -37,12 +34,20 @@ public class AdminListArticlesActivity extends AppCompatActivity {
 //            }
 //        });
 
+        List<Article> articles = new ArrayList<>();
+        ListView listView = findViewById(R.id.lv_articles_admin);
+        ArticlesAdminArrayAdapter articlesAdminArrayAdapter = new ArticlesAdminArrayAdapter(this, R.id.lv_articles_admin, articles);
+        listView.setAdapter(articlesAdminArrayAdapter);
+
         ArticleRepository articleRepository = new ArticleRepository();
 
         articleRepository.query().observe(this, new Observer<List<Article>>() {
             @Override
-            public void onChanged(List<Article> articles) {
+            public void onChanged(List<Article> articlesApi) {
                 Log.i("Articles", articles.toString());
+                articles.clear();
+                articles.addAll(articlesApi);
+                articlesAdminArrayAdapter.notifyDataSetChanged();
             }
         });
 
