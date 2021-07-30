@@ -2,9 +2,16 @@ package com.helha.tacotel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+
+import java.util.List;
+
+import model.Admin;
+import repository.AdminRepository;
 
 public class FormConnexionAdminActivity extends AppCompatActivity {
 
@@ -15,6 +22,15 @@ public class FormConnexionAdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_connexion_admin);
+
+        AdminRepository adminRepository = new AdminRepository();
+
+        adminRepository.query().observe(this, new Observer<List<Admin>>() {
+            @Override
+            public void onChanged(List<Admin> admins) {
+                Log.i("Admins", admins.toString());
+            }
+        });
     }
 
     public void goToAdminArticles(View view) {

@@ -17,7 +17,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AdminListArticlesActivity extends AppCompatActivity {
-//Lindaaaaaaaaaaaaaa
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +46,15 @@ public class AdminListArticlesActivity extends AppCompatActivity {
             }
         });
 
-        articleRepository
-                .create(new Article("libelle", "description", 22.22, 22, 13.5, "marque", "couleur", 20, "imageURL"))
-                .observe(this, new Observer<Article>() {
-                    @Override
-                    public void onChanged(Article article) {
-                        Log.i("Article", article.toString());
-                    }
-                });
+//        Mis en commentaires pcq sinon ça va créer un nouvel article à chaque fois
+//
+//        articleRepository
+//                .create(new Article("libelle", "description", 22.22, 22, 13.5, "marque", "couleur", 20, "imageURL"))
+//                .observe(this, new Observer<Article>() {
+//                    @Override
+//                    public void onChanged(Article article) {
+//                        Log.i("Article", article.toString());
+//                    }
+//                });
     }
 }
