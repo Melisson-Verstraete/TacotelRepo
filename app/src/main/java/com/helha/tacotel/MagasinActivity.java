@@ -6,19 +6,27 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import api.ApiClient;
+import api.CategorieService;
 import model.Article;
 import model.Categorie;
 import repository.ArticleRepository;
 import repository.CategorieRepository;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MagasinActivity extends AppCompatActivity {
 
@@ -30,6 +38,30 @@ public class MagasinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_magasin);
 
+        // CATEGORIES
+        List<Categorie> categories = new ArrayList<>();
+        List<String> categoriesString = new ArrayList<>();
+
+        CategorieRepository categorieRepository = new CategorieRepository();
+
+        categorieRepository.query().observe(this, new Observer<List<Categorie>>() {
+            @Override
+            public void onChanged(List<Categorie> categoriesApi) {
+                categories.addAll(categoriesApi);
+                Log.i("Categories", categories.toString());
+                Log.i("Categories", categoriesString.toString());
+            }
+        });
+
+        categoriesString.add("en");
+        categoriesString.add("a");
+        categoriesString.add("marre");
+        Spinner spinner = findViewById(R.id.spinner_categories_magasin);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoriesString);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        // ARTICLES
         List<Article> articles = new ArrayList<>();
         ListView listView = findViewById(R.id.lv_articles);
         ArticlesMagasinArrayAdapter articlesMagasinArrayAdapter = new ArticlesMagasinArrayAdapter(this, R.id.lv_articles, articles);
@@ -52,7 +84,6 @@ public class MagasinActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Object object = adapterView.getItemAtPosition(i);
                 Article article = (Article) object;
-                Log.i("Object article: ", article.getLibelle());
 
                 Intent intent = new Intent(MagasinActivity.this,DetailsArticleActivity.class);
                 intent.putExtra("libelle", article.getLibelle());
@@ -65,25 +96,10 @@ public class MagasinActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE_DETAILS_ARTICLE);
             }
         });
-
-        CategorieRepository categorieRepository = new CategorieRepository();
-
-        categorieRepository.query().observe(this, new Observer<List<Categorie>>() {
-            @Override
-            public void onChanged(List<Categorie> categories) {
-                Log.i("Categories", categories.toString());
-            }
-        });
     }
 
     public void goToMenuFromMagasin(View view) {
         Intent intent = new Intent(MagasinActivity.this,MenuActivity.class);
         startActivityForResult(intent, REQUEST_CODE_MENU);
     }
-
-//    public void goToDetailsArticle(View view) {
-//        Intent intent = new Intent(MagasinActivity.this,DetailsArticleActivity.class);
-//        intent.putExtra("libelle", article.getLibelle());
-//        startActivityForResult(intent, REQUEST_CODE_DETAILS_ARTICLE);
-//    }
 }
