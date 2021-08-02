@@ -2,13 +2,16 @@ package com.helha.tacotel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +23,7 @@ import repository.CategorieRepository;
 public class MagasinActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_MENU = 1;
+    private static final int REQUEST_CODE_DETAILS_ARTICLE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,25 @@ public class MagasinActivity extends AppCompatActivity {
             }
         });
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Object object = adapterView.getItemAtPosition(i);
+                Article article = (Article) object;
+                Log.i("Object article: ", article.getLibelle());
+
+                Intent intent = new Intent(MagasinActivity.this,DetailsArticleActivity.class);
+                intent.putExtra("libelle", article.getLibelle());
+                intent.putExtra("description", article.getDescription());
+                intent.putExtra("ecran", article.getTailleEcran());
+                intent.putExtra("marque", article.getMarque());
+                intent.putExtra("memoire", article.getTailleMemoire());
+                intent.putExtra("couleur", article.getCouleur());
+                intent.putExtra("prix", article.getPrix());
+                startActivityForResult(intent, REQUEST_CODE_DETAILS_ARTICLE);
+            }
+        });
+
         CategorieRepository categorieRepository = new CategorieRepository();
 
         categorieRepository.query().observe(this, new Observer<List<Categorie>>() {
@@ -57,4 +80,10 @@ public class MagasinActivity extends AppCompatActivity {
         Intent intent = new Intent(MagasinActivity.this,MenuActivity.class);
         startActivityForResult(intent, REQUEST_CODE_MENU);
     }
+
+//    public void goToDetailsArticle(View view) {
+//        Intent intent = new Intent(MagasinActivity.this,DetailsArticleActivity.class);
+//        intent.putExtra("libelle", article.getLibelle());
+//        startActivityForResult(intent, REQUEST_CODE_DETAILS_ARTICLE);
+//    }
 }

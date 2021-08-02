@@ -37,6 +37,9 @@ public class Article {
         this.imageURL = imageURL;
     }
 
+    public Article() {
+    }
+
     public int getIdArticle() {
         return idArticle;
     }

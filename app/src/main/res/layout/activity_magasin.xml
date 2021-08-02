@@ -85,7 +85,7 @@
     <ScrollView
         android:id="@+id/scrollView_magasin"
         android:layout_width="410dp"
-        android:layout_height="500dp"
+        android:layout_height="520dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_rechercher_magasin">
@@ -98,7 +98,7 @@
             <ListView
                 android:id="@+id/lv_articles"
                 android:layout_width="match_parent"
-                android:layout_height="585dp"
+                android:layout_height="450dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="0dp" />
         </LinearLayout>
