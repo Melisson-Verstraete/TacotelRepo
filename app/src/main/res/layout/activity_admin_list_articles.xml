@@ -38,25 +38,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="540dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="47dp"
+    <Button
+        android:id="@+id/btn_add_article"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ajouter un produit"
+        android:onClick="addArticle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider_articles_admin">
+        app:layout_constraintTop_toBottomOf="@+id/divider_articles_admin" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="409dp"
+        android:layout_height="540dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_article">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <ListView
                 android:id="@+id/lv_articles_admin"
                 android:layout_width="match_parent"
                 android:layout_height="520dp"
-                android:layout_marginTop="4dp" />
+                android:layout_marginTop="4dp">
+
+            </ListView>
         </LinearLayout>
     </ScrollView>
 
