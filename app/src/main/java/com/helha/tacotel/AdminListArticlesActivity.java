@@ -1,5 +1,6 @@
 package com.helha.tacotel;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.widget.ListView;
 
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
@@ -24,6 +26,26 @@ public class AdminListArticlesActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE_FORM_ADMIN_ARTICLE);
     }
 
+    public void deleteArticle(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Supprimer un article?");
+        builder.setMessage("Clique sur oui pour supprimer!")
+                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(AdminListArticlesActivity.this, AdminListArticlesActivity.class);
+                        startActivityForResult(intent, REQUEST_CODE_FORM_ADMIN_ARTICLE);
+                    }
+                })
+                .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
