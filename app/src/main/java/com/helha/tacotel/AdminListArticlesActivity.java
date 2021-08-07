@@ -7,10 +7,12 @@ import android.util.Log;
 import android.widget.ListView;
 
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,26 +28,14 @@ public class AdminListArticlesActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE_FORM_ADMIN_ARTICLE);
     }
 
-    public void deleteArticle(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Supprimer un article?");
-        builder.setMessage("Clique sur oui pour supprimer!")
-                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(AdminListArticlesActivity.this, AdminListArticlesActivity.class);
-                        startActivityForResult(intent, REQUEST_CODE_FORM_ADMIN_ARTICLE);
-                    }
-                })
-                .setNegativeButton("Non", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+
+    /*public void deleteArticle(View view){
+        /*Log.i("Test Identifiant",""+position);
+*/
+
+        /*
+    }*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,12 +65,13 @@ public class AdminListArticlesActivity extends AppCompatActivity {
         articleRepository.query().observe(this, new Observer<List<Article>>() {
             @Override
             public void onChanged(List<Article> articlesApi) {
-                Log.i("Articles", articles.toString());
                 articles.clear();
                 articles.addAll(articlesApi);
                 articlesAdminArrayAdapter.notifyDataSetChanged();
+
             }
         });
+
 
 //        Mis en commentaires pcq sinon ça va créer un nouvel article à chaque fois
 //

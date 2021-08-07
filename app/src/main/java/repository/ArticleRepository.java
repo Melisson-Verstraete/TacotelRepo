@@ -1,5 +1,7 @@
 package repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -49,6 +51,23 @@ public class ArticleRepository {
                 public void onFailure(Call<Article> call, Throwable t) {
 
                 }
+            });
+        return mutableLiveData;
+    }
+
+    public LiveData<Boolean> delete (int id){
+        final MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
+        getArticleService().deleteArticle(id).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                mutableLiveData.postValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+
             });
         return mutableLiveData;
     }
