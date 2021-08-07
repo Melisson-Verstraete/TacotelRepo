@@ -4,120 +4,120 @@ import java.util.Date;
 
 public class Client {
 
-    private int IdClient;
-    private String Civilite;
-    private String Nom;
-    private String Prenom;
-    private Date DateNais;
-    private String Email;
-    private String Tel;
-    private String MdpClient;
+    private int idClient;
+    private String civilite;
+    private String nom;
+    private String prenom;
+    private Date dateNais;
+    private String email;
+    private String tel;
+    private String mdpClient;
 
     public Client(int idClient, String civilite, String nom, String prenom, Date dateNais, String email, String tel, String mdpClient) {
-        IdClient = idClient;
-        Civilite = civilite;
-        Nom = nom;
-        Prenom = prenom;
-        DateNais = dateNais;
-        Email = email;
-        Tel = tel;
-        MdpClient = mdpClient;
+        this.idClient = idClient;
+        this.civilite = civilite;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateNais = dateNais;
+        this.email = email;
+        this.tel = tel;
+        this.mdpClient = mdpClient;
     }
 
     public Client(String civilite, String nom, String prenom, Date dateNais, String email, String tel, String mdpClient) {
-        Civilite = civilite;
-        Nom = nom;
-        Prenom = prenom;
-        DateNais = dateNais;
-        Email = email;
-        Tel = tel;
-        MdpClient = mdpClient;
+        this.civilite = civilite;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateNais = dateNais;
+        this.email = email;
+        this.tel = tel;
+        this.mdpClient = mdpClient;
     }
 
     public Client(String civilite, String nom, String prenom, String email, String tel, String mdpClient) {
-        Civilite = civilite;
-        Nom = nom;
-        Prenom = prenom;
-        Email = email;
-        Tel = tel;
-        MdpClient = mdpClient;
+        this.civilite = civilite;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.tel = tel;
+        this.mdpClient = mdpClient;
     }
 
     public int getIdClient() {
-        return IdClient;
+        return idClient;
     }
 
     public void setIdClient(int idClient) {
-        IdClient = idClient;
+        this.idClient = idClient;
     }
 
     public String getCivilite() {
-        return Civilite;
+        return civilite;
     }
 
     public void setCivilite(String civilite) {
-        Civilite = civilite;
+        this.civilite = civilite;
     }
 
     public String getNom() {
-        return Nom;
+        return nom;
     }
 
     public void setNom(String nom) {
-        Nom = nom;
+        this.nom = nom;
     }
 
     public String getPrenom() {
-        return Prenom;
+        return prenom;
     }
 
     public void setPrenom(String prenom) {
-        Prenom = prenom;
+        this.prenom = prenom;
     }
 
     public Date getDateNais() {
-        return DateNais;
+        return dateNais;
     }
 
     public void setDateNais(Date dateNais) {
-        DateNais = dateNais;
+        this.dateNais = dateNais;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getTel() {
-        return Tel;
+        return tel;
     }
 
     public void setTel(String tel) {
-        Tel = tel;
+        this.tel = tel;
     }
 
     public String getMdpClient() {
-        return MdpClient;
+        return mdpClient;
     }
 
     public void setMdpClient(String mdpClient) {
-        MdpClient = mdpClient;
+        this.mdpClient = mdpClient;
     }
 
     @Override
     public String toString() {
         return "Client{" +
-                "IdClient=" + IdClient +
-                ", Civilite='" + Civilite + '\'' +
-                ", Nom='" + Nom + '\'' +
-                ", Prenom='" + Prenom + '\'' +
-//                ", DateNais=" + DateNais +
-                ", Email='" + Email + '\'' +
-                ", Tel='" + Tel + '\'' +
-                ", MdpClient='" + MdpClient + '\'' +
+                "idClient=" + idClient +
+                ", civilite='" + civilite + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", dateNais=" + dateNais +
+                ", email='" + email + '\'' +
+                ", tel='" + tel + '\'' +
+                ", mdpClient='" + mdpClient + '\'' +
                 '}';
     }
 }

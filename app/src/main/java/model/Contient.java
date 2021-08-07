@@ -2,31 +2,31 @@ package model;
 
 public class Contient {
 
-    private Panier Panier;
-    private Article Article;
-    private int QteArticleChoisi;
+    private Panier panier;
+    private Article article;
+    private int qteArticleChoisi;
 
     public Contient(int qteArticleChoisi) {
-        QteArticleChoisi = qteArticleChoisi;
+        this.qteArticleChoisi = qteArticleChoisi;
     }
 
     public Contient() {
     }
 
     public int getQteArticleChoisi() {
-        return QteArticleChoisi;
+        return qteArticleChoisi;
     }
 
     public void setQteArticleChoisi(int qteArticleChoisi) {
-        QteArticleChoisi = qteArticleChoisi;
+        this.qteArticleChoisi = qteArticleChoisi;
     }
 
     @Override
     public String toString() {
         return "Contient{" +
-                "Panier=" + Panier +
-                ", Article=" + Article +
-                ", QteArticleChoisi=" + QteArticleChoisi +
+                "panier=" + panier +
+                ", article=" + article +
+                ", qteArticleChoisi=" + qteArticleChoisi +
                 '}';
     }
 }

@@ -47,17 +47,20 @@ public class MagasinActivity extends AppCompatActivity {
         categorieRepository.query().observe(this, new Observer<List<Categorie>>() {
             @Override
             public void onChanged(List<Categorie> categoriesApi) {
-                categories.addAll(categoriesApi);
                 Log.i("Categories", categories.toString());
-                Log.i("Categories", categoriesString.toString());
+                categories.addAll(categoriesApi);
+
+                categoriesString.add(categories.toString());
+                String nom = categories.get(0).getNomCategorie();
+                Log.i("CategoriesBOUCLE", nom);
             }
         });
-
-        categoriesString.add("en");
-        categoriesString.add("a");
-        categoriesString.add("marre");
+//        for (int j=0;j<=categories.size();j++) {
+//            String nom2 = categories.get(j).getNomCategorie();
+//            Log.i("CategoriesBOUCLE2", nom2);
+//        }
         Spinner spinner = findViewById(R.id.spinner_categories_magasin);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoriesString);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoriesString);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 

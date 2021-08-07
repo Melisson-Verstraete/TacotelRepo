@@ -11,7 +11,4 @@ import retrofit2.http.POST;
 public interface CategorieService {
     @GET("dbTaCoTel/Categorie")
     Call<List<Categorie>> getCategories();
-
-    @POST("dbTaCoTel/Categorie")
-    Call<Categorie> postCategorie(@Body Categorie categorie);
 }

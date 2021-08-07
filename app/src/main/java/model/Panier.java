@@ -5,49 +5,49 @@ import java.util.List;
 
 public class Panier {
 
-    private int IdPanier;
-    private Date DateCreation;
-    private List<Article> Articles;
-
-    public Panier(int idPanier, Date dateCreation, List<Article> articles) {
-        IdPanier = idPanier;
-        DateCreation = dateCreation;
-        Articles = articles;
-    }
+    private int idPanier;
+    private Date dateCreation;
+    private List<Article> articles;
 
     public Panier() {
     }
 
+    public Panier(int idPanier, Date dateCreation, List<Article> articles) {
+        this.idPanier = idPanier;
+        this.dateCreation = dateCreation;
+        this.articles = articles;
+    }
+
     public int getIdPanier() {
-        return IdPanier;
+        return idPanier;
     }
 
     public void setIdPanier(int idPanier) {
-        IdPanier = idPanier;
+        this.idPanier = idPanier;
     }
 
     public Date getDateCreation() {
-        return DateCreation;
+        return dateCreation;
     }
 
     public void setDateCreation(Date dateCreation) {
-        DateCreation = dateCreation;
+        this.dateCreation = dateCreation;
     }
 
     public List<Article> getArticles() {
-        return Articles;
+        return articles;
     }
 
     public void setArticles(List<Article> articles) {
-        Articles = articles;
+        this.articles = articles;
     }
 
     @Override
     public String toString() {
         return "Panier{" +
-                "IdPanier=" + IdPanier +
-                ", DateCreation=" + DateCreation +
-                ", Articles=" + Articles +
+                "idPanier=" + idPanier +
+                ", dateCreation=" + dateCreation +
+                ", articles=" + articles +
                 '}';
     }
 }

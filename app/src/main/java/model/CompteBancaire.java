@@ -2,46 +2,46 @@ package model;
 
 public class CompteBancaire {
 
-    private String NumCpte;
-    private String TypeCpte;
-    private String TitulaireCpte;
+    private String numCpte;
+    private String typeCpte;
+    private String titulaireCpte;
 
     public CompteBancaire(String numCpte, String typeCpte, String titulaireCpte) {
-        NumCpte = numCpte;
-        TypeCpte = typeCpte;
-        TitulaireCpte = titulaireCpte;
+        this.numCpte = numCpte;
+        this.typeCpte = typeCpte;
+        this.titulaireCpte = titulaireCpte;
     }
 
     public String getNumCpte() {
-        return NumCpte;
+        return numCpte;
     }
 
     public void setNumCpte(String numCpte) {
-        NumCpte = numCpte;
+        this.numCpte = numCpte;
     }
 
     public String getTypeCpte() {
-        return TypeCpte;
+        return typeCpte;
     }
 
     public void setTypeCpte(String typeCpte) {
-        TypeCpte = typeCpte;
+        this.typeCpte = typeCpte;
     }
 
     public String getTitulaireCpte() {
-        return TitulaireCpte;
+        return titulaireCpte;
     }
 
     public void setTitulaireCpte(String titulaireCpte) {
-        TitulaireCpte = titulaireCpte;
+        this.titulaireCpte = titulaireCpte;
     }
 
     @Override
     public String toString() {
         return "CompteBancaire{" +
-                "NumCpte='" + NumCpte + '\'' +
-                ", TypeCpte='" + TypeCpte + '\'' +
-                ", TitulaireCpte='" + TitulaireCpte + '\'' +
+                "numCpte='" + numCpte + '\'' +
+                ", typeCpte='" + typeCpte + '\'' +
+                ", titulaireCpte='" + titulaireCpte + '\'' +
                 '}';
     }
 }

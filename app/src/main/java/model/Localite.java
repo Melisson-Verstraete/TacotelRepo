@@ -2,87 +2,87 @@ package model;
 
 public class Localite {
 
-    private int IdLocalite;
-    private String Rue;
-    private int CodePostal;
-    private String NumRue;
-    private String Ville;
-    private String Pays;
+    private int idLocalite;
+    private String rue;
+    private int codePostal;
+    private String numRue;
+    private String ville;
+    private String pays;
 
     public Localite(int idLocalite, String rue, int codePostal, String numRue, String ville, String pays) {
-        IdLocalite = idLocalite;
-        Rue = rue;
-        CodePostal = codePostal;
-        NumRue = numRue;
-        Ville = ville;
-        Pays = pays;
+        this.idLocalite = idLocalite;
+        this.rue = rue;
+        this.codePostal = codePostal;
+        this.numRue = numRue;
+        this.ville = ville;
+        this.pays = pays;
     }
 
     public Localite(String rue, int codePostal, String numRue, String ville, String pays) {
-        Rue = rue;
-        CodePostal = codePostal;
-        NumRue = numRue;
-        Ville = ville;
-        Pays = pays;
+        this.rue = rue;
+        this.codePostal = codePostal;
+        this.numRue = numRue;
+        this.ville = ville;
+        this.pays = pays;
     }
 
     public int getIdLocalite() {
-        return IdLocalite;
+        return idLocalite;
     }
 
     public void setIdLocalite(int idLocalite) {
-        IdLocalite = idLocalite;
+        this.idLocalite = idLocalite;
     }
 
     public String getRue() {
-        return Rue;
+        return rue;
     }
 
     public void setRue(String rue) {
-        Rue = rue;
+        this.rue = rue;
     }
 
     public int getCodePostal() {
-        return CodePostal;
+        return codePostal;
     }
 
     public void setCodePostal(int codePostal) {
-        CodePostal = codePostal;
+        this.codePostal = codePostal;
     }
 
     public String getNumRue() {
-        return NumRue;
+        return numRue;
     }
 
     public void setNumRue(String numRue) {
-        NumRue = numRue;
+        this.numRue = numRue;
     }
 
     public String getVille() {
-        return Ville;
+        return ville;
     }
 
     public void setVille(String ville) {
-        Ville = ville;
+        this.ville = ville;
     }
 
     public String getPays() {
-        return Pays;
+        return pays;
     }
 
     public void setPays(String pays) {
-        Pays = pays;
+        this.pays = pays;
     }
 
     @Override
     public String toString() {
         return "Localite{" +
-                "IdLocalite=" + IdLocalite +
-                ", Rue='" + Rue + '\'' +
-                ", CodePostal=" + CodePostal +
-                ", NumRue='" + NumRue + '\'' +
-                ", Ville='" + Ville + '\'' +
-                ", Pays='" + Pays + '\'' +
+                "idLocalite=" + idLocalite +
+                ", rue='" + rue + '\'' +
+                ", codePostal=" + codePostal +
+                ", numRue='" + numRue + '\'' +
+                ", ville='" + ville + '\'' +
+                ", pays='" + pays + '\'' +
                 '}';
     }
 }

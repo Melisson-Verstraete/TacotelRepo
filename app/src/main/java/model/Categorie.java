@@ -2,39 +2,39 @@ package model;
 
 public class Categorie {
 
-    private int IdCategorie;
-    private String NomCategorie;
+    private int idCategorie;
+    private String nomCategorie;
 
     public Categorie(int idCategorie, String nomCategorie) {
-        IdCategorie = idCategorie;
-        NomCategorie = nomCategorie;
+        this.idCategorie = idCategorie;
+        this.nomCategorie = nomCategorie;
     }
 
     public Categorie(String nomCategorie) {
-        NomCategorie = nomCategorie;
+        this.nomCategorie = nomCategorie;
     }
 
     public int getIdCategorie() {
-        return IdCategorie;
+        return idCategorie;
     }
 
     public void setIdCategorie(int idCategorie) {
-        IdCategorie = idCategorie;
+        this.idCategorie = idCategorie;
     }
 
     public String getNomCategorie() {
-        return NomCategorie;
+        return nomCategorie;
     }
 
     public void setNomCategorie(String nomCategorie) {
-        NomCategorie = nomCategorie;
+        this.nomCategorie = nomCategorie;
     }
 
     @Override
     public String toString() {
         return "Categorie{" +
-                "IdCategorie=" + IdCategorie +
-                ", NomCategorie='" + NomCategorie + '\'' +
+                "IdCategorie=" + idCategorie +
+                ", NomCategorie='" + nomCategorie + '\'' +
                 '}';
     }
 }

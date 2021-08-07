@@ -2,51 +2,51 @@ package model;
 
 public class Admin {
 
-    private int IdAdmin;
-    private String Login;
-    private String MdpAdmin;
+    private int idAdmin;
+    private String login;
+    private String mdpAdmin;
 
     public Admin(int idAdmin, String login, String mdpAdmin) {
-        IdAdmin = idAdmin;
-        Login = login;
-        MdpAdmin = mdpAdmin;
+        this.idAdmin = idAdmin;
+        this.login = login;
+        this.mdpAdmin = mdpAdmin;
     }
 
     public Admin(String login, String mdpAdmin) {
-        Login = login;
-        MdpAdmin = mdpAdmin;
+        this.login = login;
+        this.mdpAdmin = mdpAdmin;
     }
 
     public int getIdAdmin() {
-        return IdAdmin;
+        return idAdmin;
     }
 
     public void setIdAdmin(int idAdmin) {
-        IdAdmin = idAdmin;
+        this.idAdmin = idAdmin;
     }
 
     public String getLogin() {
-        return Login;
+        return login;
     }
 
     public void setLogin(String login) {
-        Login = login;
+        this.login = login;
     }
 
     public String getMdpAdmin() {
-        return MdpAdmin;
+        return mdpAdmin;
     }
 
     public void setMdpAdmin(String mdpAdmin) {
-        MdpAdmin = mdpAdmin;
+        this.mdpAdmin = mdpAdmin;
     }
 
     @Override
     public String toString() {
         return "Admin{" +
-                "IdAdmin=" + IdAdmin +
-                ", Login='" + Login + '\'' +
-                ", MdpAdmin='" + MdpAdmin + '\'' +
+                "idAdmin=" + idAdmin +
+                ", login='" + login + '\'' +
+                ", mdpAdmin='" + mdpAdmin + '\'' +
                 '}';
     }
 }

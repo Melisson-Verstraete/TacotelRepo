@@ -2,39 +2,35 @@ package model;
 
 public class Photo {
 
-    private int IdPhoto;
-    private String NomPhoto;
+    private int idPhoto;
+    private String nomPhoto;
 
     public Photo(int idPhoto, String nomPhoto) {
-        IdPhoto = idPhoto;
-        NomPhoto = nomPhoto;
-    }
-
-    public Photo(String nomPhoto) {
-        NomPhoto = nomPhoto;
+        this.idPhoto = idPhoto;
+        this.nomPhoto = nomPhoto;
     }
 
     public int getIdPhoto() {
-        return IdPhoto;
+        return idPhoto;
     }
 
     public void setIdPhoto(int idPhoto) {
-        IdPhoto = idPhoto;
+        this.idPhoto = idPhoto;
     }
 
     public String getNomPhoto() {
-        return NomPhoto;
+        return nomPhoto;
     }
 
     public void setNomPhoto(String nomPhoto) {
-        NomPhoto = nomPhoto;
+        this.nomPhoto = nomPhoto;
     }
 
     @Override
     public String toString() {
         return "Photo{" +
-                "IdPhoto=" + IdPhoto +
-                ", NomPhoto='" + NomPhoto + '\'' +
+                "idPhoto=" + idPhoto +
+                ", nomPhoto='" + nomPhoto + '\'' +
                 '}';
     }
 }

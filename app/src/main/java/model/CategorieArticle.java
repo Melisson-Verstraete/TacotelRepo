@@ -2,35 +2,35 @@ package model;
 
 public class CategorieArticle {
 
-    private int IdArticle;
-    private int IdCategorie;
+    private int idArticle;
+    private int idCategorie;
 
     public CategorieArticle(int idArticle, int idCategorie) {
-        IdArticle = idArticle;
-        IdCategorie = idCategorie;
+        this.idArticle = idArticle;
+        this.idCategorie = idCategorie;
     }
 
     public int getIdArticle() {
-        return IdArticle;
+        return idArticle;
     }
 
     public void setIdArticle(int idArticle) {
-        IdArticle = idArticle;
+        this.idArticle = idArticle;
     }
 
     public int getIdCategorie() {
-        return IdCategorie;
+        return idCategorie;
     }
 
     public void setIdCategorie(int idCategorie) {
-        IdCategorie = idCategorie;
+        this.idCategorie = idCategorie;
     }
 
     @Override
     public String toString() {
         return "CategorieArticle{" +
-                "IdArticle=" + IdArticle +
-                ", IdCategorie=" + IdCategorie +
+                "idArticle=" + idArticle +
+                ", idCategorie=" + idCategorie +
                 '}';
     }
 }
