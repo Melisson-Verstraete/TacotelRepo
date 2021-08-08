@@ -2,43 +2,48 @@ package com.helha.tacotel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import api.ApiClient;
-import api.CategorieService;
 import model.Article;
 import model.Categorie;
+import model.CategorieArticle;
 import repository.ArticleRepository;
+import repository.CategorieArticleRepository;
 import repository.CategorieRepository;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class MagasinActivity extends AppCompatActivity {
+public class MagasinActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final int REQUEST_CODE_MENU = 1;
     private static final int REQUEST_CODE_DETAILS_ARTICLE = 1;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_magasin);
 
-        // CATEGORIES
+        afficherCategories();
+        afficherArticles();
+    }
+
+    // CATEGORIES
+    private void afficherCategories() {
         List<Categorie> categories = new ArrayList<>();
         List<String> categoriesString = new ArrayList<>();
 
@@ -47,24 +52,23 @@ public class MagasinActivity extends AppCompatActivity {
         categorieRepository.query().observe(this, new Observer<List<Categorie>>() {
             @Override
             public void onChanged(List<Categorie> categoriesApi) {
-                Log.i("Categories", categories.toString());
                 categories.addAll(categoriesApi);
-
-                categoriesString.add(categories.toString());
-                String nom = categories.get(0).getNomCategorie();
-                Log.i("CategoriesBOUCLE", nom);
+                for (int j=0;j<categories.size();j++) {
+                    categoriesString.add(categories.get(j).getNomCategorie());
+                }
             }
         });
-//        for (int j=0;j<=categories.size();j++) {
-//            String nom2 = categories.get(j).getNomCategorie();
-//            Log.i("CategoriesBOUCLE2", nom2);
-//        }
-        Spinner spinner = findViewById(R.id.spinner_categories_magasin);
+
+        spinner = findViewById(R.id.spinner_categories_magasin);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoriesString);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        // ARTICLES
+        spinner.setOnItemSelectedListener(this);
+    }
+
+    // ARTICLES
+    private void afficherArticles() {
         List<Article> articles = new ArrayList<>();
         ListView listView = findViewById(R.id.lv_articles);
         ArticlesMagasinArrayAdapter articlesMagasinArrayAdapter = new ArticlesMagasinArrayAdapter(this, R.id.lv_articles, articles);
@@ -79,6 +83,28 @@ public class MagasinActivity extends AppCompatActivity {
                 articles.clear();
                 articles.addAll(articlesApi);
                 articlesMagasinArrayAdapter.notifyDataSetChanged();
+
+                // RECHERCHER
+                EditText editText = findViewById(R.id.et_rechercher_magasin);
+                editText.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View view, int id, KeyEvent keyEvent) {
+                        if (editText.getText().toString().isEmpty()) {
+                            articles.clear();
+                            articles.addAll(articlesApi);
+                            articlesMagasinArrayAdapter.notifyDataSetChanged();
+                        } else {
+                            articles.clear();
+                            for (int j = 0; j < articlesApi.size(); j++) {
+                                if (articlesApi.get(j).getLibelle().contains(editText.getText().toString())) {
+                                    articles.add(articlesApi.get(j));
+                                }
+                            }
+                            articlesMagasinArrayAdapter.notifyDataSetChanged();
+                        }
+                        return false;
+                    }
+                });
             }
         });
 
@@ -101,8 +127,19 @@ public class MagasinActivity extends AppCompatActivity {
         });
     }
 
+    // REDIRECTION VERS MENU
     public void goToMenuFromMagasin(View view) {
         Intent intent = new Intent(MagasinActivity.this,MenuActivity.class);
         startActivityForResult(intent, REQUEST_CODE_MENU);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        Log.i("essai", String.valueOf(parent.getItemAtPosition(pos)));
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
