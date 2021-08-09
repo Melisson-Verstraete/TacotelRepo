@@ -26,10 +26,6 @@ public class AdminListArticlesActivity extends AppCompatActivity {
 
 
 
-    public void deleteArticle(View view){
-        Intent intent = new Intent(AdminListArticlesActivity.this, AdminListArticlesActivity.class);
-        startActivityForResult(intent, REQUEST_CODE_FORM_ADMIN_ARTICLE);
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
