@@ -3,7 +3,6 @@ package com.helha.tacotel;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import java.util.List;
 import model.Article;
 import repository.ArticleRepository;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
 
 public class ArticlesAdminArrayAdapter extends ArrayAdapter<Article> {
     public ArticlesAdminArrayAdapter(@NonNull Context context, int resource, @NonNull List<Article> objects) {
@@ -51,6 +49,8 @@ public class ArticlesAdminArrayAdapter extends ArrayAdapter<Article> {
                             public void onClick(DialogInterface dialog, int which) {
                                 ArticleRepository articleRepository = new ArticleRepository();
                                 articleRepository.delete(getItem(position).getIdArticle());
+                                Intent intent = new Intent(getContext(),AdminListArticlesActivity.class);
+                                getContext().startActivity(intent);
                             }
                         })
                         .setNegativeButton("Non", new DialogInterface.OnClickListener() {

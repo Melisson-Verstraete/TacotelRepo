@@ -1,15 +1,11 @@
 package com.helha.tacotel;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 
 import android.view.View;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
@@ -30,12 +26,10 @@ public class AdminListArticlesActivity extends AppCompatActivity {
 
 
 
-    /*public void deleteArticle(View view){
-        /*Log.i("Test Identifiant",""+position);
-*/
-
-        /*
-    }*/
+    public void deleteArticle(View view){
+        Intent intent = new Intent(AdminListArticlesActivity.this, AdminListArticlesActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_FORM_ADMIN_ARTICLE);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
