@@ -47,7 +47,7 @@
     <string name="sous_total">Sous-total</string>
     <string name="tva">TVA</string>
     <string name="total_ttc">Total TTC</string>
-    <string name="ajout_modification_article">Ajout/modification article</string>
+    <string name="ajout_modification_article">Ajout article</string>
     <string name="liste_articles">Liste des articles</string>
     <string name="se_connecter_client">Se connecter en tant que client</string>
     <string name="libelle">Libellé</string>

@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ArticleService {
@@ -19,4 +20,7 @@ public interface ArticleService {
 
     @DELETE("dbTaCoTel/Article/{id}")
     Call<Boolean> deleteArticle(@Path("id") int id);
+
+    @PUT("dbTaCoTel/Article/{id}")
+    Call<Article> putArticle(@Path("id") int id, @Body Article article);
 }

@@ -30,7 +30,7 @@ public class FormAdminArticleActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_FORM_ADD_ARTICLE = 1;
     public static final String EXTRA_BUNDLE_ARTICLE = "bundle_article";
-
+    private Article article = new Article();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +47,11 @@ public class FormAdminArticleActivity extends AppCompatActivity {
         TextView tvMemoire = findViewById(R.id.et_memoire_new_article);
         TextView tvImageURL = findViewById(R.id.et_image_new_article);
 
+        Button btnAdd = findViewById(R.id.btn_ajouter_new_article);
+
         Bundle bundleArticle = getIntent().getExtras();
         if(bundleArticle != null){
-            Article article = (Article)getIntent().getSerializableExtra(EXTRA_BUNDLE_ARTICLE);
+            article = (Article)getIntent().getSerializableExtra(EXTRA_BUNDLE_ARTICLE);
             tvLibelle.setText(article.getLibelle());
             tvDescription.setText(article.getDescription());
             tvPrix.setText(""+article.getPrix());
@@ -59,15 +61,17 @@ public class FormAdminArticleActivity extends AppCompatActivity {
             tvCouleur.setText(article.getCouleur());
             tvMemoire.setText(article.getTailleMemoire() + "");
             tvImageURL.setText(article.getImageURL());
+            TextView tvTitle = findViewById(R.id.tv_article_admin);
+            tvTitle.setText("Modification Article");
+            btnAdd.setText("Modifier");
         }
 
 
-        Button btnAdd = findViewById(R.id.btn_ajouter_new_article);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Création d'une variable article
-                Article article = new Article();
+                ArticleRepository articleRepository = new ArticleRepository();
+
                 article.setCouleur(tvCouleur.getText().toString());
                 article.setDescription(tvDescription.getText().toString());
                 article.setImageURL(tvImageURL.getText().toString());
@@ -78,9 +82,16 @@ public class FormAdminArticleActivity extends AppCompatActivity {
                 article.setTailleEcran(Double.valueOf(tvEcran.getText().toString()));
                 article.setTailleMemoire(Double.valueOf(tvMemoire.getText().toString()));
 
-                ArticleRepository articleRepository = new ArticleRepository();
 
-                articleRepository.create(article);
+                if(btnAdd.getText() == "Modifier"){
+
+                    articleRepository.update(article.getIdArticle(),article);
+                }
+                else{
+
+                    articleRepository.create(article);
+                }
+
                 Intent intent = new Intent(FormAdminArticleActivity.this,AdminListArticlesActivity.class);
                 startActivityForResult(intent,REQUEST_CODE_FORM_ADD_ARTICLE);
             }

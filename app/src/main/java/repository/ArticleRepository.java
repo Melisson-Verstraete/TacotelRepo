@@ -71,4 +71,22 @@ public class ArticleRepository {
             });
         return mutableLiveData;
     }
+
+    //Pour la modification d'un article
+    public LiveData<Article> update(int id, Article article){
+        final MutableLiveData<Article> mutableLiveData = new MutableLiveData<>();
+        getArticleService().putArticle(id, article).enqueue(new Callback<Article>() {
+            @Override
+            public void onResponse(Call<Article> call, Response<Article> response) {
+                mutableLiveData.postValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Article> call, Throwable t) {
+
+            }
+
+        });
+        return mutableLiveData;
+    }
 }
