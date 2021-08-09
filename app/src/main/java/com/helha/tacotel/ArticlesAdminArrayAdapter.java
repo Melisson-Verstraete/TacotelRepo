@@ -3,6 +3,8 @@ package com.helha.tacotel;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,8 @@ import repository.ArticleRepository;
 
 
 public class ArticlesAdminArrayAdapter extends ArrayAdapter<Article> {
+
+    public static final String EXTRA_BUNDLE_ARTICLE = "bundle_article";
     public ArticlesAdminArrayAdapter(@NonNull Context context, int resource, @NonNull List<Article> objects) {
         super(context, resource, objects);
     }
@@ -36,6 +40,17 @@ public class ArticlesAdminArrayAdapter extends ArrayAdapter<Article> {
 
         final Article article = getItem(position);
         populateView(convertView, article);
+
+        Button btnUpdate = convertView.findViewById(R.id.btn_modifier_article_admin);
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Article article = getItem(position);
+                Intent intent = new Intent(getContext(),FormAdminArticleActivity.class);
+                intent.putExtra(EXTRA_BUNDLE_ARTICLE,article);
+                getContext().startActivity(intent);
+            }
+        });
 
         Button btnDelete = convertView.findViewById(R.id.btn_supprimer_article_admin);
         btnDelete.setOnClickListener(new View.OnClickListener() {

@@ -29,12 +29,14 @@ import repository.ArticleRepository;
 public class FormAdminArticleActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_FORM_ADD_ARTICLE = 1;
+    public static final String EXTRA_BUNDLE_ARTICLE = "bundle_article";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_admin_article);
+
         TextView tvLibelle = findViewById(R.id.et_libelle_new_article);
         TextView tvDescription = findViewById(R.id.et_description_new_article);
         TextView tvPrix = findViewById(R.id.et_prix_new_article);
@@ -44,6 +46,21 @@ public class FormAdminArticleActivity extends AppCompatActivity {
         TextView tvCouleur = findViewById(R.id.et_couleur_new_article);
         TextView tvMemoire = findViewById(R.id.et_memoire_new_article);
         TextView tvImageURL = findViewById(R.id.et_image_new_article);
+
+        Bundle bundleArticle = getIntent().getExtras();
+        if(bundleArticle != null){
+            Article article = (Article)getIntent().getSerializableExtra(EXTRA_BUNDLE_ARTICLE);
+            tvLibelle.setText(article.getLibelle());
+            tvDescription.setText(article.getDescription());
+            tvPrix.setText(""+article.getPrix());
+            tvStock.setText(article.getQteEnStock()+"");
+            tvEcran.setText(article.getTailleEcran() + "");
+            tvMarque.setText(article.getMarque());
+            tvCouleur.setText(article.getCouleur());
+            tvMemoire.setText(article.getTailleMemoire() + "");
+            tvImageURL.setText(article.getImageURL());
+        }
+
 
         Button btnAdd = findViewById(R.id.btn_ajouter_new_article);
         btnAdd.setOnClickListener(new View.OnClickListener() {
