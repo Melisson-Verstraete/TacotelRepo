@@ -139,4 +139,22 @@ public class ArticleRepository {
         return mutableLiveData;
     }
 
+
+    public LiveData<Boolean> deleteCategorieFromArticle (int idArticle){
+        final MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
+        getArticleService().deleteCategorieFromArticle(idArticle).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                mutableLiveData.postValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+
+        });
+        return mutableLiveData;
+    }
+
 }

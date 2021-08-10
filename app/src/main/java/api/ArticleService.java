@@ -33,4 +33,7 @@ public interface ArticleService {
 
     @GET("dbTaCoTel/Article/Categorie/Recherche/{id}")
     Call<Integer> getCategorieByArticle(@Path("id") int id);
+
+    @DELETE("dbTaCoTel/Article/Categorie/delete/{idArticle}")
+    Call<Boolean> deleteCategorieFromArticle(@Path("idArticle") int idArticle);
 }

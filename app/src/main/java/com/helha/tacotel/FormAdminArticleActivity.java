@@ -168,10 +168,10 @@ public class FormAdminArticleActivity extends AppCompatActivity {
                     articleRepository.update(article.getIdArticle(),article);
 
                     if(isNew != 0){
-
+                        articleRepository.deleteCategorieFromArticle(article.getIdArticle());
+                        articleRepository.setCategorie(article.getIdArticle(),article.getCategorie().getIdCategorie());
                     }
                     else{
-                        Log.i("Test","Id Article : "+article.getIdArticle()+", Id Catégorie : "+article.getCategorie().getIdCategorie());
                         articleRepository.setCategorie(article.getIdArticle(),article.getCategorie().getIdCategorie());
                     }
 
