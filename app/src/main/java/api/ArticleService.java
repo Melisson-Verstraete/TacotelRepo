@@ -3,6 +3,7 @@ package api;
 import java.util.List;
 
 import model.Article;
+import model.Categorie;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -24,6 +25,12 @@ public interface ArticleService {
     @PUT("dbTaCoTel/Article/{id}")
     Call<Article> putArticle(@Path("id") int id, @Body Article article);
 
+    @GET("dbTaCoTel/Libelle/{libelle}")
+    Call<Integer> getArticleByLibelle(@Path("libelle") String libelle);
+
     @POST("dbTaCoTel/Article/{idArticle}/Categorie/{idCategorie}")
     Call<Article> postCategorieToArticle(@Path("idArticle") int idArticle, @Path("idCategorie") int idCategorie);
+
+    @GET("dbTaCoTel/Article/Categorie/Recherche/{id}")
+    Call<Integer> getCategorieByArticle(@Path("id") int id);
 }

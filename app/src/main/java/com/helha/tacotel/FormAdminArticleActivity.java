@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class FormAdminArticleActivity extends AppCompatActivity {
     public static final String EXTRA_BUNDLE_ARTICLE = "bundle_article";
     private Article article = new Article();
     private String nameCategorie = new String();
+    private int isNew;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +46,15 @@ public class FormAdminArticleActivity extends AppCompatActivity {
         TextView tvMemoire = findViewById(R.id.et_memoire_new_article);
         TextView tvImageURL = findViewById(R.id.et_image_new_article);
 
+        ArticleRepository articleRepository = new ArticleRepository();
+
         //Remplir le spinner de données
         CategorieRepository categorieRepository = new CategorieRepository();
         List<Categorie>categories = new ArrayList<>();
         List<String> nameCategories = new ArrayList<>();
         Button btnAdd = findViewById(R.id.btn_ajouter_new_article);
+
+        TextView tvCategorie = findViewById(R.id.tv_categorie_new_article);
 
         Spinner spCategorie = (Spinner) findViewById(R.id.spinner_categories_new_article);
 
@@ -57,6 +63,7 @@ public class FormAdminArticleActivity extends AppCompatActivity {
                 nameCategories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCategorie.setAdapter(adapter);
+
 
         categorieRepository.query().observe(this, new Observer<List<Categorie>>() {
             @Override
@@ -87,11 +94,37 @@ public class FormAdminArticleActivity extends AppCompatActivity {
             btnAdd.setText("Modifier");
 
 
-            spCategorie.setSelection(adapter.getPosition(article.getCategorie().getNomCategorie()));
-            nameCategorie = article.getCategorie().getNomCategorie();
-            adapter.notifyDataSetChanged();
-        }
+            Log.i("Test",article.toString());
+            articleRepository.getCategorieByArticle(article.getIdArticle()).observe(this, new Observer<Integer>() {
+                @Override
+                public void onChanged(Integer idFound) {
 
+                    if(idFound != 0){
+                       spCategorie.setSelection(adapter.getPosition(adapter.getItem(idFound-1)));
+                       nameCategorie = adapter.getItem(idFound-1) ;
+                       isNew = 1;
+
+                    }
+                    else{
+                        isNew = 0;
+                    }
+                    adapter.notifyDataSetChanged();
+
+                }
+            });
+
+
+
+        }
+        if(btnAdd.getText().equals("Modifier")){
+            tvCategorie.setVisibility(View.VISIBLE);
+            spCategorie.setVisibility(View.VISIBLE);
+        }
+        else{
+
+            tvCategorie.setVisibility(View.GONE);
+            spCategorie.setVisibility(View.GONE);
+        }
 
 
         spCategorie.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -113,7 +146,7 @@ public class FormAdminArticleActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArticleRepository articleRepository = new ArticleRepository();
+                Intent intent = new Intent(FormAdminArticleActivity.this,AdminListArticlesActivity.class);
 
                 article.setCouleur(tvCouleur.getText().toString());
                 article.setDescription(tvDescription.getText().toString());
@@ -132,16 +165,21 @@ public class FormAdminArticleActivity extends AppCompatActivity {
                 }
 
                 if(btnAdd.getText() == "Modifier"){
-
                     articleRepository.update(article.getIdArticle(),article);
+
+                    if(isNew != 0){
+
+                    }
+                    else{
+                        Log.i("Test","Id Article : "+article.getIdArticle()+", Id Catégorie : "+article.getCategorie().getIdCategorie());
+                        articleRepository.setCategorie(article.getIdArticle(),article.getCategorie().getIdCategorie());
+                    }
+
                 }
                 else{
-
                     articleRepository.create(article);
-                    articleRepository.setCategorie(article.getIdArticle(),article.getCategorie().getIdCategorie());
-                }
 
-                Intent intent = new Intent(FormAdminArticleActivity.this,AdminListArticlesActivity.class);
+                }
                 startActivityForResult(intent,REQUEST_CODE_FORM_ADD_ARTICLE);
             }
         });

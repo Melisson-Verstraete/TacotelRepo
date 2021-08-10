@@ -1,6 +1,8 @@
 package model;
 
-public class Categorie {
+import java.io.Serializable;
+
+public class Categorie implements Serializable {
 
     private int idCategorie;
     private String nomCategorie;

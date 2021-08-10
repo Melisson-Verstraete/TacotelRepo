@@ -10,6 +10,7 @@ import java.util.List;
 import api.ApiClient;
 import api.ArticleService;
 import model.Article;
+import model.Categorie;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -90,6 +91,21 @@ public class ArticleRepository {
         return mutableLiveData;
     }
 
+    public LiveData<Integer> getArticleByLibelle(String libelle) {
+        final MutableLiveData<Integer> mutableLiveData = new MutableLiveData<>();
+        getArticleService().getArticleByLibelle(libelle).enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                mutableLiveData.postValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
+        return mutableLiveData;
+    }
 
     public LiveData<Article> setCategorie(int idArticle, int idCategorie) {
         final MutableLiveData<Article> mutableLiveData = new MutableLiveData<>();
@@ -106,4 +122,21 @@ public class ArticleRepository {
         });
         return mutableLiveData;
     }
+    public LiveData<Integer> getCategorieByArticle (int id){
+        final MutableLiveData<Integer> mutableLiveData = new MutableLiveData<>();
+        getArticleService().getCategorieByArticle(id).enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                mutableLiveData.postValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+
+        });
+        return mutableLiveData;
+    }
+
 }

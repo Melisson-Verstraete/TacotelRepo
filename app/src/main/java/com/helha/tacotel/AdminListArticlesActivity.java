@@ -2,6 +2,7 @@ package com.helha.tacotel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import android.view.View;
@@ -19,6 +20,7 @@ import repository.ArticleRepository;
 public class AdminListArticlesActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_FORM_ADMIN_ARTICLE = 1;
+
     public void addArticle(View view){
         Intent intent = new Intent(AdminListArticlesActivity.this, FormAdminArticleActivity.class);
         startActivityForResult(intent, REQUEST_CODE_FORM_ADMIN_ARTICLE);
@@ -30,7 +32,7 @@ public class AdminListArticlesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_list_articles);
-
+        Bundle bundle = getIntent().getExtras();
 //        ArticleService articleService = ApiClient.getClient().create(ArticleService.class);
 //
 //        articleService.getArticles().enqueue(new Callback<List<Article>>() {
@@ -61,6 +63,7 @@ public class AdminListArticlesActivity extends AppCompatActivity {
 
             }
         });
+
 
 
 //        Mis en commentaires pcq sinon ça va créer un nouvel article à chaque fois
