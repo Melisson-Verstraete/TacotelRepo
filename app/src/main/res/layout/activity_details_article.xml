@@ -221,6 +221,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="60dp"
         android:background="@color/color_blue_info"
+        android:onClick="ajouterArticlePanier"
         android:text="Ajouter au panier"
         app:layout_constraintStart_toEndOf="@+id/btn_retour_details"
         app:layout_constraintTop_toBottomOf="@+id/tv_quantite_details" />

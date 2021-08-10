@@ -28,6 +28,7 @@ public class FormConnexionActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_FORM_INSCRIPTION = 1;
     public static final int REQUEST_CODE_FORM_CONNEXION_ADMIN = 1;
     private static final int REQUEST_CODE_FORM_CONNEXION_MENU = 1;
+    private static int idUserConnected;
 
     UtilisateurConnecte utilisateurConnecte;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -35,7 +36,6 @@ public class FormConnexionActivity extends AppCompatActivity {
     TextView tv_tacotel_connexion,tv_connexion,tv_pseudo_connexion,tv_mdp_connexion,tv_pas_inscrit,tv_connexion_admin;
     EditText et_pseudo_connexion,et_mdp_connexion;
     Button btn_valider_connexion;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +79,7 @@ public class FormConnexionActivity extends AppCompatActivity {
                         //Toast.makeText(FormConnexionActivity.this, u.toString(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(FormConnexionActivity.this, MenuActivity.class);
                         startActivityForResult(intent, REQUEST_CODE_FORM_CONNEXION_MENU);
+                        idUserConnected = u.getIdUser();
                         dialog.dismiss();
                     }
                 }, new Consumer<Throwable>() {
@@ -96,6 +97,10 @@ public class FormConnexionActivity extends AppCompatActivity {
     protected void onStop() {
         compositeDisposable.clear();
         super.onStop();
+    }
+
+    public static int getIdUserConnected() {
+        return idUserConnected;
     }
 
     public void goToFormInscription2(View view) {

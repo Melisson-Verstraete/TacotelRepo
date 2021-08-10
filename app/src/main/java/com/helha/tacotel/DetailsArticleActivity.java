@@ -2,32 +2,37 @@ package com.helha.tacotel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+
+import java.util.Date;
+import java.util.List;
 
 import model.Article;
+import model.Panier;
+import repository.PanierRepository;
 
 public class DetailsArticleActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_MENU = 1;
     private static final int REQUEST_CODE_MAGASIN = 1;
 
+    String libelle, description, marque, couleur;
+    double ecran, memoire, prix;
+    int idUser = FormConnexionActivity.getIdUserConnected();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_article);
 
-        String libelle;
-        String description;
-        double ecran;
-        String marque;
-        double memoire;
-        String couleur;
-        double prix;
+        PanierRepository panierRepository = new PanierRepository();
+        panierRepository
+                .create(new Panier(idUser, new Date()));
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -68,14 +73,51 @@ public class DetailsArticleActivity extends AppCompatActivity {
         tvMarque.setText(marque);
         tvMemoire.setText(memoire + " GB");
         tvCouleur.setText(couleur);
-        tvPrix.setText("€ " + prix);
+        tvPrix.setText("€ " + prix + " HTVA");
     }
 
+    public void ajouterArticlePanier(View view) {
+//        PanierRepository panierRepository = new PanierRepository();
+//        panierRepository
+//                .create(new Panier(idUser, new Date()))
+//                .observe(DetailsArticleActivity.this, new Observer<Panier>() {
+//                    @Override
+//                    public void onChanged(Panier panier) {
+//                        Log.i("panier", panier.toString());
+//                    }
+//                });
+//        panierRepository.query().observe(this, new Observer<List<Panier>>() {
+//            @Override
+//            public void onChanged(List<Panier> paniersApi) {
+//                if (paniersApi.size() < 1) {
+//                    panierRepository
+//                            .create(new Panier(idUser, new Date()))
+//                            .observe(DetailsArticleActivity.this, new Observer<Panier>() {
+//                                @Override
+//                                public void onChanged(Panier panier) {
+//                                    Log.i("panier", panier.toString());
+//                                }
+//                            });
+//                } else {
+//                    for (int j = 1; j < paniersApi.size(); j++) {
+//                        if (paniersApi.get(j).getIdPanier() == idUser) {
+//                            Log.i("panier", "exists");
+//                        } else {
+//                            Log.i("panier", "does not exist");
+//                        }
+//                    }
+//                }
+//            }
+//        });
+    }
+
+    // REDIRECTION VERS MENU
     public void goToMenuFromDetails(View view) {
         Intent intent = new Intent(DetailsArticleActivity.this,MenuActivity.class);
         startActivityForResult(intent, REQUEST_CODE_MENU);
     }
-    
+
+    // REDIRECTION VERS MAGASIN
     public void goToMagasinFromDetails(View view) {
         Intent intent = new Intent(DetailsArticleActivity.this,MagasinActivity.class);
         startActivityForResult(intent, REQUEST_CODE_MAGASIN);
