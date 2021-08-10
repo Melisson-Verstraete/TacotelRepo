@@ -16,6 +16,8 @@ public class Categorie implements Serializable {
         this.nomCategorie = nomCategorie;
     }
 
+    public Categorie(){}
+
     public int getIdCategorie() {
         return idCategorie;
     }

@@ -14,15 +14,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 
 import java.util.List;
 
 import model.Article;
+import model.Categorie;
 import repository.ArticleRepository;
 
 
 public class ArticlesAdminArrayAdapter extends ArrayAdapter<Article> {
 
+    private int hasArticle = 0;
     public static final String EXTRA_BUNDLE_ARTICLE = "bundle_article";
     public ArticlesAdminArrayAdapter(@NonNull Context context, int resource, @NonNull List<Article> objects) {
         super(context, resource, objects);
@@ -40,6 +44,9 @@ public class ArticlesAdminArrayAdapter extends ArrayAdapter<Article> {
 
         final Article article = getItem(position);
         populateView(convertView, article);
+
+        ArticleRepository articleRepository = new ArticleRepository();
+
 
         Button btnUpdate = convertView.findViewById(R.id.btn_modifier_article_admin);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +69,9 @@ public class ArticlesAdminArrayAdapter extends ArrayAdapter<Article> {
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                ArticleRepository articleRepository = new ArticleRepository();
+
+                                articleRepository.deleteCategorieFromArticle(getItem(position).getIdArticle());
+
                                 articleRepository.delete(getItem(position).getIdArticle());
                                 Intent intent = new Intent(getContext(),AdminListArticlesActivity.class);
                                 getContext().startActivity(intent);
