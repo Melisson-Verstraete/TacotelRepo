@@ -9,7 +9,9 @@ public class Panier {
     private Date dateCreation;
     private List<Article> articles;
 
-    public Panier() {
+    public Panier(int idPanier, Date dateCreation) {
+        this.idPanier = idPanier;
+        this.dateCreation = dateCreation;
     }
 
     public Panier(int idPanier, Date dateCreation, List<Article> articles) {
