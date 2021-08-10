@@ -89,4 +89,21 @@ public class ArticleRepository {
         });
         return mutableLiveData;
     }
+
+
+    public LiveData<Article> setCategorie(int idArticle, int idCategorie) {
+        final MutableLiveData<Article> mutableLiveData = new MutableLiveData<>();
+        getArticleService().postCategorieToArticle(idArticle,idCategorie).enqueue(new Callback<Article>() {
+            @Override
+            public void onResponse(Call<Article> call, Response<Article> response) {
+                mutableLiveData.postValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Article> call, Throwable t) {
+
+            }
+        });
+        return mutableLiveData;
+    }
 }

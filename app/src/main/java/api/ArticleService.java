@@ -23,4 +23,7 @@ public interface ArticleService {
 
     @PUT("dbTaCoTel/Article/{id}")
     Call<Article> putArticle(@Path("id") int id, @Body Article article);
+
+    @POST("dbTaCoTel/Article/{idArticle}/Categorie/{idCategorie}")
+    Call<Article> postCategorieToArticle(@Path("idArticle") int idArticle, @Path("idCategorie") int idCategorie);
 }

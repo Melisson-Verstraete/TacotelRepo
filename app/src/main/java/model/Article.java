@@ -14,6 +14,8 @@ public class Article implements Serializable {
     private double tailleMemoire;
     private String imageURL;
 
+    private Categorie categorie;
+
     public Article(int idArticle, String libelle, String description, double prix, int qteEnStock, double tailleEcran, String marque, String couleur, double tailleMemoire, String imageURL) {
         this.idArticle = idArticle;
         this.libelle = libelle;
@@ -122,6 +124,9 @@ public class Article implements Serializable {
         this.imageURL = imageURL;
     }
 
+    public Categorie getCategorie(){return categorie;}
+
+    public void setCategorie(Categorie categorie){ this.categorie = categorie;}
     @Override
     public String toString() {
         return "Article{" +
