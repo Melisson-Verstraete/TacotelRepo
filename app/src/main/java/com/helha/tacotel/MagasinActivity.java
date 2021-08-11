@@ -4,15 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -32,6 +29,8 @@ public class MagasinActivity extends AppCompatActivity implements AdapterView.On
     private static final int REQUEST_CODE_MENU = 1;
     private static final int REQUEST_CODE_DETAILS_ARTICLE = 1;
 
+    List<Categorie> categories = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,22 +41,23 @@ public class MagasinActivity extends AppCompatActivity implements AdapterView.On
 
     // CATEGORIES
     private void afficherCategories() {
-        List<String> categories = new ArrayList<>();
+        List<String> nomCategories = new ArrayList<>();
 
         CategorieRepository categorieRepository = new CategorieRepository();
 
         Spinner spinner = findViewById(R.id.spinner_categories_magasin);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nomCategories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
         categorieRepository.query().observe(this, new Observer<List<Categorie>>() {
             @Override
             public void onChanged(List<Categorie> categoriesApi) {
-                categories.clear();
-                categories.add("TOUT");
+                categories.addAll(categoriesApi);
+                nomCategories.clear();
+                nomCategories.add("TOUT");
                 for (int j=0;j<categoriesApi.size();j++) {
-                    categories.add(categoriesApi.get(j).getNomCategorie());
+                    nomCategories.add(categoriesApi.get(j).getNomCategorie());
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -78,6 +78,17 @@ public class MagasinActivity extends AppCompatActivity implements AdapterView.On
 
     // ARTICLES
     private void afficherArticles(String categorieChoisie) {
+        // CATEGORIEARTICLES
+        List<CategorieArticle> categorieArticles = new ArrayList<>();
+        CategorieArticleRepository categorieArticleRepository = new CategorieArticleRepository();
+        categorieArticleRepository.query().observe(this, new Observer<List<CategorieArticle>>() {
+            @Override
+            public void onChanged(List<CategorieArticle> categorieArticlesApi) {
+                categorieArticles.addAll(categorieArticlesApi);
+            }
+        });
+
+        // ARTICLES
         List<Article> articles = new ArrayList<>();
         ListView listView = findViewById(R.id.lv_articles);
         ArticlesMagasinArrayAdapter articlesMagasinArrayAdapter = new ArticlesMagasinArrayAdapter(this, R.id.lv_articles, articles);
@@ -91,26 +102,46 @@ public class MagasinActivity extends AppCompatActivity implements AdapterView.On
                 articles.clear();
                 if (categorieChoisie.equals("TOUT")) {
                     articles.addAll(articlesApi);
-                } else if (categorieChoisie.equals("Tablette")){
-                    for (int j = 0; j < articlesApi.size(); j++) {
-                        if (articlesApi.get(j).getCategorie().toString() == "1") {
-                            articles.add(articlesApi.get(j));
-                        }
-                    }
-                } else if (categorieChoisie.equals("Ordinateur")){
-                    for (int j = 0; j < articlesApi.size(); j++) {
-                        if (articlesApi.get(j).getCategorie().toString() == "2") {
-                            articles.add(articlesApi.get(j));
-                        }
-                    }
-                } else if (categorieChoisie.equals("Téléphone")){
-                    for (int j = 0; j < articlesApi.size(); j++) {
-                        if (articlesApi.get(j).getCategorie().toString() == "3") {
-                            articles.add(articlesApi.get(j));
+                    Log.i("categorieChoisie", "tout");
+                } else {
+                    for (int m=0 ; m<categories.size() ; m++) {
+                        if (categorieChoisie.equals(categories.get(m).getNomCategorie())) {
+                            Log.i("categorieChoisie", categories.get(m).getNomCategorie());
+                            for (int n = 0; n < articlesApi.size(); n++) {
+                                for (int j = 0; j < categorieArticles.size(); j++) {
+                                    if (categorieArticles.get(j).getIdCategorie() == categories.get(m).getIdCategorie()
+                                            && categorieArticles.get(j).getIdArticle() == articlesApi.get(n).getIdArticle()) {
+                                        articles.add(articlesApi.get(n));
+                                    }
+                                }
+                            }
                         }
                     }
                 }
                 articlesMagasinArrayAdapter.notifyDataSetChanged();
+
+//                if (categorieChoisie.equals("TOUT")) {
+//                    articles.addAll(articlesApi);
+//                } else if (categorieChoisie.equals("Tablette")){
+//                    for (int j = 0; j < articlesApi.size(); j++) {
+//                        if (articlesApi.get(j).getCategorie().toString() == "1") {
+//                            articles.add(articlesApi.get(j));
+//                        }
+//                    }
+//                } else if (categorieChoisie.equals("Ordinateur")){
+//                    for (int j = 0; j < articlesApi.size(); j++) {
+//                        if (articlesApi.get(j).getCategorie().toString() == "2") {
+//                            articles.add(articlesApi.get(j));
+//                        }
+//                    }
+//                } else if (categorieChoisie.equals("Téléphone")){
+//                    for (int j = 0; j < articlesApi.size(); j++) {
+//                        if (articlesApi.get(j).getCategorie().toString() == "3") {
+//                            articles.add(articlesApi.get(j));
+//                        }
+//                    }
+//                }
+
 
                 // RECHERCHER
                 EditText editText = findViewById(R.id.et_rechercher_magasin);
