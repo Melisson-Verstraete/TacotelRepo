@@ -1,5 +1,6 @@
 package com.helha.tacotel;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,6 +37,14 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
     private TextView tv_pays1_validation ;
     private TextView tv_mode_validation ;
 
+    SharedPreferences sharedpreferences2;
+    public static final String SHARED_PREFS2 = "sharedPrefs2";
+
+    public static final String TITULAIRE_COMPTE = "titulaireKey" ;
+    public static final String NUM_COMPTE = "numKey" ;
+    public static final String CVV = "cvvKey" ;
+    public static String TYPE_CARTE = "typecarteKey" ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,20 +57,19 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
         et_num_compte = (EditText) findViewById(R.id.et_num_compte);
         et_cvv = (EditText) findViewById(R.id.et_cvv);
 
+
         radioGroup_carte = (RadioGroup) findViewById(R.id.radioGroup_carte);
         radioButton_debit = (RadioButton)findViewById(R.id.radioButton_debit);
         radioButton_credit = (RadioButton)findViewById(R.id.radioButton_credit);
-/*
-        tv_nom1_validation = (TextView) findViewById(R.id.tv_nom1_validation) ;
-        tv_adresse1_validation = (TextView) findViewById(R.id.tv_adresse1_validation) ;
-        tv_pays1_validation = (TextView) findViewById(R.id.tv_pays1_validation) ;*/
+
 
         radioButton_debit.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     et_cvv.setVisibility(View.INVISIBLE);
-                    String str_mode_paiement = "carte débit" ;
+                    TYPE_CARTE = "carte de débit"  ;
+                    //String str_mode_paiement = "carte débit" ;
                     //rb2.setChecked(false);
                 }
             }
@@ -72,11 +80,26 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     et_cvv.setVisibility(View.VISIBLE);
-                    String str_mode_paiement = "carte crédit" ;
+                    TYPE_CARTE = "carte de crédit"  ;
+                    //String str_mode_paiement = "carte crédit" ;
                     //rb2.setChecked(false);
                 }
             }
         });
+
+        sharedpreferences2 = getSharedPreferences(SHARED_PREFS2, Context.MODE_PRIVATE);
+        if (sharedpreferences2.contains(TITULAIRE_COMPTE)) {
+            et_titulaire_compte.setText(sharedpreferences2.getString(TITULAIRE_COMPTE, ""));
+        }
+        if (sharedpreferences2.contains(NUM_COMPTE)) {
+            et_cvv.setText(sharedpreferences2.getString(NUM_COMPTE, ""));
+        }
+        if (sharedpreferences2.contains(CVV)) {
+            et_cvv.setText(sharedpreferences2.getString(CVV, ""));
+        }
+        if(sharedpreferences2.contains(TYPE_CARTE)){
+
+        }
 
 /*
         Intent intent = getIntent();
@@ -103,6 +126,8 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
         String str_num_compte = et_num_compte.getText().toString() ;
         String str_cvv = et_cvv.getText().toString() ;
 
+        SharedPreferences.Editor editor = sharedpreferences2.edit();
+
 
         if(((str_titulaire_compte.isEmpty()||str_num_compte.isEmpty()||str_cvv.isEmpty())&&radioButton_credit.isChecked())||((str_titulaire_compte.isEmpty()||str_num_compte.isEmpty())&&radioButton_debit.isChecked()))
         {
@@ -112,18 +137,23 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
             Intent intent = new Intent(FormPaiementBanqueActivity.this,FormPaiementValidationActivity.class);
             startActivityForResult(intent, REQUEST_CODE_PAIEMENT_VALIDATION);
 
+            editor.putString(TITULAIRE_COMPTE, str_titulaire_compte) ;
+            editor.putString(NUM_COMPTE, str_num_compte) ;
+            editor.putString(CVV, str_cvv) ;
+
+            editor.commit() ;
 
             //intent.putExtra("tv_nom1_validation", str)
-            tv_nom1_validation.setText(intent.getStringExtra("tv_nom1_validation"));
+ /*           tv_nom1_validation.setText(intent.getStringExtra("tv_nom1_validation"));
 
             //intent.putExtra("tv_mode_validation", str_mode_paiement) ;
             intent.putExtra("tv_titulaire_compte_validation", str_titulaire_compte) ;
             intent.putExtra("tv_num_compte_validation", str_num_compte) ;
 
-            startActivity(intent);
+            startActivity(intent);*/
         }
     }
-/*
+
     public void onRadioButtonClicked(View view) {
 
         if(radioButton_credit.isChecked())
@@ -133,5 +163,5 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
         if(radioButton_debit.isChecked()){
             et_cvv.setVisibility(View.INVISIBLE);
         }
-    }*/
+    }
 }

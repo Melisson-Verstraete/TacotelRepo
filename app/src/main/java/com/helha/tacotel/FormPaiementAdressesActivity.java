@@ -35,7 +35,23 @@ public class FormPaiementAdressesActivity extends AppCompatActivity {
     private EditText et_ville2_adresses ;
     private EditText et_pays2_adresses ;
 
+    SharedPreferences sharedpreferences;
     public static final String SHARED_PREFS = "sharedPrefs";
+
+    public static final String NOM1_ADRESSES = "nom1Key" ;
+    public static final String PRENOM1_ADRESSES = "prenom1key" ;
+    public static final String RUE1_ADRESSES = "rue1Key" ;
+    public static final String NUMERO1_ADRESSES ="numero1Key" ;
+    public static final String CODEPOSTAL1_ADRESSES = "codePostal1Key" ;
+    public static final String VILLE1_ADRESSES = "ville1Key" ;
+    public static final String PAYS1_ADRESSES = "pays1Key" ;
+    public static final String NOM2_ADRESSES = "nom2Key" ;
+    public static final String PRENOM2_ADRESSES = "prenom2key" ;
+    public static final String RUE2_ADRESSES = "rue2Key" ;
+    public static final String NUMERO2_ADRESSES ="numero2Key" ;
+    public static final String CODEPOSTAL2_ADRESSES = "codePostal2Key" ;
+    public static final String VILLE2_ADRESSES = "ville2Key" ;
+    public static final String PAYS2_ADRESSES = "pays2Key" ;
 /*
     SharedPreferences Sprefs;
     public static final String prefName = "report" ;*/
@@ -73,6 +89,63 @@ public class FormPaiementAdressesActivity extends AppCompatActivity {
 
         startActivity(intent_validation);*/
 
+        sharedpreferences = getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE);
+        if (sharedpreferences.contains(NOM1_ADRESSES)) {
+            et_nom1_adresses.setText(sharedpreferences.getString(NOM1_ADRESSES, ""));
+        }
+        if (sharedpreferences.contains(PRENOM1_ADRESSES)) {
+            et_prenom1_adresses.setText(sharedpreferences.getString(PRENOM1_ADRESSES, ""));
+
+        }
+        if (sharedpreferences.contains(RUE1_ADRESSES)) {
+            et_rue1_adresses.setText(sharedpreferences.getString(RUE1_ADRESSES, ""));
+
+        }
+        if (sharedpreferences.contains(NUMERO1_ADRESSES)) {
+            et_numero1_adresses.setText(sharedpreferences.getString(NUMERO1_ADRESSES, ""));
+
+        }
+        if (sharedpreferences.contains(CODEPOSTAL1_ADRESSES)) {
+            et_codePostal1_adresses.setText(sharedpreferences.getString(CODEPOSTAL1_ADRESSES, ""));
+
+        }
+        if (sharedpreferences.contains(VILLE1_ADRESSES)) {
+            et_ville1_adresses.setText(sharedpreferences.getString(VILLE1_ADRESSES, ""));
+
+        }
+        if (sharedpreferences.contains(PAYS1_ADRESSES)) {
+            et_pays1_adresses.setText(sharedpreferences.getString(PAYS1_ADRESSES, ""));
+
+        }
+        if (sharedpreferences.contains(NOM2_ADRESSES)) {
+            et_nom2_adresses.setText(sharedpreferences.getString(NOM2_ADRESSES, ""));
+        }
+        if (sharedpreferences.contains(PRENOM2_ADRESSES)) {
+            et_prenom2_adresses.setText(sharedpreferences.getString(PRENOM2_ADRESSES, ""));
+
+        }
+        if (sharedpreferences.contains(RUE2_ADRESSES)) {
+            et_rue2_adresses.setText(sharedpreferences.getString(RUE2_ADRESSES, ""));
+
+        }
+        if (sharedpreferences.contains(NUMERO2_ADRESSES)) {
+            et_numero2_adresses.setText(sharedpreferences.getString(NUMERO2_ADRESSES, ""));
+
+        }
+        if (sharedpreferences.contains(CODEPOSTAL2_ADRESSES)) {
+            et_codePostal2_adresses.setText(sharedpreferences.getString(CODEPOSTAL2_ADRESSES, ""));
+
+        }
+        if (sharedpreferences.contains(VILLE2_ADRESSES)) {
+            et_ville2_adresses.setText(sharedpreferences.getString(VILLE2_ADRESSES, ""));
+
+        }
+        if (sharedpreferences.contains(PAYS2_ADRESSES)) {
+            et_pays2_adresses.setText(sharedpreferences.getString(PAYS2_ADRESSES, ""));
+
+        }
+
+
     }
 
     public void goToMenuFromPaiementAdresses(View view) {
@@ -95,9 +168,9 @@ public class FormPaiementAdressesActivity extends AppCompatActivity {
         String str_codePostal2 = et_codePostal2_adresses.getText().toString();
         String str_ville2 = et_ville2_adresses.getText().toString();
         String str_pays2 = et_pays2_adresses.getText().toString();
-/*
-        Sprefs = getSharedPreferences(prefName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = Sprefs.edit();*/
+
+        //Sprefs = getSharedPreferences(prefName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
 
         if (str_nom1.isEmpty()||str_nom2.isEmpty()||str_prenom1.isEmpty()||str_prenom2.isEmpty()||str_rue1.isEmpty()||
                 str_rue2.isEmpty()||str_numero1.isEmpty()||str_numero2.isEmpty()||str_codePostal1.isEmpty()||str_codePostal2.isEmpty()||
@@ -108,15 +181,28 @@ public class FormPaiementAdressesActivity extends AppCompatActivity {
         else {
             Intent intent = new Intent(FormPaiementAdressesActivity.this, FormPaiementBanqueActivity.class);
             startActivityForResult(intent, REQUEST_CODE_PAIEMENT_BANQUE);
-/*
-            SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            editor.putString(str_nom1, et_nom1_adresses.getText().toString()) ;
+            //SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+            //SharedPreferences.Editor editor = sharedPreferences.edit();
 
-            editor.apply();
+            editor.putString(NOM1_ADRESSES, str_nom1 + " " + str_prenom1) ;
+            //editor.putString(PRENOM1_ADRESSES, str_prenom1) ;
+            editor.putString(RUE1_ADRESSES, str_rue1 +" "+str_numero1+" "+str_codePostal1+ " "+str_ville1) ;
+            //editor.putString(NUMERO1_ADRESSES, str_numero1) ;
+            // editor.putString(CODEPOSTAL1_ADRESSES, str_codePostal1) ;
+            //editor.putString(VILLE1_ADRESSES, str_ville1) ;
+            editor.putString(PAYS1_ADRESSES, str_pays1) ;
+            editor.putString(NOM2_ADRESSES, str_nom2+ " " + str_prenom2) ;
+            //editor.putString(PRENOM2_ADRESSES, str_prenom2) ;
+            editor.putString(RUE2_ADRESSES, str_rue2+" "+str_numero2+" "+str_codePostal2+ " "+str_ville2) ;
+            //editor.putString(NUMERO2_ADRESSES, str_numero2) ;
+            //editor.putString(CODEPOSTAL2_ADRESSES, str_codePostal2) ;
+            //editor.putString(VILLE2_ADRESSES, str_ville2) ;
+            editor.putString(PAYS2_ADRESSES, str_pays2) ;
 
-            Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show();*/
+            editor.commit();
+
+            //Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show();*/
 /*
             editor.putString("str_nom1"+et_nom1_adresses.getText().toString(), et_nom1_adresses.getText().toString()) ;
 
