@@ -33,9 +33,11 @@ public class FormConnexionActivity extends AppCompatActivity {
     UtilisateurConnecte utilisateurConnecte;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    TextView tv_tacotel_connexion,tv_connexion,tv_pseudo_connexion,tv_mdp_connexion,tv_pas_inscrit,tv_connexion_admin;
+    TextView tv_tacotel_connexion,tv_connexion,tv_pseudo_connexion,tv_mdp_connexion,
+            tv_pas_inscrit,tv_connexion_admin;
     EditText et_pseudo_connexion,et_mdp_connexion;
     Button btn_valider_connexion;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,6 @@ public class FormConnexionActivity extends AppCompatActivity {
 
         //Init Api
         utilisateurConnecte = ApiClient.getClient().create(UtilisateurConnecte.class);
-        //utilisateurConnecte = UtilisateurRpository.getInstance().create(UtilisateurConnecte.class);
 
         //views
         et_pseudo_connexion = (EditText)findViewById(R.id.et_pseudo_connexion);
@@ -78,6 +79,7 @@ public class FormConnexionActivity extends AppCompatActivity {
                     public void accept(Utilisateur u) throws Exception {
                         //Toast.makeText(FormConnexionActivity.this, u.toString(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(FormConnexionActivity.this, MenuActivity.class);
+                        intent.putExtra("pseudo", u.getIdUser());
                         startActivityForResult(intent, REQUEST_CODE_FORM_CONNEXION_MENU);
                         idUserConnected = u.getIdUser();
                         dialog.dismiss();
@@ -99,9 +101,7 @@ public class FormConnexionActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    public static int getIdUserConnected() {
-        return idUserConnected;
-    }
+    public static int getIdUserConnected() { return idUserConnected; }
 
     public void goToFormInscription2(View view) {
         Intent intent = new Intent(FormConnexionActivity.this, FormInscriptionActivity.class);

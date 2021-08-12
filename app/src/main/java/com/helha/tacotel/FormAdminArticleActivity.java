@@ -1,186 +1,92 @@
 package com.helha.tacotel;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.Observer;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import model.Article;
-import model.Categorie;
-import repository.ArticleRepository;
-import repository.CategorieRepository;
+import api.ApiClient;
+import api.UtilisateurConnecte;
+import dmax.dialog.SpotsDialog;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import model.Login;
+import model.Utilisateur;
 
 public class FormAdminArticleActivity extends AppCompatActivity {
 
-    public static final int REQUEST_CODE_FORM_ADD_ARTICLE = 1;
-    public static final String EXTRA_BUNDLE_ARTICLE = "bundle_article";
-    private Article article = new Article();
-    private String nameCategorie = new String();
-    private int isNew;
+    public static final int REQUEST_CODE_FORM_INSCRIPTION = 1;
+    public static final int REQUEST_CODE_FORM_CONNEXION_ADMIN = 1;
+    private static final int REQUEST_CODE_FORM_CONNEXION_MENU = 1;
+
+    UtilisateurConnecte utilisateurConnecte;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    TextView tv_tacotel_connexion,tv_connexion,tv_pseudo_connexion,tv_mdp_connexion,tv_pas_inscrit,tv_connexion_admin;
+    EditText et_pseudo_connexion,et_mdp_connexion;
+    Button btn_valider_connexion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_admin_article);
 
-        TextView tvLibelle = findViewById(R.id.et_libelle_new_article);
-        TextView tvDescription = findViewById(R.id.et_description_new_article);
-        TextView tvPrix = findViewById(R.id.et_prix_new_article);
-        TextView tvStock = findViewById(R.id.et_stock_new_article);
-        TextView tvEcran = findViewById(R.id.et_ecran_new_article);
-        TextView tvMarque = findViewById(R.id.et_marque_new_article);
-        TextView tvCouleur = findViewById(R.id.et_couleur_new_article);
-        TextView tvMemoire = findViewById(R.id.et_memoire_new_article);
-        TextView tvImageURL = findViewById(R.id.et_image_new_article);
+        //Init Api
+        utilisateurConnecte = ApiClient.getClient().create(UtilisateurConnecte.class);
+        //utilisateurConnecte = UtilisateurRpository.getInstance().create(UtilisateurConnecte.class);
 
-        ArticleRepository articleRepository = new ArticleRepository();
+        //views
+        et_pseudo_connexion = (EditText)findViewById(R.id.et_pseudo_connexion);
+        et_mdp_connexion = (EditText)findViewById(R.id.et_mdp_connexion);
+        btn_valider_connexion = (Button)findViewById(R.id.btn_valider_connexion);
+        tv_tacotel_connexion = (TextView)findViewById(R.id.tv_tacotel_connexion);
+        tv_connexion = (TextView)findViewById(R.id.tv_connexion);
+        tv_pseudo_connexion = (TextView)findViewById(R.id.tv_pseudo_connexion);
+        tv_mdp_connexion = (TextView)findViewById(R.id.tv_mdp_connexion);
+        tv_pas_inscrit = (TextView)findViewById(R.id.tv_pas_inscrit);
+        tv_connexion_admin = (TextView)findViewById(R.id.tv_connexion_admin);
 
-        //Remplir le spinner de données
-        CategorieRepository categorieRepository = new CategorieRepository();
-        List<Categorie>categories = new ArrayList<>();
-        List<String> nameCategories = new ArrayList<>();
-        Button btnAdd = findViewById(R.id.btn_ajouter_new_article);
-
-        TextView tvCategorie = findViewById(R.id.tv_categorie_new_article);
-
-        Spinner spCategorie = (Spinner) findViewById(R.id.spinner_categories_new_article);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item,
-                nameCategories);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spCategorie.setAdapter(adapter);
-
-
-        categorieRepository.query().observe(this, new Observer<List<Categorie>>() {
-            @Override
-            public void onChanged(List<Categorie> categoriesApi) {
-                categories.clear();
-                categories.addAll(categoriesApi);
-                for(int i=0;i<categories.size();i++){
-                    nameCategories.add(categories.get(i).getNomCategorie());
-                }
-                adapter.notifyDataSetChanged();
-            }
-        });
-
-        Bundle bundleArticle = getIntent().getExtras();
-        if(bundleArticle != null){
-            article = (Article)getIntent().getSerializableExtra(EXTRA_BUNDLE_ARTICLE);
-            tvLibelle.setText(article.getLibelle());
-            tvDescription.setText(article.getDescription());
-            tvPrix.setText(""+article.getPrix());
-            tvStock.setText(article.getQteEnStock()+"");
-            tvEcran.setText(article.getTailleEcran() + "");
-            tvMarque.setText(article.getMarque());
-            tvCouleur.setText(article.getCouleur());
-            tvMemoire.setText(article.getTailleMemoire() + "");
-            tvImageURL.setText(article.getImageURL());
-            TextView tvTitle = findViewById(R.id.tv_article_admin);
-            tvTitle.setText("Modification Article");
-            btnAdd.setText("Modifier");
-
-
-            Log.i("Test",article.toString());
-            articleRepository.getCategorieByArticle(article.getIdArticle()).observe(this, new Observer<Integer>() {
-                @Override
-                public void onChanged(Integer idFound) {
-
-                    if(idFound != 0){
-                       spCategorie.setSelection(adapter.getPosition(adapter.getItem(idFound-1)));
-                       nameCategorie = adapter.getItem(idFound-1) ;
-                       isNew = 1;
-
-                    }
-                    else{
-                        isNew = 0;
-                    }
-                    adapter.notifyDataSetChanged();
-
-                }
-            });
-
-
-
-        }
-        if(btnAdd.getText().equals("Modifier")){
-            tvCategorie.setVisibility(View.VISIBLE);
-            spCategorie.setVisibility(View.VISIBLE);
-        }
-        else{
-
-            tvCategorie.setVisibility(View.GONE);
-            spCategorie.setVisibility(View.GONE);
-        }
-
-
-        spCategorie.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                spCategorie.setSelection(adapter.getPosition(adapter.getItem(position)));
-                nameCategorie = adapter.getItem(position);
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        //Event
+        btn_valider_connexion.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FormAdminArticleActivity.this,AdminListArticlesActivity.class);
+                AlertDialog dialog = new SpotsDialog.Builder()
+                        .setContext(FormAdminArticleActivity.this)
+                        .build();
+                dialog.show();
 
-                article.setCouleur(tvCouleur.getText().toString());
-                article.setDescription(tvDescription.getText().toString());
-                article.setImageURL(tvImageURL.getText().toString());
-                article.setLibelle(tvLibelle.getText().toString());
-                article.setMarque(tvMarque.getText().toString());
-                article.setPrix(Double.valueOf(tvPrix.getText().toString()));
-                article.setQteEnStock(Integer.valueOf(tvStock.getText().toString()));
-                article.setTailleEcran(Double.valueOf(tvEcran.getText().toString()));
-                article.setTailleMemoire(Double.valueOf(tvMemoire.getText().toString()));
-                for(int i=0;i<categories.size();i++){
-                    if(categories.get(i).getNomCategorie().equals(nameCategorie)){
+                //create user to login
+                Login login = new Login(et_pseudo_connexion.getText().toString(), et_mdp_connexion.getText().toString());
 
-                        article.setCategorie(categories.get(i));
-                    }
-                }
-
-                if(btnAdd.getText() == "Modifier"){
-                    articleRepository.update(article.getIdArticle(),article);
-
-                    if(isNew != 0){
-                        articleRepository.deleteCategorieFromArticle(article.getIdArticle());
-                        articleRepository.setCategorie(article.getIdArticle(),article.getCategorie().getIdCategorie());
-                    }
-                    else{
-                        articleRepository.setCategorie(article.getIdArticle(),article.getCategorie().getIdCategorie());
-                    }
-
-                }
-                else{
-                    articleRepository.create(article);
-
-                }
-                startActivityForResult(intent,REQUEST_CODE_FORM_ADD_ARTICLE);
+                compositeDisposable.add(utilisateurConnecte.loginUser(login)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<Utilisateur>() {
+                            @Override
+                            public void accept(Utilisateur u) throws Exception {
+                                //Toast.makeText(FormConnexionActivity.this, u.toString(), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(FormAdminArticleActivity.this, AdminListArticlesActivity.class);
+                                startActivityForResult(intent, REQUEST_CODE_FORM_CONNEXION_MENU);
+                                dialog.dismiss();
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                dialog.dismiss();
+                                Toast.makeText(FormAdminArticleActivity.this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }));
             }
         });
     }

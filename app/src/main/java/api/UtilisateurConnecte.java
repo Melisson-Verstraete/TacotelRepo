@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface UtilisateurConnecte {
     @GET("dbTaCoTel/UtilisateurConnecte")
@@ -21,4 +22,7 @@ public interface UtilisateurConnecte {
     @POST("dbTaCoTel/UtilisateurConnecte/authenticate")
     Observable<Utilisateur>  loginUser(@Body Login login);
     //Observable<String> loginUser(@Body Utilisateur user);
+
+    @GET("dbTaCoTel/UtilisateurConnecte/{idUser}")
+    Call<Utilisateur> getSpeudo(@Path("idUser") int id);
 }
