@@ -20,6 +20,10 @@ public class Panier {
         this.articles = articles;
     }
 
+    public Panier(int idUser) {
+        idPanier = idUser;
+    }
+
     public int getIdPanier() {
         return idPanier;
     }

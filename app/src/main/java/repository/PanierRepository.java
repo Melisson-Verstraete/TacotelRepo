@@ -7,6 +7,8 @@ import java.util.List;
 
 import api.ApiClient;
 import api.PanierService;
+import model.Article;
+import model.Contient;
 import model.Panier;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,6 +49,39 @@ public class PanierRepository {
 
                 @Override
                 public void onFailure(Call<Panier> call, Throwable t) {
+
+                }
+            });
+        return mutableLiveData;
+    }
+
+    public LiveData<List<Article>> getArticles(int idPanier) {
+        final MutableLiveData<List<Article>> mutableLiveData = new MutableLiveData<>();
+            getPanierService().getArticles(idPanier).enqueue(new Callback<List<Article>>() {
+                @Override
+                public void onResponse(Call<List<Article>> call, Response<List<Article>> response) {
+                    mutableLiveData.postValue(response.body());
+                }
+
+                @Override
+                public void onFailure(Call<List<Article>> call, Throwable t) {
+
+                }
+
+            });
+        return mutableLiveData;
+    }
+
+    public LiveData<Article> addArticle(int idPanier, int idArticle, int qteArticleChoisi) {
+        final MutableLiveData<Article> mutableLiveData = new MutableLiveData<>();
+            getPanierService().addArticle(idPanier, idArticle, qteArticleChoisi).enqueue(new Callback<Article>() {
+                @Override
+                public void onResponse(Call<Article> call, Response<Article> response) {
+                    mutableLiveData.postValue(response.body());
+                }
+
+                @Override
+                public void onFailure(Call<Article> call, Throwable t) {
 
                 }
             });

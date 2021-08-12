@@ -24,7 +24,7 @@ import repository.ArticleRepository;
 import repository.CategorieArticleRepository;
 import repository.CategorieRepository;
 
-public class MagasinActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MagasinActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_MENU = 1;
     private static final int REQUEST_CODE_DETAILS_ARTICLE = 1;
@@ -120,29 +120,6 @@ public class MagasinActivity extends AppCompatActivity implements AdapterView.On
                 }
                 articlesMagasinArrayAdapter.notifyDataSetChanged();
 
-//                if (categorieChoisie.equals("TOUT")) {
-//                    articles.addAll(articlesApi);
-//                } else if (categorieChoisie.equals("Tablette")){
-//                    for (int j = 0; j < articlesApi.size(); j++) {
-//                        if (articlesApi.get(j).getCategorie().toString() == "1") {
-//                            articles.add(articlesApi.get(j));
-//                        }
-//                    }
-//                } else if (categorieChoisie.equals("Ordinateur")){
-//                    for (int j = 0; j < articlesApi.size(); j++) {
-//                        if (articlesApi.get(j).getCategorie().toString() == "2") {
-//                            articles.add(articlesApi.get(j));
-//                        }
-//                    }
-//                } else if (categorieChoisie.equals("Téléphone")){
-//                    for (int j = 0; j < articlesApi.size(); j++) {
-//                        if (articlesApi.get(j).getCategorie().toString() == "3") {
-//                            articles.add(articlesApi.get(j));
-//                        }
-//                    }
-//                }
-
-
                 // RECHERCHER
                 EditText editText = findViewById(R.id.et_rechercher_magasin);
                 editText.setOnKeyListener(new View.OnKeyListener() {
@@ -190,15 +167,5 @@ public class MagasinActivity extends AppCompatActivity implements AdapterView.On
     public void goToMenuFromMagasin(View view) {
         Intent intent = new Intent(MagasinActivity.this,MenuActivity.class);
         startActivityForResult(intent, REQUEST_CODE_MENU);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        Log.i("essai", String.valueOf(parent.getItemAtPosition(pos)));
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 }

@@ -9,11 +9,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import model.Article;
+import model.Contient;
 import model.Panier;
+import repository.ContientRepository;
 import repository.PanierRepository;
 
 public class DetailsArticleActivity extends AppCompatActivity {
@@ -29,10 +33,6 @@ public class DetailsArticleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_article);
-
-        PanierRepository panierRepository = new PanierRepository();
-        panierRepository
-                .create(new Panier(idUser, new Date()));
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -74,21 +74,60 @@ public class DetailsArticleActivity extends AppCompatActivity {
         tvMemoire.setText(memoire + " GB");
         tvCouleur.setText(couleur);
         tvPrix.setText("€ " + prix + " HTVA");
+
+        // CREATION DU PANIER SI PAS EXISTANT
+        PanierRepository panierRepository = new PanierRepository();
+//        panierRepository.create(new Panier(idUser));
+
+        panierRepository.query().observe(this, new Observer<List<Panier>>() {
+            @Override
+            public void onChanged(List<Panier> paniersApi) {
+                Log.i("paniersApiSize",""+paniersApi.size());
+//                if (paniersApi.size() < 1) {
+//                    panierRepository
+//                            .create(new Panier(idUser))
+//                            .observe(DetailsArticleActivity.this, new Observer<Panier>() {
+//                                @Override
+//                                public void onChanged(Panier panier) {
+//                                    Log.i("panier", panier.toString());
+//                                }
+//                            });
+//                } else {
+//                    for (int j = 1; j < paniersApi.size(); j++) {
+//                        if (paniersApi.get(j).getIdPanier() == idUser) {
+//                            Log.i("panier", "exists");
+//                        } else {
+//                            Log.i("panier", "does not exist");
+//                        }
+//                    }
+//                }
+            }
+        });
     }
 
     public void ajouterArticlePanier(View view) {
 //        PanierRepository panierRepository = new PanierRepository();
-//        panierRepository
-//                .create(new Panier(idUser, new Date()))
-//                .observe(DetailsArticleActivity.this, new Observer<Panier>() {
-//                    @Override
-//                    public void onChanged(Panier panier) {
-//                        Log.i("panier", panier.toString());
-//                    }
-//                });
+//        List<Article> articles = new ArrayList<>();
+
+//        panierRepository.getArticles(idUser).observe(this, new Observer<List<Article>>() {
+//            @Override
+//            public void onChanged(List<Article> articlesApi) {
+//                articles.clear();
+//                articles.addAll(articlesApi);
+//                Log.i("pleeeeeeeeeease",articles.toString());
+//            }
+//        });
+//        panierRepository.addArticle(idUser, 3, 2);
+
+//        List<Panier> paniers = new ArrayList<>();
+//        Log.i("paniersApiSize",paniers.toString());
+////        panierRepository.create(new Panier(idUser));
 //        panierRepository.query().observe(this, new Observer<List<Panier>>() {
 //            @Override
 //            public void onChanged(List<Panier> paniersApi) {
+//                Log.i("paniersApiSize",""+paniersApi.size());
+//                paniers.addAll(paniersApi);
+//                Log.i("panier",paniers.toString());
 //                if (paniersApi.size() < 1) {
 //                    panierRepository
 //                            .create(new Panier(idUser, new Date()))

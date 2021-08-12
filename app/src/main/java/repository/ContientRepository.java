@@ -36,4 +36,20 @@ public class ContientRepository {
             });
         return mutableLiveData;
     }
+
+    public LiveData<Contient> create(Contient contient) {
+        final MutableLiveData<Contient> mutableLiveData = new MutableLiveData<>();
+            getContientService().postContient(contient).enqueue(new Callback<Contient>() {
+                @Override
+                public void onResponse(Call<Contient> call, Response<Contient> response) {
+                    mutableLiveData.postValue(response.body());
+                }
+
+                @Override
+                public void onFailure(Call<Contient> call, Throwable t) {
+
+                }
+            });
+        return mutableLiveData;
+    }
 }
