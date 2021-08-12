@@ -22,6 +22,6 @@ public interface PanierService {
     @GET("dbTaCoTel/panier/{idPanier}")
     Call<List<Article>> getArticles(@Path("idPanier") int idPanier);
 
-    @POST("dbTaCoTel/panier/{idPanier}/Article/{idArticle}")
-    Call<Article> addArticle(@Path("idPanier") int idPanier, @Path("idArticle") int idArticle, @Body int qteArticleChoisi);
+    @POST("dbTaCoTel/panier/{idPanier}/Article/{idArticle}/quantite/{qteArticleChoisi}")
+    Call<Article> postArticle(@Path("idPanier") int idPanier, @Path("idArticle") int idArticle, @Path("qteArticleChoisi") int qteArticleChoisi);
 }

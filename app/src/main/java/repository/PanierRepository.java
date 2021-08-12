@@ -72,9 +72,9 @@ public class PanierRepository {
         return mutableLiveData;
     }
 
-    public LiveData<Article> addArticle(int idPanier, int idArticle, int qteArticleChoisi) {
+    public LiveData<Article> addArticle(int idPanier, Article article, int qteArticleChoisi) {
         final MutableLiveData<Article> mutableLiveData = new MutableLiveData<>();
-            getPanierService().addArticle(idPanier, idArticle, qteArticleChoisi).enqueue(new Callback<Article>() {
+            getPanierService().postArticle(idPanier, article.getIdArticle(), qteArticleChoisi).enqueue(new Callback<Article>() {
                 @Override
                 public void onResponse(Call<Article> call, Response<Article> response) {
                     mutableLiveData.postValue(response.body());

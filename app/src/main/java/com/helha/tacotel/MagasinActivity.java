@@ -151,6 +151,8 @@ public class MagasinActivity extends AppCompatActivity {
                 Article article = (Article) object;
 
                 Intent intent = new Intent(MagasinActivity.this,DetailsArticleActivity.class);
+                intent.putExtra("Article",article);
+                intent.putExtra("idArticle", article.getIdArticle());
                 intent.putExtra("libelle", article.getLibelle());
                 intent.putExtra("description", article.getDescription());
                 intent.putExtra("ecran", article.getTailleEcran());

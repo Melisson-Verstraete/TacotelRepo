@@ -2,9 +2,17 @@ package com.helha.tacotel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+
+import java.util.List;
+
+import model.Article;
+import model.Panier;
+import repository.PanierRepository;
 
 public class PanierActivity extends AppCompatActivity {
 

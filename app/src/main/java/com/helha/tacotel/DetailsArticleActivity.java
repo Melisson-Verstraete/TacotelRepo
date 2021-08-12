@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,8 +17,10 @@ import java.util.Date;
 import java.util.List;
 
 import model.Article;
+import model.CategorieArticle;
 import model.Contient;
 import model.Panier;
+import repository.CategorieArticleRepository;
 import repository.ContientRepository;
 import repository.PanierRepository;
 
@@ -25,22 +29,41 @@ public class DetailsArticleActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_MENU = 1;
     private static final int REQUEST_CODE_MAGASIN = 1;
 
+    Article article;
     String libelle, description, marque, couleur;
     double ecran, memoire, prix;
-    int idUser = FormConnexionActivity.getIdUserConnected();
+    int idArticle, idUser = FormConnexionActivity.getIdUserConnected();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_article);
 
+        Log.i("valentin2","");
+        PanierRepository panierRepository = new PanierRepository();
+        Log.i("valentin","");
+        panierRepository.query().observe(this, new Observer<List<Panier>>() {
+            @Override
+            public void onChanged(List<Panier> paniers) {
+                Log.i("paniers", paniers.toString());
+            }
+        });
+
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
-                libelle = null; description = null;
-                ecran = 0; marque = null;
-                memoire = 0; couleur = null; prix = 0;
+                article = null;
+                idArticle = 0;
+                libelle = null;
+                description = null;
+                ecran = 0;
+                marque = null;
+                memoire = 0;
+                couleur = null;
+                prix = 0;
             } else {
+                article = (Article) extras.get("Article");
+                idArticle = extras.getInt("idArticle");
                 libelle = extras.getString("libelle");
                 description = extras.getString("description");
                 ecran = extras.getDouble("ecran");
@@ -50,6 +73,8 @@ public class DetailsArticleActivity extends AppCompatActivity {
                 prix = extras.getDouble("prix");
             }
         } else {
+            article = (Article) savedInstanceState.getSerializable("Article");
+            idArticle = (int) savedInstanceState.getSerializable("idArticle");
             libelle = (String) savedInstanceState.getSerializable("libelle");
             description = (String) savedInstanceState.getSerializable("description");
             ecran = (double) savedInstanceState.getSerializable("ecran");
@@ -75,90 +100,71 @@ public class DetailsArticleActivity extends AppCompatActivity {
         tvCouleur.setText(couleur);
         tvPrix.setText("€ " + prix + " HTVA");
 
-        // CREATION DU PANIER SI PAS EXISTANT
-        PanierRepository panierRepository = new PanierRepository();
-//        panierRepository.create(new Panier(idUser));
-
-        panierRepository.query().observe(this, new Observer<List<Panier>>() {
-            @Override
-            public void onChanged(List<Panier> paniersApi) {
-                Log.i("paniersApiSize",""+paniersApi.size());
-//                if (paniersApi.size() < 1) {
-//                    panierRepository
-//                            .create(new Panier(idUser))
-//                            .observe(DetailsArticleActivity.this, new Observer<Panier>() {
-//                                @Override
-//                                public void onChanged(Panier panier) {
-//                                    Log.i("panier", panier.toString());
-//                                }
-//                            });
-//                } else {
-//                    for (int j = 1; j < paniersApi.size(); j++) {
-//                        if (paniersApi.get(j).getIdPanier() == idUser) {
-//                            Log.i("panier", "exists");
-//                        } else {
-//                            Log.i("panier", "does not exist");
-//                        }
-//                    }
-//                }
-            }
-        });
     }
 
     public void ajouterArticlePanier(View view) {
+        EditText etQuantite = findViewById(R.id.et_quantite_details_result);
+        String etQuantiteValue = etQuantite.getText().toString();
+        int quantite = Integer.parseInt(etQuantiteValue);
+
 //        PanierRepository panierRepository = new PanierRepository();
-//        List<Article> articles = new ArrayList<>();
-
-//        panierRepository.getArticles(idUser).observe(this, new Observer<List<Article>>() {
-//            @Override
-//            public void onChanged(List<Article> articlesApi) {
-//                articles.clear();
-//                articles.addAll(articlesApi);
-//                Log.i("pleeeeeeeeeease",articles.toString());
-//            }
-//        });
-//        panierRepository.addArticle(idUser, 3, 2);
-
-//        List<Panier> paniers = new ArrayList<>();
-//        Log.i("paniersApiSize",paniers.toString());
-////        panierRepository.create(new Panier(idUser));
+//        Log.i("valentin","");
 //        panierRepository.query().observe(this, new Observer<List<Panier>>() {
 //            @Override
-//            public void onChanged(List<Panier> paniersApi) {
-//                Log.i("paniersApiSize",""+paniersApi.size());
-//                paniers.addAll(paniersApi);
-//                Log.i("panier",paniers.toString());
-//                if (paniersApi.size() < 1) {
-//                    panierRepository
-//                            .create(new Panier(idUser, new Date()))
-//                            .observe(DetailsArticleActivity.this, new Observer<Panier>() {
-//                                @Override
-//                                public void onChanged(Panier panier) {
-//                                    Log.i("panier", panier.toString());
-//                                }
-//                            });
-//                } else {
-//                    for (int j = 1; j < paniersApi.size(); j++) {
-//                        if (paniersApi.get(j).getIdPanier() == idUser) {
-//                            Log.i("panier", "exists");
-//                        } else {
-//                            Log.i("panier", "does not exist");
-//                        }
-//                    }
-//                }
+//            public void onChanged(List<Panier> paniers) {
+//                Log.i("paniers", paniers.toString());
 //            }
 //        });
+
+//        Log.i("panier, article, qte",idUser + " " + article.getLibelle() + " " + quantite);
+//        panierRepository
+//                .addArticle(idUser,article,quantite)
+//                .observe(this, new Observer<Article>() {
+//                    @Override
+//                    public void onChanged(Article article) {
+//                        Log.i("peut-etre","ou pas");
+//                        Log.i("peut-etre",article.getLibelle());
+//                    }
+//                });
+
+//        panierRepository.query().observe(this, new Observer<List<Panier>>() {
+//            @Override
+//            public void onChanged(List<Panier> paniers) {
+//                Log.i("paniers",paniers.toString());
+//            }
+//        });
+
+        // CREATION DU PANIER
+//        panierRepository
+//                .create(new Panier(idUser))
+//                .observe(this, new Observer<Panier>() {
+//                    @Override
+//                    public void onChanged(Panier panier) {
+//                        Log.i("panier",panier.toString());
+//                    }
+//                });
+
+        // AJOUT DE L'ARTICLE DANS LE PANIER
+//        panierRepository
+//                .addArticle(idUser,idArticle,quantite)
+//                .observe(this, new Observer<Article>() {
+//                    @Override
+//                    public void onChanged(Article article) {
+//                        Log.i("article",article.toString());
+//                    }
+//                });
+//        Log.i("prout",panierRepository.query().toString());
     }
 
     // REDIRECTION VERS MENU
     public void goToMenuFromDetails(View view) {
-        Intent intent = new Intent(DetailsArticleActivity.this,MenuActivity.class);
+        Intent intent = new Intent(DetailsArticleActivity.this, MenuActivity.class);
         startActivityForResult(intent, REQUEST_CODE_MENU);
     }
 
     // REDIRECTION VERS MAGASIN
     public void goToMagasinFromDetails(View view) {
-        Intent intent = new Intent(DetailsArticleActivity.this,MagasinActivity.class);
+        Intent intent = new Intent(DetailsArticleActivity.this, MagasinActivity.class);
         startActivityForResult(intent, REQUEST_CODE_MAGASIN);
     }
 }
