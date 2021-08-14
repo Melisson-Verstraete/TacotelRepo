@@ -31,11 +31,12 @@ public class PanierRepository {
                 @Override
                 public void onResponse(Call<List<Panier>> call, Response<List<Panier>> response) {
                     mutableLiveData.postValue(response.body());
+                    Log.i("BONHEUR","bonheur query");
                 }
 
                 @Override
                 public void onFailure(Call<List<Panier>> call, Throwable t) {
-
+                    Log.i("HORREUR","horreur query");
                 }
             });
         return mutableLiveData;
@@ -57,9 +58,25 @@ public class PanierRepository {
         return mutableLiveData;
     }
 
+    public LiveData<Boolean> delete(int idPanier) {
+        final MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
+            getPanierService().deletePanier(idPanier).enqueue(new Callback<Boolean>() {
+                @Override
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    mutableLiveData.postValue(response.body());
+                }
+
+                @Override
+                public void onFailure(Call<Boolean> call, Throwable t) {
+
+                }
+            });
+        return mutableLiveData;
+    }
+
     public LiveData<List<Article>> getArticles(int idPanier) {
         final MutableLiveData<List<Article>> mutableLiveData = new MutableLiveData<>();
-            getPanierService().getArticles(idPanier).enqueue(new Callback<List<Article>>() {
+            getPanierService().queryArticles(idPanier).enqueue(new Callback<List<Article>>() {
                 @Override
                 public void onResponse(Call<List<Article>> call, Response<List<Article>> response) {
                     mutableLiveData.postValue(response.body());
@@ -67,16 +84,16 @@ public class PanierRepository {
 
                 @Override
                 public void onFailure(Call<List<Article>> call, Throwable t) {
-
+                    Log.i("HORREUR","horreur getArticles");
                 }
 
             });
         return mutableLiveData;
     }
 
-    public LiveData<Article> addArticle(int idPanier, Article article, int qteArticleChoisi) {
+    public LiveData<Article> addArticle(Article article, int idPanier, int qteArticleChoisi) {
         final MutableLiveData<Article> mutableLiveData = new MutableLiveData<>();
-            getPanierService().postArticle(idPanier, article.getIdArticle(), qteArticleChoisi).enqueue(new Callback<Article>() {
+            getPanierService().postArticle(article, idPanier, qteArticleChoisi).enqueue(new Callback<Article>() {
                 @Override
                 public void onResponse(Call<Article> call, Response<Article> response) {
                     mutableLiveData.postValue(response.body());

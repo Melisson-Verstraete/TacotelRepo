@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -13,6 +12,7 @@ import androidx.lifecycle.Observer;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -33,21 +33,12 @@ public class DetailsArticleActivity extends AppCompatActivity {
     String libelle, description, marque, couleur;
     double ecran, memoire, prix;
     int idArticle, idUser = FormConnexionActivity.getIdUserConnected();
+    PanierRepository panierRepository = new PanierRepository();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_article);
-
-        Log.i("valentin2","");
-        PanierRepository panierRepository = new PanierRepository();
-        Log.i("valentin","");
-        panierRepository.query().observe(this, new Observer<List<Panier>>() {
-            @Override
-            public void onChanged(List<Panier> paniers) {
-                Log.i("paniers", paniers.toString());
-            }
-        });
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -100,37 +91,34 @@ public class DetailsArticleActivity extends AppCompatActivity {
         tvCouleur.setText(couleur);
         tvPrix.setText("€ " + prix + " HTVA");
 
+        Log.i("valentin22", article.toString());
+        panierRepository
+                .getArticles(idUser)
+                .observe(this, new Observer<List<Article>>() {
+                    @Override
+                    public void onChanged(List<Article> articlesApi) {
+                        Log.i("valentin3", articlesApi.toString());
+                    }
+                });
+        Log.i("valentin23",article.toString());
     }
 
     public void ajouterArticlePanier(View view) {
         EditText etQuantite = findViewById(R.id.et_quantite_details_result);
         String etQuantiteValue = etQuantite.getText().toString();
-        int quantite = Integer.parseInt(etQuantiteValue);
+        int quantite = 0;
+        if (etQuantiteValue.isEmpty()) {
+            quantite = 1;
+        } else {
+            quantite = Integer.parseInt(etQuantiteValue);
+        }
+        Log.i("valentin",""+quantite);
 
-//        PanierRepository panierRepository = new PanierRepository();
-//        Log.i("valentin","");
+        // RECUPERATION DE LA LISTE DES PANIERS
 //        panierRepository.query().observe(this, new Observer<List<Panier>>() {
 //            @Override
 //            public void onChanged(List<Panier> paniers) {
 //                Log.i("paniers", paniers.toString());
-//            }
-//        });
-
-//        Log.i("panier, article, qte",idUser + " " + article.getLibelle() + " " + quantite);
-//        panierRepository
-//                .addArticle(idUser,article,quantite)
-//                .observe(this, new Observer<Article>() {
-//                    @Override
-//                    public void onChanged(Article article) {
-//                        Log.i("peut-etre","ou pas");
-//                        Log.i("peut-etre",article.getLibelle());
-//                    }
-//                });
-
-//        panierRepository.query().observe(this, new Observer<List<Panier>>() {
-//            @Override
-//            public void onChanged(List<Panier> paniers) {
-//                Log.i("paniers",paniers.toString());
 //            }
 //        });
 
@@ -140,20 +128,31 @@ public class DetailsArticleActivity extends AppCompatActivity {
 //                .observe(this, new Observer<Panier>() {
 //                    @Override
 //                    public void onChanged(Panier panier) {
-//                        Log.i("panier",panier.toString());
+//                        Log.i("panier", String.valueOf(panier.getIdPanier()));
 //                    }
 //                });
 
+        // DELETE DU PANIER
+//        panierRepository.delete(idUser);
+
+        // RECUPERATION DE LA LISTE DES ARTICLES DANS LE PANIER
+        panierRepository.getArticles(idUser).observe(this, new Observer<List<Article>>() {
+            @Override
+            public void onChanged(List<Article> articlesApi) {
+                Log.i("articles dans panier", articlesApi.toString());
+            }
+        });
+
         // AJOUT DE L'ARTICLE DANS LE PANIER
 //        panierRepository
-//                .addArticle(idUser,idArticle,quantite)
+//                .addArticle(idUser,article,quantite)
 //                .observe(this, new Observer<Article>() {
 //                    @Override
-//                    public void onChanged(Article article) {
-//                        Log.i("article",article.toString());
+//                    public void onChanged(Article articleApi) {
+//                        Log.i("article",articleApi.toString());
 //                    }
 //                });
-//        Log.i("prout",panierRepository.query().toString());
+//        Log.i("article",panierRepository.query().toString());
     }
 
     // REDIRECTION VERS MENU
