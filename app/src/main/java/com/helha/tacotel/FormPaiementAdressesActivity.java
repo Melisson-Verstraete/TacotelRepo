@@ -1,18 +1,31 @@
 package com.helha.tacotel;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
-public class FormPaiementAdressesActivity extends AppCompatActivity {
+import java.util.List;
+import java.util.Locale;
+
+public class FormPaiementAdressesActivity extends AppCompatActivity implements LocationListener {
 
     private static final int REQUEST_CODE_MENU = 1;
     private static final int REQUEST_CODE_PAIEMENT_BANQUE = 1;
@@ -52,6 +65,10 @@ public class FormPaiementAdressesActivity extends AppCompatActivity {
     public static final String CODEPOSTAL2_ADRESSES = "codePostal2Key" ;
     public static final String VILLE2_ADRESSES = "ville2Key" ;
     public static final String PAYS2_ADRESSES = "pays2Key" ;
+
+    private Button btnLocation;
+    private LocationManager locationManager;
+
 /*
     SharedPreferences Sprefs;
     public static final String prefName = "report" ;*/
@@ -82,7 +99,21 @@ public class FormPaiementAdressesActivity extends AppCompatActivity {
         //findViewById(R.id.btn_suivant_adresses).setOnClickListener(this);
         btn_adresses_similaires = (Button) findViewById(R.id.btn_adresses_similaires) ;
         btn_suivant_adresses = (Button) findViewById(R.id.btn_suivant_adresses) ;
+        btnLocation = (Button) findViewById(R.id.btn_set_location);
 
+        if(ContextCompat.checkSelfPermission(FormPaiementAdressesActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(FormPaiementAdressesActivity.this,new String[]{
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+            },100);
+        }
+
+        btnLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getLocation();
+            }
+        });
 /*
         Intent intent_validation = new Intent(FormPaiementAdressesActivity.this,FormPaiementValidationActivity.class);
         intent_validation.putExtra("tv_nom1_validation", str_prenom1+" "+str_nom1) ;
@@ -146,6 +177,16 @@ public class FormPaiementAdressesActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @SuppressLint("MissingPermission")
+    private void getLocation() {
+        try{
+            locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,5,FormPaiementAdressesActivity.this);
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
     }
 
     public void goToMenuFromPaiementAdresses(View view) {
@@ -230,6 +271,45 @@ public class FormPaiementAdressesActivity extends AppCompatActivity {
         et_codePostal2_adresses.setText(et_codePostal1_adresses.getText());
         et_ville2_adresses.setText(et_ville1_adresses.getText());
         et_pays2_adresses.setText(et_pays1_adresses.getText());
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        try{
+            Geocoder geocoder = new Geocoder(FormPaiementAdressesActivity.this, Locale.getDefault());
+            List<Address> adresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+            Address address = adresses.get(0);
+
+            et_codePostal1_adresses.setText(address.getPostalCode());
+            et_codePostal2_adresses.setText(address.getPostalCode());
+
+            et_pays1_adresses.setText(address.getCountryName());
+            et_pays2_adresses.setText(address.getCountryName());
+
+            et_rue1_adresses.setText(address.getThoroughfare());
+            et_rue2_adresses.setText(address.getThoroughfare());
+
+            et_ville1_adresses.setText(address.getLocality());
+            et_ville2_adresses.setText(address.getLocality());
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(@NonNull String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(@NonNull String provider) {
+
     }
 /*
     public void formulaireLivraison () {

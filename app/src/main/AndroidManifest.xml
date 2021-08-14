@@ -3,6 +3,7 @@
     package="com.helha.tacotel">
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -23,7 +24,9 @@
         <activity android:name=".FormAdminArticleActivity"></activity>
         <activity android:name=".MagasinActivity"></activity>
         <activity android:name=".AdminListArticlesActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -67,11 +67,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
+        android:digits="abcdefghijklmnopqrstuvwxyz- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
         android:ems="10"
         android:hint="@string/nom"
         android:inputType="textPersonName"
         android:textSize="@dimen/et_size_form"
-        android:digits="abcdefghijklmnopqrstuvwxyz- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_adresse_livraison" />
 
@@ -81,11 +81,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:digits="abcdefghijklmnopqrstuvwxyz- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
         android:ems="10"
         android:hint="@string/prenom"
         android:inputType="textPersonName"
         android:textSize="@dimen/et_size_form"
-        android:digits="abcdefghijklmnopqrstuvwxyz- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
         app:layout_constraintStart_toEndOf="@+id/et_nom1_adresses"
         app:layout_constraintTop_toBottomOf="@+id/tv_adresse_livraison" />
 
@@ -95,11 +95,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/rue"
-        android:textSize="@dimen/et_size_form"
         android:digits="abcdefghijklmnopqrstuvwxyz0123456789- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
+        android:ems="10"
+        android:hint="@string/rue"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_nom1_adresses" />
 
@@ -109,11 +109,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:digits="abcdefghijklmnopqrstuvwxyz0123456789- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
         android:ems="10"
         android:hint="@string/numero"
         android:inputType="textPersonName"
         android:textSize="@dimen/et_size_form"
-        android:digits="abcdefghijklmnopqrstuvwxyz0123456789- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
         app:layout_constraintStart_toEndOf="@+id/et_rue1_adresses"
         app:layout_constraintTop_toBottomOf="@+id/et_prenom1_adresses" />
 
@@ -123,11 +123,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/code_postal"
-        android:textSize="@dimen/et_size_form"
         android:digits="0123456789"
+        android:ems="10"
+        android:hint="@string/code_postal"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_rue1_adresses" />
 
@@ -137,11 +137,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/ville"
-        android:textSize="@dimen/et_size_form"
         android:digits="abcdefghijklmnopqrstuvwxyz- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
+        android:ems="10"
+        android:hint="@string/ville"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
         app:layout_constraintStart_toEndOf="@+id/et_codePostal1_adresses"
         app:layout_constraintTop_toBottomOf="@+id/et_numero1_adresses" />
 
@@ -151,11 +151,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/pays"
-        android:textSize="@dimen/et_size_form"
         android:digits="abcdefghijklmnopqrstuvwxyz- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
+        android:ems="10"
+        android:hint="@string/pays"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_codePostal1_adresses" />
 
@@ -177,11 +177,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
+        android:digits="abcdefghijklmnopqrstuvwxyz- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
         android:ems="10"
         android:hint="@string/nom"
         android:inputType="textPersonName"
         android:textSize="@dimen/et_size_form"
-        android:digits="abcdefghijklmnopqrstuvwxyz- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_adresse_facturation" />
 
@@ -191,11 +191,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:digits="abcdefghijklmnopqrstuvwxyz- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
         android:ems="10"
         android:hint="@string/prenom"
         android:inputType="textPersonName"
         android:textSize="@dimen/et_size_form"
-        android:digits="abcdefghijklmnopqrstuvwxyz- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
         app:layout_constraintStart_toEndOf="@+id/et_nom2_adresses"
         app:layout_constraintTop_toBottomOf="@+id/tv_adresse_facturation" />
 
@@ -205,11 +205,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/rue"
-        android:textSize="@dimen/et_size_form"
         android:digits="abcdefghijklmnopqrstuvwxyz0123456789- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
+        android:ems="10"
+        android:hint="@string/rue"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_nom2_adresses" />
 
@@ -219,11 +219,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:digits="abcdefghijklmnopqrstuvwxyz0123456789- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
         android:ems="10"
         android:hint="@string/numero"
         android:inputType="textPersonName"
         android:textSize="@dimen/et_size_form"
-        android:digits="abcdefghijklmnopqrstuvwxyz0123456789- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
         app:layout_constraintStart_toEndOf="@+id/et_rue2_adresses"
         app:layout_constraintTop_toBottomOf="@+id/et_prenom2_adresses" />
 
@@ -233,11 +233,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/code_postal"
-        android:textSize="@dimen/et_size_form"
         android:digits="0123456789"
+        android:ems="10"
+        android:hint="@string/code_postal"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_rue2_adresses" />
 
@@ -247,11 +247,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/ville"
-        android:textSize="@dimen/et_size_form"
         android:digits="abcdefghijklmnopqrstuvwxyz0123456789- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
+        android:ems="10"
+        android:hint="@string/ville"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
         app:layout_constraintStart_toEndOf="@+id/et_codePostal2_adresses"
         app:layout_constraintTop_toBottomOf="@+id/et_numero2_adresses" />
 
@@ -261,11 +261,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/pays"
-        android:textSize="@dimen/et_size_form"
         android:digits="abcdefghijklmnopqrstuvwxyz0123456789- ABCDEFGHIJQLMNOPQRSTUVWXYZ"
+        android:ems="10"
+        android:hint="@string/pays"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/et_size_form"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_codePostal2_adresses" />
 
@@ -277,8 +277,8 @@
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="8dp"
         android:background="@color/color_blue_info"
-        android:text="Même adresse"
         android:onClick="copyAdress"
+        android:text="Même adresse"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/et_prenom2_adresses"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -295,5 +295,17 @@
         android:text="Suivant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_ville2_adresses" />
+
+    <Button
+        android:id="@+id/btn_set_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/color_blue_info"
+        android:text="Localiser le téléphone"
+        app:layout_constraintBottom_toTopOf="@+id/et_prenom1_adresses"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_adresse_livraison"
+        app:layout_constraintTop_toBottomOf="@+id/tv_adresses" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
