@@ -44,7 +44,7 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
     public static final String TITULAIRE_COMPTE = "titulaireKey" ;
     public static final String NUM_COMPTE = "numKey" ;
     public static final String CVV = "cvvKey" ;
-    public static String TYPE_CARTE = "typecarteKey" ;
+    public static String TYPE_CARTE = "débit" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
