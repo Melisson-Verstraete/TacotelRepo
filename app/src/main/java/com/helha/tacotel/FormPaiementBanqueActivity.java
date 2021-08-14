@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -22,7 +23,7 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_PAIEMENT_VALIDATION = 1;
 
     private RadioGroup radioGroup_carte ;
-    private RadioButton radioButton_debit ;
+    private RadioButton radioButton_debit;
     private RadioButton radioButton_credit ;
 
     private EditText et_titulaire_compte ;
@@ -57,18 +58,16 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
         et_num_compte = (EditText) findViewById(R.id.et_num_compte);
         et_cvv = (EditText) findViewById(R.id.et_cvv);
 
-
         radioGroup_carte = (RadioGroup) findViewById(R.id.radioGroup_carte);
         radioButton_debit = (RadioButton)findViewById(R.id.radioButton_debit);
         radioButton_credit = (RadioButton)findViewById(R.id.radioButton_credit);
-
 
         radioButton_debit.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     et_cvv.setVisibility(View.INVISIBLE);
-                    TYPE_CARTE = "carte de débit"  ;
+                    TYPE_CARTE = "débit";
                     //String str_mode_paiement = "carte débit" ;
                     //rb2.setChecked(false);
                 }
@@ -80,7 +79,7 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     et_cvv.setVisibility(View.VISIBLE);
-                    TYPE_CARTE = "carte de crédit"  ;
+                    TYPE_CARTE = "crédit";
                     //String str_mode_paiement = "carte crédit" ;
                     //rb2.setChecked(false);
                 }
@@ -98,7 +97,8 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
             et_cvv.setText(sharedpreferences2.getString(CVV, ""));
         }
         if(sharedpreferences2.contains(TYPE_CARTE)){
-
+            radioButton_credit.setChecked(sharedpreferences2.getBoolean("TYPE_CARTE", false));
+            radioButton_debit.setChecked(sharedpreferences2.getBoolean("TYPE_CARTE", false));
         }
 
 /*
@@ -125,6 +125,7 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
         String str_titulaire_compte = et_titulaire_compte.getText().toString() ;
         String str_num_compte = et_num_compte.getText().toString() ;
         String str_cvv = et_cvv.getText().toString() ;
+        String str_type = "type de carte: "+TYPE_CARTE;
 
         SharedPreferences.Editor editor = sharedpreferences2.edit();
 
@@ -137,6 +138,7 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
             Intent intent = new Intent(FormPaiementBanqueActivity.this,FormPaiementValidationActivity.class);
             startActivityForResult(intent, REQUEST_CODE_PAIEMENT_VALIDATION);
 
+            editor.putString(TYPE_CARTE, str_type);
             editor.putString(TITULAIRE_COMPTE, str_titulaire_compte) ;
             editor.putString(NUM_COMPTE, str_num_compte) ;
             editor.putString(CVV, str_cvv) ;

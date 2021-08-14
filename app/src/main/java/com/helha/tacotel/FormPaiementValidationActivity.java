@@ -21,6 +21,7 @@ import static com.helha.tacotel.FormPaiementAdressesActivity.SHARED_PREFS;
 import static com.helha.tacotel.FormPaiementBanqueActivity.NUM_COMPTE;
 import static com.helha.tacotel.FormPaiementBanqueActivity.SHARED_PREFS2;
 import static com.helha.tacotel.FormPaiementBanqueActivity.TITULAIRE_COMPTE;
+import static com.helha.tacotel.FormPaiementBanqueActivity.TYPE_CARTE;
 
 //import static final com.helha.tacotel.FormPaiementAdressesActivity.SHARED_PREFS;
 
@@ -67,7 +68,7 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
         tv_nom2_validation = (TextView) findViewById(R.id.tv_nom2_validation) ;
         tv_adresse2_validation = (TextView) findViewById(R.id.tv_adresse2_validation) ;
         tv_pays2_validation = (TextView) findViewById(R.id.tv_pays2_validation) ;
-        //tv_mode_validation = (TextView) findViewById(R.id.tv_mode_validation) ;
+        tv_mode_validation = (TextView) findViewById(R.id.tv_mode_validation) ;
         tv_titulaire_compte_validation = (TextView) findViewById(R.id.tv_titulaire_compte_validation) ;
         tv_num_compte_validation = (TextView) findViewById(R.id.tv_num_compte_validation) ;
         //tv_cvv_validation = (TextView) findViewById(R.id.tv_cvv_validation) ;
@@ -92,6 +93,9 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
         }
         if (sharedpreferences.contains(PAYS2_ADRESSES)) {
             tv_pays2_validation.setText(sharedpreferences.getString(PAYS2_ADRESSES, ""));
+        }
+        if (sharedpreferences2.contains(TYPE_CARTE)) {
+            tv_mode_validation.setText(sharedpreferences2.getString(TYPE_CARTE, ""));
         }
         if (sharedpreferences2.contains(TITULAIRE_COMPTE)) {
             tv_titulaire_compte_validation.setText(sharedpreferences2.getString(TITULAIRE_COMPTE, ""));

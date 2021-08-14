@@ -123,14 +123,7 @@ public class DetailsArticleActivity extends AppCompatActivity {
 //        });
 
         // CREATION DU PANIER
-//        panierRepository
-//                .create(new Panier(idUser))
-//                .observe(this, new Observer<Panier>() {
-//                    @Override
-//                    public void onChanged(Panier panier) {
-//                        Log.i("panier", String.valueOf(panier.getIdPanier()));
-//                    }
-//                });
+//        panierRepository.create(new Panier(idUser));
 
         // DELETE DU PANIER
 //        panierRepository.delete(idUser);
@@ -139,20 +132,28 @@ public class DetailsArticleActivity extends AppCompatActivity {
         panierRepository.getArticles(idUser).observe(this, new Observer<List<Article>>() {
             @Override
             public void onChanged(List<Article> articlesApi) {
-                Log.i("articles dans panier", articlesApi.toString());
+                if (articlesApi == null) {
+                    Log.i("articles dans panier", "nul");
+                } else {
+                    Log.i("articles dans panier", articlesApi.toString());
+                }
             }
         });
 
         // AJOUT DE L'ARTICLE DANS LE PANIER
 //        panierRepository
-//                .addArticle(idUser,article,quantite)
+//                .addArticle(article,idUser,quantite)
 //                .observe(this, new Observer<Article>() {
 //                    @Override
 //                    public void onChanged(Article articleApi) {
-//                        Log.i("article",articleApi.toString());
+//                        if (articleApi == null) {
+//                            Log.i("article ben null", "null");
+//                        } else {
+//                            Log.i("article", articleApi.toString());
+//                        }
 //                    }
 //                });
-//        Log.i("article",panierRepository.query().toString());
+//        Log.i("article ajout",article.toString() + idUser + quantite);
     }
 
     // REDIRECTION VERS MENU
