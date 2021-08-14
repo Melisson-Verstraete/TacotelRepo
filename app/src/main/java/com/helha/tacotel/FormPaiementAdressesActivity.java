@@ -281,16 +281,12 @@ public class FormPaiementAdressesActivity extends AppCompatActivity implements L
             Address address = adresses.get(0);
 
             et_codePostal1_adresses.setText(address.getPostalCode());
-            et_codePostal2_adresses.setText(address.getPostalCode());
 
             et_pays1_adresses.setText(address.getCountryName());
-            et_pays2_adresses.setText(address.getCountryName());
 
             et_rue1_adresses.setText(address.getThoroughfare());
-            et_rue2_adresses.setText(address.getThoroughfare());
 
             et_ville1_adresses.setText(address.getLocality());
-            et_ville2_adresses.setText(address.getLocality());
 
         }catch (Exception e){
             e.printStackTrace();
