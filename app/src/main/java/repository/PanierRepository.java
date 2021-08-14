@@ -31,12 +31,11 @@ public class PanierRepository {
                 @Override
                 public void onResponse(Call<List<Panier>> call, Response<List<Panier>> response) {
                     mutableLiveData.postValue(response.body());
-                    Log.i("BONHEUR","bonheur query");
                 }
 
                 @Override
                 public void onFailure(Call<List<Panier>> call, Throwable t) {
-                    Log.i("HORREUR","horreur query");
+
                 }
             });
         return mutableLiveData;
@@ -80,6 +79,7 @@ public class PanierRepository {
                 @Override
                 public void onResponse(Call<List<Article>> call, Response<List<Article>> response) {
                     mutableLiveData.postValue(response.body());
+                    Log.i("BONHEUR","bonheur getArticles");
                 }
 
                 @Override
@@ -97,11 +97,12 @@ public class PanierRepository {
                 @Override
                 public void onResponse(Call<Article> call, Response<Article> response) {
                     mutableLiveData.postValue(response.body());
+                    Log.i("BONHEUR","bonheur addArticles");
                 }
 
                 @Override
                 public void onFailure(Call<Article> call, Throwable t) {
-
+                    Log.i("HORREUR","horreur addArticles");
                 }
             });
         return mutableLiveData;

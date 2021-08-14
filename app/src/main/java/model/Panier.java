@@ -22,6 +22,7 @@ public class Panier {
 
     public Panier(int idUser) {
         idPanier = idUser;
+        dateCreation = new Date();
     }
 
     public int getIdPanier() {

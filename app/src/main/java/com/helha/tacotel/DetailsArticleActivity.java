@@ -90,17 +90,6 @@ public class DetailsArticleActivity extends AppCompatActivity {
         tvMemoire.setText(memoire + " GB");
         tvCouleur.setText(couleur);
         tvPrix.setText("€ " + prix + " HTVA");
-
-        Log.i("valentin22", article.toString());
-        panierRepository
-                .getArticles(idUser)
-                .observe(this, new Observer<List<Article>>() {
-                    @Override
-                    public void onChanged(List<Article> articlesApi) {
-                        Log.i("valentin3", articlesApi.toString());
-                    }
-                });
-        Log.i("valentin23",article.toString());
     }
 
     public void ajouterArticlePanier(View view) {
@@ -112,18 +101,40 @@ public class DetailsArticleActivity extends AppCompatActivity {
         } else {
             quantite = Integer.parseInt(etQuantiteValue);
         }
-        Log.i("valentin",""+quantite);
 
-        // RECUPERATION DE LA LISTE DES PANIERS
-//        panierRepository.query().observe(this, new Observer<List<Panier>>() {
-//            @Override
-//            public void onChanged(List<Panier> paniers) {
-//                Log.i("paniers", paniers.toString());
-//            }
-//        });
+        // CREATION DU PANIER S'IL N'EXISTE PAS
+        panierRepository.query().observe(this, new Observer<List<Panier>>() {
+            @Override
+            public void onChanged(List<Panier> paniersApi) {
+                Log.i("paniers", paniersApi.toString());
+                int existe = 0;
+                for (int j=0;j<paniersApi.size();j++) {
+                    if (paniersApi.get(j).getIdPanier() == idUser) {
+                        existe = 1;
+                    }
+                }
+                if (existe == 0) {
+                    panierRepository.create(new Panier(idUser));
+                } else {
+                    existe = 0;
+                }
+            }
+        });
 
-        // CREATION DU PANIER
-//        panierRepository.create(new Panier(idUser));
+        Log.i("Article à ajouter", article.toString()+idUser+quantite);
+        // AJOUT DE L'ARTICLE DANS LE PANIER
+        panierRepository
+                .addArticle(article,idUser,quantite)
+                .observe(this, new Observer<Article>() {
+                    @Override
+                    public void onChanged(Article articleApi) {
+                        if (articleApi == null) {
+                            Log.i("article ben null", "null");
+                        } else {
+                            Log.i("article", articleApi.toString());
+                        }
+                    }
+                });
 
         // DELETE DU PANIER
 //        panierRepository.delete(idUser);
@@ -139,21 +150,6 @@ public class DetailsArticleActivity extends AppCompatActivity {
                 }
             }
         });
-
-        // AJOUT DE L'ARTICLE DANS LE PANIER
-//        panierRepository
-//                .addArticle(article,idUser,quantite)
-//                .observe(this, new Observer<Article>() {
-//                    @Override
-//                    public void onChanged(Article articleApi) {
-//                        if (articleApi == null) {
-//                            Log.i("article ben null", "null");
-//                        } else {
-//                            Log.i("article", articleApi.toString());
-//                        }
-//                    }
-//                });
-//        Log.i("article ajout",article.toString() + idUser + quantite);
     }
 
     // REDIRECTION VERS MENU
