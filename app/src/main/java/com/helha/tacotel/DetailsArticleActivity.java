@@ -90,19 +90,6 @@ public class DetailsArticleActivity extends AppCompatActivity {
         tvMemoire.setText(memoire + " GB");
         tvCouleur.setText(couleur);
         tvPrix.setText("€ " + prix + " HTVA");
-
-
-        // RECUPERATION DE LA LISTE DES ARTICLES DANS LE PANIER
-        panierRepository.getArticles(idUser).observe(this, new Observer<List<Article>>() {
-            @Override
-            public void onChanged(List<Article> articlesApi) {
-                if (articlesApi == null) {
-                    Log.i("articles dans panier", "nul");
-                } else {
-                    Log.i("articles dans panier", articlesApi.toString());
-                }
-            }
-        });
     }
 
     public void ajouterArticlePanier(View view) {
@@ -136,7 +123,6 @@ public class DetailsArticleActivity extends AppCompatActivity {
         });
 
         // AJOUT DE L'ARTICLE DANS LE PANIER
-        Log.i("Article à ajouter", idUser+" "+quantite+" "+article.toString());
         panierRepository
             .addArticle(article,idUser,quantite)
             .observe(this, new Observer<Boolean>() {

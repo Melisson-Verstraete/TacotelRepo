@@ -125,7 +125,7 @@
     <ScrollView
         android:id="@+id/scrollView_panier"
         android:layout_width="413dp"
-        android:layout_height="450dp"
+        android:layout_height="460dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider_panier">
@@ -138,7 +138,7 @@
             <ListView
                 android:id="@+id/lv_articles_panier"
                 android:layout_width="413dp"
-                android:layout_height="455dp"
+                android:layout_height="470dp"
                 android:layout_marginTop="4dp" />
         </LinearLayout>
     </ScrollView>
