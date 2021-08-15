@@ -102,7 +102,6 @@ public class MagasinActivity extends AppCompatActivity {
                 articles.clear();
                 if (categorieChoisie.equals("TOUT")) {
                     articles.addAll(articlesApi);
-                    Log.i("categorieChoisie", "tout");
                 } else {
                     for (int m=0 ; m<categories.size() ; m++) {
                         if (categorieChoisie.equals(categories.get(m).getNomCategorie())) {

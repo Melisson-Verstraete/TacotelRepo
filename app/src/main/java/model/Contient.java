@@ -13,6 +13,22 @@ public class Contient {
     public Contient() {
     }
 
+    public Panier getPanier() {
+        return panier;
+    }
+
+    public void setPanier(Panier panier) {
+        this.panier = panier;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
+
     public int getQteArticleChoisi() {
         return qteArticleChoisi;
     }

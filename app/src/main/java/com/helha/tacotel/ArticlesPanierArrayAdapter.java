@@ -1,6 +1,7 @@
 package com.helha.tacotel;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,11 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 import model.Article;
+import model.Panier;
 
 public class ArticlesPanierArrayAdapter extends ArrayAdapter<Article> {
+    double sousTotal = 0;
+
     public ArticlesPanierArrayAdapter(@NonNull Context context, int resource, @NonNull List<Article> objects) {
         super(context, resource, objects);
     }
@@ -35,6 +39,19 @@ public class ArticlesPanierArrayAdapter extends ArrayAdapter<Article> {
     }
 
     private void populateView(View view, Article article) {
+        int quantite = 0;
+        double prixTotal = 0;
+
+        for (int j=0;j<PanierActivity.contients.size();j++) {
+            if (PanierActivity.contients.get(j).getArticle().getIdArticle() == article.getIdArticle()) {
+                quantite = PanierActivity.contients.get(j).getQteArticleChoisi();
+                prixTotal = article.getPrix() * quantite;
+                sousTotal += prixTotal;
+                PanierActivity.sousTotalStatic = sousTotal;
+                Log.i("SOUSTOTAAAL",""+PanierActivity.sousTotalStatic);
+            }
+        }
+
         ImageView imgItem = view.findViewById(R.id.img_item_panier);
         TextView tvNomItem = view.findViewById(R.id.tv_nom_item_panier);
         TextView tvPrixUniItem = view.findViewById(R.id.tv_prix_item_panier);
@@ -43,7 +60,7 @@ public class ArticlesPanierArrayAdapter extends ArrayAdapter<Article> {
 
         tvNomItem.setText(article.getLibelle());
         tvPrixUniItem.setText("€ " + article.getPrix());
-        tvPrixTotItem.setText("€ " + "ok");
-        tvQteItem.setText("" + "ok");
+        tvPrixTotItem.setText("€ " + prixTotal);
+        tvQteItem.setText("x" + quantite);
     }
 }

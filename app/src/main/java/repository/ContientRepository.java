@@ -21,9 +21,9 @@ public class ContientRepository {
         return ApiClient.getClient().create(ContientService.class);
     }
 
-    public LiveData<List<Contient>> query() {
+    public LiveData<List<Contient>> query(int idPanier) {
         final MutableLiveData<List<Contient>> mutableLiveData = new MutableLiveData<>();
-            getContientService().getContients().enqueue(new Callback<List<Contient>>() {
+            getContientService().getContients(idPanier).enqueue(new Callback<List<Contient>>() {
                 @Override
                 public void onResponse(Call<List<Contient>> call, Response<List<Contient>> response) {
                     mutableLiveData.postValue(response.body());

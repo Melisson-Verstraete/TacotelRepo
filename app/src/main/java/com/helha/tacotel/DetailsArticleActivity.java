@@ -93,6 +93,7 @@ public class DetailsArticleActivity extends AppCompatActivity {
     }
 
     public void ajouterArticlePanier(View view) {
+        // RECUPERATION DE LA QUANTITE
         EditText etQuantite = findViewById(R.id.et_quantite_details_result);
         String etQuantiteValue = etQuantite.getText().toString();
         int quantite = 0;
@@ -108,7 +109,7 @@ public class DetailsArticleActivity extends AppCompatActivity {
             public void onChanged(List<Panier> paniersApi) {
                 Log.i("paniers", paniersApi.toString());
                 int existe = 0;
-                for (int j=0;j<paniersApi.size();j++) {
+                for (int j = 0; j < paniersApi.size(); j++) {
                     if (paniersApi.get(j).getIdPanier() == idUser) {
                         existe = 1;
                     }
@@ -121,35 +122,19 @@ public class DetailsArticleActivity extends AppCompatActivity {
             }
         });
 
-        Log.i("Article à ajouter", article.toString()+idUser+quantite);
         // AJOUT DE L'ARTICLE DANS LE PANIER
         panierRepository
                 .addArticle(article,idUser,quantite)
-                .observe(this, new Observer<Article>() {
+                .observe(this, new Observer<Boolean>() {
                     @Override
-                    public void onChanged(Article articleApi) {
-                        if (articleApi == null) {
-                            Log.i("article ben null", "null");
-                        } else {
-                            Log.i("article", articleApi.toString());
-                        }
+                    public void onChanged(Boolean aBoolean) {
+                        Log.i("ADDARTICLE", ""+aBoolean);
+                        goToMagasinFromDetails(view);
                     }
                 });
 
         // DELETE DU PANIER
 //        panierRepository.delete(idUser);
-
-        // RECUPERATION DE LA LISTE DES ARTICLES DANS LE PANIER
-        panierRepository.getArticles(idUser).observe(this, new Observer<List<Article>>() {
-            @Override
-            public void onChanged(List<Article> articlesApi) {
-                if (articlesApi == null) {
-                    Log.i("articles dans panier", "nul");
-                } else {
-                    Log.i("articles dans panier", articlesApi.toString());
-                }
-            }
-        });
     }
 
     // REDIRECTION VERS MENU

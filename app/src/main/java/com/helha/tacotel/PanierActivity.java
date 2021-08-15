@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -13,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Article;
+import model.Contient;
 import model.Panier;
+import repository.ContientRepository;
 import repository.PanierRepository;
 
 public class PanierActivity extends AppCompatActivity {
@@ -22,6 +25,8 @@ public class PanierActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_PAIEMENT_ADRESSES = 1;
 
     int idUser = FormConnexionActivity.getIdUserConnected();
+    static List<Contient> contients = new ArrayList<>();
+    static double sousTotalStatic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,7 @@ public class PanierActivity extends AppCompatActivity {
         List<Article> articles = new ArrayList<>();
         ListView listView = findViewById(R.id.lv_articles_panier);
         ArticlesPanierArrayAdapter articlesPanierArrayAdapter = new ArticlesPanierArrayAdapter(this, R.id.lv_articles_panier, articles);
+
         listView.setAdapter(articlesPanierArrayAdapter);
 
         PanierRepository panierRepository = new PanierRepository();
@@ -44,6 +50,18 @@ public class PanierActivity extends AppCompatActivity {
                 articlesPanierArrayAdapter.notifyDataSetChanged();
             }
         });
+
+        ContientRepository contientRepository = new ContientRepository();
+
+        contientRepository.query(idUser).observe(this, new Observer<List<Contient>>() {
+            @Override
+            public void onChanged(List<Contient> contientsApi) {
+                contients.addAll(contientsApi);
+            }
+        });
+
+        TextView tvSousTotal = findViewById(R.id.tv_sous_tot_panier_result);
+        tvSousTotal.setText("€ " + sousTotalStatic);
     }
 
     public void goToMenuFromPanier(View view) {
