@@ -19,6 +19,6 @@ public interface AdminService {
     @POST("dbTaCoTel/Admin")
     Call<Admin> postAdmin(@Body Admin admin);
 
-    @POST("dbTaCoTel/Admin/authenticate")
+    @POST("dbTaCoTel/Admin")
     Observable<Admin> loginAdmin(@Body Admin admin);
 }

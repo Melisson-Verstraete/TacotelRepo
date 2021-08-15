@@ -48,12 +48,12 @@ public class FormConnexionAdminActivity extends AppCompatActivity {
 
         AdminRepository adminRepository = new AdminRepository();
 
-        adminRepository.query().observe(this, new Observer<List<Admin>>() {
+       /* adminRepository.query().observe(this, new Observer<List<Admin>>() {
             @Override
             public void onChanged(List<Admin> admins) {
                 Log.i("Admins", admins.toString());
             }
-        });
+        });*/
 
 
         //Init Api
@@ -88,7 +88,6 @@ public class FormConnexionAdminActivity extends AppCompatActivity {
                         .subscribe(new Consumer<Admin>() {
                             @Override
                             public void accept(Admin a) throws Exception {
-                                //if(et_pseudo_admin.equals(utilisateur.getPseudo().toString()))
                                 Toast.makeText(FormConnexionAdminActivity.this, a.toString(), Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(FormConnexionAdminActivity.this, AdminListArticlesActivity.class);
                                 startActivityForResult(intent, REQUEST_CODE_ADMIN_LIST_ARTICLES);
@@ -103,6 +102,12 @@ public class FormConnexionAdminActivity extends AppCompatActivity {
                         }));
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        compositeDisposable.clear();
+        super.onStop();
     }
 
     public void goToAdminArticles(View view) {
