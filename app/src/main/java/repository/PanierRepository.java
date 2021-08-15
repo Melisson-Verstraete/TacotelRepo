@@ -90,6 +90,7 @@ public class PanierRepository {
         return mutableLiveData;
     }
 
+    // bon code
     public LiveData<Boolean> addArticle(Article article, int idPanier, int qteArticleChoisi) {
         final MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
             getPanierService().postArticle(article, idPanier, qteArticleChoisi).enqueue(new Callback<Boolean>() {
