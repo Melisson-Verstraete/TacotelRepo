@@ -27,4 +27,7 @@ public interface PanierService {
 
     @DELETE("dbTaCoTel/panier/{idPanier}")
     Call<Boolean> deletePanier(@Path("idPanier") int idPanier);
+
+    @DELETE("dbTaCoTel/panier/Article/Delete/{idArticle}")
+    Call<Boolean> deleteArticleFromAllPanier(@Path("idArticle") int idArticle);
 }
