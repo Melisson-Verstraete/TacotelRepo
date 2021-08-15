@@ -22,12 +22,15 @@ import java.util.List;
 import model.Article;
 import model.Categorie;
 import repository.ArticleRepository;
+import repository.PanierRepository;
 
 
 public class ArticlesAdminArrayAdapter extends ArrayAdapter<Article> {
 
     private int hasArticle = 0;
     public static final String EXTRA_BUNDLE_ARTICLE = "bundle_article";
+
+    private PanierRepository panierRepository = new PanierRepository();
     public ArticlesAdminArrayAdapter(@NonNull Context context, int resource, @NonNull List<Article> objects) {
         super(context, resource, objects);
     }
@@ -72,6 +75,7 @@ public class ArticlesAdminArrayAdapter extends ArrayAdapter<Article> {
 
                                 articleRepository.deleteCategorieFromArticle(getItem(position).getIdArticle());
 
+                                panierRepository.deleteArticleFromAllPaniers(getItem(position).getIdArticle());
                                 articleRepository.delete(getItem(position).getIdArticle());
                                 Intent intent = new Intent(getContext(),AdminListArticlesActivity.class);
                                 getContext().startActivity(intent);

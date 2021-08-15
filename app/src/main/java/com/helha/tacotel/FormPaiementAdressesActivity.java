@@ -183,7 +183,7 @@ public class FormPaiementAdressesActivity extends AppCompatActivity implements L
     private void getLocation() {
         try{
             locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,5,FormPaiementAdressesActivity.this);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,FormPaiementAdressesActivity.this);
         }catch (Exception exception){
             exception.printStackTrace();
         }
