@@ -23,7 +23,7 @@ public interface PanierService {
     Call<List<Article>> queryArticles(@Path("idPanier") int idPanier);
 
     @POST("dbTaCoTel/panier/{idPanier}/Article/{idArticle}/quantite/{qteArticleChoisi}")
-    Call<Article> postArticle(@Path("idArticle") Article idArticle, @Path("idPanier") int idPanier, @Path("qteArticleChoisi") int qteArticleChoisi);
+    Call<Boolean> postArticle(@Body Article idArticle, @Path("idPanier") int idPanier, @Path("qteArticleChoisi") int qteArticleChoisi);
 
     @DELETE("dbTaCoTel/panier/{idPanier}")
     Call<Boolean> deletePanier(@Path("idPanier") int idPanier);

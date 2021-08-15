@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.io.IOException;
 import java.util.List;
 
 import api.ApiClient;
@@ -91,17 +92,17 @@ public class PanierRepository {
         return mutableLiveData;
     }
 
-    public LiveData<Article> addArticle(Article article, int idPanier, int qteArticleChoisi) {
-        final MutableLiveData<Article> mutableLiveData = new MutableLiveData<>();
-            getPanierService().postArticle(article, idPanier, qteArticleChoisi).enqueue(new Callback<Article>() {
+    public LiveData<Boolean> addArticle(Article article, int idPanier, int qteArticleChoisi) {
+        final MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
+            getPanierService().postArticle(article, idPanier, qteArticleChoisi).enqueue(new Callback<Boolean>() {
                 @Override
-                public void onResponse(Call<Article> call, Response<Article> response) {
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                     mutableLiveData.postValue(response.body());
                     Log.i("BONHEUR","bonheur addArticles");
                 }
 
                 @Override
-                public void onFailure(Call<Article> call, Throwable t) {
+                public void onFailure(Call<Boolean> call, Throwable t) {
                     Log.i("HORREUR","horreur addArticles");
                 }
             });
