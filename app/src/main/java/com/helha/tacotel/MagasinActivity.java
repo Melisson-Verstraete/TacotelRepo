@@ -159,6 +159,7 @@ public class MagasinActivity extends AppCompatActivity {
                 intent.putExtra("memoire", article.getTailleMemoire());
                 intent.putExtra("couleur", article.getCouleur());
                 intent.putExtra("prix", article.getPrix());
+                intent.putExtra("imageURL", article.getImageURL());
                 startActivityForResult(intent, REQUEST_CODE_DETAILS_ARTICLE);
             }
         });

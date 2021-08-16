@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 import model.Article;
+import model.DownloadImageTask;
 
 public class ArticlesMagasinArrayAdapter extends ArrayAdapter<Article> {
     public ArticlesMagasinArrayAdapter(@NonNull Context context, int resource, @NonNull List<Article> objects) {
@@ -48,5 +49,9 @@ public class ArticlesMagasinArrayAdapter extends ArrayAdapter<Article> {
         tvNomItem.setText(article.getLibelle());
         tvDescriptionItem.setText(article.getDescription());
         tvPrixItem.setText("€ " + article.getPrix());
+
+        if(article.getImageURL() != null)
+            new DownloadImageTask(imgItem)
+                    .execute(article.getImageURL());
     }
 }

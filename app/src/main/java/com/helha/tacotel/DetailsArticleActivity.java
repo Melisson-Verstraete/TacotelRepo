@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import java.util.List;
 import model.Article;
 import model.CategorieArticle;
 import model.Contient;
+import model.DownloadImageTask;
 import model.Panier;
 import repository.CategorieArticleRepository;
 import repository.ContientRepository;
@@ -31,7 +33,7 @@ public class DetailsArticleActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_MAGASIN = 1;
 
     Article article;
-    String libelle, description, marque, couleur;
+    String libelle, description, marque, couleur,imageURL;
     double ecran, memoire, prix;
     int idArticle, idUser = FormConnexionActivity.getIdUserConnected();
     PanierRepository panierRepository = new PanierRepository();
@@ -56,6 +58,7 @@ public class DetailsArticleActivity extends AppCompatActivity {
                 memoire = 0;
                 couleur = null;
                 prix = 0;
+                imageURL = null;
             } else {
                 article = (Article) extras.get("Article");
                 idArticle = extras.getInt("idArticle");
@@ -66,6 +69,7 @@ public class DetailsArticleActivity extends AppCompatActivity {
                 memoire = extras.getDouble("memoire");
                 couleur = extras.getString("couleur");
                 prix = extras.getDouble("prix");
+                imageURL = extras.getString("imageURL");
             }
         } else {
             article = (Article) savedInstanceState.getSerializable("Article");
@@ -77,6 +81,7 @@ public class DetailsArticleActivity extends AppCompatActivity {
             memoire = (double) savedInstanceState.getSerializable("memoire");
             couleur = (String) savedInstanceState.getSerializable("couleur");
             prix = (double) savedInstanceState.getSerializable("prix");
+            imageURL = (String) savedInstanceState.getSerializable("image");
         }
 
         TextView tvLibelle = findViewById(R.id.tv_libelle_details);
@@ -86,6 +91,7 @@ public class DetailsArticleActivity extends AppCompatActivity {
         TextView tvMemoire = findViewById(R.id.tv_memoire_details_result);
         TextView tvCouleur = findViewById(R.id.tv_couleur_details_result);
         TextView tvPrix = findViewById(R.id.tv_prix_details_result);
+        ImageView img= findViewById(R.id.img_details);
 
         tvLibelle.setText(libelle);
         tvDescription.setText(description);
@@ -94,6 +100,10 @@ public class DetailsArticleActivity extends AppCompatActivity {
         tvMemoire.setText(memoire + " GB");
         tvCouleur.setText(couleur);
         tvPrix.setText("€ " + prix + " HTVA");
+        //img.setImageResource(R.drawable.image);
+        if(imageURL != null)
+        new DownloadImageTask(img)
+                .execute(imageURL);
     }
 
     public void ajouterArticlePanier(View view) {
