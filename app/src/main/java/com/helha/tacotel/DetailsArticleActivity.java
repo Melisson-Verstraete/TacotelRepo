@@ -100,7 +100,7 @@ public class DetailsArticleActivity extends AppCompatActivity {
         tvMemoire.setText(memoire + " GB");
         tvCouleur.setText(couleur);
         tvPrix.setText("€ " + prix + " HTVA");
-        //img.setImageResource(R.drawable.image);
+
         if(imageURL != null)
         new DownloadImageTask(img)
                 .execute(imageURL);

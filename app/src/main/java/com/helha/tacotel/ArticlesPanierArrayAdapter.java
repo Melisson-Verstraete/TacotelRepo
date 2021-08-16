@@ -21,6 +21,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import model.Article;
+import model.DownloadImageTask;
 import model.Panier;
 import repository.ContientRepository;
 
@@ -57,11 +58,16 @@ public class ArticlesPanierArrayAdapter extends ArrayAdapter<Article> {
             }
         }
 
+        ImageView imgItem = view.findViewById(R.id.img_item_panier);
         TextView tvNomItem = view.findViewById(R.id.tv_nom_item_panier);
         TextView tvPrixUniItem = view.findViewById(R.id.tv_prix_item_panier);
         TextView tvPrixTotItem = view.findViewById(R.id.tv_prix_total_item_panier);
         TextView tvQteItem = view.findViewById(R.id.tv_qte_item_panier);
         EditText etQteItem = view.findViewById(R.id.et_qte_item_panier);
+
+        if(article.getImageURL() != null)
+            new DownloadImageTask(imgItem)
+                    .execute(article.getImageURL());
 
         DecimalFormat df = new DecimalFormat("#.00");
 
