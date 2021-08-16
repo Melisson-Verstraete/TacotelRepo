@@ -21,6 +21,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import model.Article;
+import model.DownloadImageTask;
 import model.Panier;
 import repository.ContientRepository;
 
@@ -70,6 +71,7 @@ public class ArticlesPanierArrayAdapter extends ArrayAdapter<Article> {
         tvPrixUniItem.setText("€ " + article.getPrix() + " HTVA");
         tvPrixTotItem.setText("€ " + df.format(prixTotal) + " HTVA");
         tvQteItem.setText("x" + quantite);
+
 
         ImageView img_supprimer = view.findViewById(R.id.img_supprimer_item_panier);
         ContientRepository contientRepository = new ContientRepository();

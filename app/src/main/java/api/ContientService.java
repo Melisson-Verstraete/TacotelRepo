@@ -26,6 +26,6 @@ public interface ContientService {
     @DELETE("dbTaCoTel/Contient/{idPanier}/Article/{idArticle}")
     Call<Boolean> deleteArticleContient(@Path("idPanier") int idPanier, @Path("idArticle") int idArticle);
 
-    @PUT ("{idPanier}/Article/{idArticle}/quantite/{qteArticleChoisi}")
+    @PUT ("dbTaCoTel/Contient/{idPanier}/Article/{idArticle}/quantite/{qteArticleChoisi}")
     Call<Boolean> updateContient(@Path("idPanier") int idPanier, @Path("idArticle") int idArticle, @Path("qteArticleChoisi") int qteArticleChoisi);
 }
