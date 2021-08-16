@@ -40,6 +40,11 @@ public class PanierActivity extends AppCompatActivity {
         List<Article> articles = new ArrayList<>();
         ListView listView = findViewById(R.id.lv_articles_panier);
         ArticlesPanierArrayAdapter articlesPanierArrayAdapter = new ArticlesPanierArrayAdapter(this, R.id.lv_articles_panier, articles);
+// CHANGEMENT DES PRIX TOTAUX DANS LA VIEW
+        TextView tvSousTotal = findViewById(R.id.tv_sous_tot_panier_result);
+        TextView tvTVA = findViewById(R.id.tv_tva_panier_result);
+        TextView tvTotal = findViewById(R.id.tv_total_panier_result);
+
 
         listView.setAdapter(articlesPanierArrayAdapter);
 
@@ -63,22 +68,22 @@ public class PanierActivity extends AppCompatActivity {
                 if(contientsApi != null){
                     contients.clear();
                     contients.addAll(contientsApi);
+                    for (Contient contient:contients
+                         ) {
+                        Log.i("Test","Quantite : " + contient.getQteArticleChoisi()+", prix : "+contient.getArticle().getPrix());
+                        sousTotalStatic +=contient.getQteArticleChoisi()*contient.getArticle().getPrix();
+                    }
+                    tvSousTotal.setText("€ " + sousTotalStatic);
+                    double tva = sousTotalStatic * 0.79;
+                    tvTVA.setText("€ " + tva);
+                    double total = sousTotalStatic + tva;
+                    tvTotal.setText("€ " + total);
+
                 }
             }
         });
 
-        // CHANGEMENT DES PRIX TOTAUX DANS LA VIEW
-        TextView tvSousTotal = findViewById(R.id.tv_sous_tot_panier_result);
-        TextView tvTVA = findViewById(R.id.tv_tva_panier_result);
-        TextView tvTotal = findViewById(R.id.tv_total_panier_result);
 
-        tvSousTotal.setText("€ " + sousTotalStatic);
-        double tva = sousTotalStatic * 0.79;
-        tvTVA.setText("€ " + tva);
-        double total = sousTotalStatic + tva;
-        tvTotal.setText("€ " + total);
-
-        Log.i("soustotalstatic", ""+sousTotalStatic + " tva: " + tva + " total: " + total);
     }
 
     public void goToMenuFromPanier(View view) {
