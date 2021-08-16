@@ -6,10 +6,20 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Article;
+import model.Contient;
+import repository.ContientRepository;
+import repository.PanierRepository;
 
 import static com.helha.tacotel.FormPaiementAdressesActivity.NOM1_ADRESSES;
 import static com.helha.tacotel.FormPaiementAdressesActivity.NOM2_ADRESSES;
@@ -30,6 +40,9 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_MENU = 1;
     private static final int REQUEST_CODE_FORM_BANQUE = 1;
+
+    int idUser = FormConnexionActivity.getIdUserConnected();
+    static List<Contient> contients = new ArrayList<>();
 
     private TextView tv_nom1_validation ;
     private TextView tv_adresse1_validation ;
@@ -58,6 +71,34 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_paiement_validation);
+
+        List<Article> articles = new ArrayList<>();
+        ListView listView = findViewById(R.id.lv_articles_validation);
+        ArticlesPanierArrayAdapter articlesPanierArrayAdapter = new ArticlesPanierArrayAdapter(this, R.id.lv_articles_validation, articles);
+
+        listView.setAdapter(articlesPanierArrayAdapter);
+
+        PanierRepository panierRepository = new PanierRepository();
+
+        // RECUPERATION DE LA LISTE DES ARTICLES DANS LE PANIER
+        panierRepository.getArticles(idUser).observe(this, new Observer<List<Article>>() {
+            @Override
+            public void onChanged(List<Article> articlesApi) {
+                articles.clear();
+                articles.addAll(articlesApi);
+                articlesPanierArrayAdapter.notifyDataSetChanged();
+            }
+        });
+
+        ContientRepository contientRepository = new ContientRepository();
+
+        contientRepository.query(idUser).observe(this, new Observer<List<Contient>>() {
+            @Override
+            public void onChanged(List<Contient> contientsApi) {
+                contients.clear();
+                contients.addAll(contientsApi);
+            }
+        });
 
         btn_payer_validation = (Button) findViewById(R.id.btn_payer_validation);
         btn_retour_validation = (Button) findViewById(R.id.btn_retour_validation);
