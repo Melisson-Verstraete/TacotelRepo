@@ -2,10 +2,8 @@ package com.helha.tacotel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +12,7 @@ import androidx.lifecycle.Observer;
 import java.util.Date;
 import java.util.List;
 
-import api.UtilisateurConnecte;
 import model.Client;
-import model.Login;
 import model.Panier;
 import model.Utilisateur;
 import repository.ClientRepository;
@@ -36,7 +32,8 @@ public class MenuActivity extends AppCompatActivity {
     PanierRepository panierRepository = new PanierRepository();
     Button btn_deconnexion;
     TextView tv_nom_menu;
-    //EditText et_pseudo_connexion;
+
+    int idUser = FormConnexionActivity.getIdUserConnected();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,27 +49,31 @@ public class MenuActivity extends AppCompatActivity {
 
         }
 
-        btn_deconnexion.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //startActivity(new Intent(Users.this, For.class));
-                Intent intent = new Intent(MenuActivity.this,MainActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_MAIN);
-                tv_nom_menu.setText(tv_nom_menu.getText());
-                finish();
+        UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
+
+        utilisateurRepository.query(idUser).observe(this, new Observer<Utilisateur>() {
+            @Override
+            public void onChanged(Utilisateur utilisateur) {
+                tv_nom_menu.setText(utilisateur.getPrenom() + " " + utilisateur.getNom());
             }
         });
-        UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
 
         utilisateurRepository.query(id).observe(this, new Observer<Utilisateur>() {
             @Override
             public void onChanged(Utilisateur utilisateur) {
                 if(utilisateur != null)
                 {
-                    tv_nom_menu.setText(utilisateur.getPseudo());
                     client = new Client(id,"M",utilisateur.getNom(),utilisateur.getPrenom(),new Date(),utilisateur.getMail(),"tel",utilisateur.getMdp());
-                }else{
-                    }
+                }
+            }
+        });
 
+        btn_deconnexion.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //startActivity(new Intent(Users.this, For.class));
+                Intent intent = new Intent(MenuActivity.this,MainActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_MAIN);
+                finish();
             }
         });
 
@@ -103,24 +104,20 @@ public class MenuActivity extends AppCompatActivity {
             public void onChanged(List<Panier> paniersApi) {
                 int existe = 0;
                 if(paniersApi.size() == 0 ){
-
                     panierRepository.create(new Panier(client.getIdClient()));
                 }
                 else {
                     for (int j = 0; j < paniersApi.size(); j++) {
-
                         if (paniersApi.get(j).getIdPanier() == client.getIdClient()) {
                             existe = 1;
                         }
                     }
                     if (existe == 0) {
-
                         panierRepository.create(new Panier(client.getIdClient()));
                     }
                 }
             }
         });
-
     }
 
     public void goToMagasin(View view) {
@@ -142,10 +139,4 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(MenuActivity.this,DetailsArticleActivity.class);
         startActivityForResult(intent, REQUEST_CODE_DETAILS_ARTICLE);
     }
-
-//    public void goToDetails(View view) {
-//        Intent intent = new Intent(MenuActivity.this,FormAdminArticleActivity.class);
-//        startActivityForResult(intent, REQUEST_CODE_DETAILS_ARTICLE);
-//    }
-
 }
