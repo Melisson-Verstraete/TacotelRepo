@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import model.Article;
+import model.DownloadImageTask;
 
 public class ArticlesPaiementArrayAdapter extends ArrayAdapter<Article> {
     int quantite = 0;
@@ -67,5 +68,12 @@ public class ArticlesPaiementArrayAdapter extends ArrayAdapter<Article> {
         img_supprimer.setVisibility(View.GONE);
         ImageView img_modifier = view.findViewById(R.id.img_modifier_item_panier);
         img_modifier.setVisibility(View.GONE);
+
+        if(article.getImageURL() != null) {
+            new DownloadImageTask(imgItem)
+                    .execute(article.getImageURL());
+        }
+
+
     }
 }

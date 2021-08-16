@@ -201,11 +201,6 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
     public void goToMenuFromPaiementValidation(View view) {
         modifierQteEnStockArticle();
 
-        // DELETE DU PANIER
-        PanierRepository panierRepository = new PanierRepository();
-        contientRepository.delete(idUser);
-        panierRepository.delete(idUser);
-
         Intent intent = new Intent(FormPaiementValidationActivity.this,MenuActivity.class);
         startActivityForResult(intent, REQUEST_CODE_MENU);
     }
@@ -229,11 +224,16 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
                                 if (articlesApi.get(i).getIdArticle() == contientsApi.get(j).getArticle().getIdArticle()) {
                                     int nouvelleQuantite = articlesApi.get(i).getQteEnStock() - contientsApi.get(j).getQteArticleChoisi();
                                     articlesApi.get(i).setQteEnStock(nouvelleQuantite);
+                                    Log.i("QUANTITE", ""+articlesApi.get(i).getQteEnStock());
+                                    Log.i("QUANTITEnouvelle", ""+nouvelleQuantite);
                                     articleRepository.update(articlesApi.get(i).getIdArticle(), articlesApi.get(i));
-                                    break;
                                 }
                             }
                         }
+                        // DELETE DU PANIER
+                        PanierRepository panierRepository = new PanierRepository();
+                        contientRepository.delete(idUser);
+                        panierRepository.delete(idUser);
                     }
                 });
             }
