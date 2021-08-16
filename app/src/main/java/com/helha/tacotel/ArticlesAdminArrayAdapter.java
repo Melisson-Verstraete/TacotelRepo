@@ -67,8 +67,8 @@ public class ArticlesAdminArrayAdapter extends ArrayAdapter<Article> {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("Voulez-vous vraiment supprimer cette article?");
-                builder.setMessage("Toute suppression est définitive")
+                builder.setTitle("Voulez-vous vraiment supprimer cet article?");
+                builder.setMessage("Toute suppression est définitive.")
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

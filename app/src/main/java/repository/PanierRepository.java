@@ -1,17 +1,10 @@
 package repository;
-
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
-import java.io.IOException;
 import java.util.List;
-
 import api.ApiClient;
 import api.PanierService;
 import model.Article;
-import model.Contient;
 import model.Panier;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -90,7 +83,6 @@ public class PanierRepository {
         return mutableLiveData;
     }
 
-    // bon code
     public LiveData<Boolean> addArticle(Article article, int idPanier, int qteArticleChoisi) {
         final MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
             getPanierService().postArticle(article, idPanier, qteArticleChoisi).enqueue(new Callback<Boolean>() {

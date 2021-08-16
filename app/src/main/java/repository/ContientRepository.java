@@ -1,5 +1,7 @@
 package repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -7,6 +9,7 @@ import java.util.List;
 
 import api.ApiClient;
 import api.ContientService;
+import model.Article;
 import model.Contient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,6 +53,56 @@ public class ContientRepository {
 
                 }
             });
+        return mutableLiveData;
+    }
+
+    public LiveData<Boolean> delete (int idPanier){
+        final MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
+        getContientService().deleteContient(idPanier).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                mutableLiveData.postValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+
+        });
+        return mutableLiveData;
+    }
+
+    public LiveData<Boolean> deleteArticle (int idPanier, int idArticle){
+        final MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
+        getContientService().deleteArticleContient(idPanier, idArticle).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                mutableLiveData.postValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+            }
+
+        });
+        return mutableLiveData;
+    }
+
+    public LiveData<Boolean> update(int idPanier, int idArticle, int qteArticleChoisi){
+        final MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
+        getContientService().updateContient(idPanier, idArticle, qteArticleChoisi).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                mutableLiveData.postValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+
+        });
         return mutableLiveData;
     }
 }

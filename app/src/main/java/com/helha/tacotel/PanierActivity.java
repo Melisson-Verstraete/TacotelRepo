@@ -3,10 +3,14 @@ package com.helha.tacotel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
@@ -56,16 +60,28 @@ public class PanierActivity extends AppCompatActivity {
         contientRepository.query(idUser).observe(this, new Observer<List<Contient>>() {
             @Override
             public void onChanged(List<Contient> contientsApi) {
+                contients.clear();
                 contients.addAll(contientsApi);
             }
         });
 
+        // CHANGEMENT DES PRIX TOTAUX DANS LA VIEW
         TextView tvSousTotal = findViewById(R.id.tv_sous_tot_panier_result);
+        TextView tvTVA = findViewById(R.id.tv_tva_panier_result);
+        TextView tvTotal = findViewById(R.id.tv_total_panier_result);
+
         tvSousTotal.setText("€ " + sousTotalStatic);
+        double tva = sousTotalStatic * 0.79;
+        tvTVA.setText("€ " + tva);
+        double total = sousTotalStatic + tva;
+        tvTotal.setText("€ " + total);
+
+        Log.i("soustotalstatic", ""+sousTotalStatic + " tva: " + tva + " total: " + total);
     }
 
     public void goToMenuFromPanier(View view) {
         Intent intent = new Intent(PanierActivity.this,MenuActivity.class);
+        sousTotalStatic = 0;
         startActivityForResult(intent, REQUEST_CODE_MENU);
     }
     
