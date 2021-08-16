@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import model.Article;
 import model.Contient;
+import repository.ArticleRepository;
 import repository.ContientRepository;
 import repository.PanierRepository;
 
@@ -119,7 +121,10 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
         }
         if (sharedpreferences2.contains(NUM_COMPTE)) {
             tv_num_compte_validation.setText(sharedpreferences2.getString(NUM_COMPTE, ""));
-        }
+        }/*
+        if(sharedpreferences2.contains(checkedRadioButtonId)){
+
+        }*/
 
 /*
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -198,7 +203,52 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
     }
 
     public void goToPaiementBanqueFromPaiementValidation(View view) {
+        modifierQteEnStockArticle();
+
         Intent intent = new Intent(FormPaiementValidationActivity.this,FormPaiementBanqueActivity.class);
         startActivityForResult(intent, REQUEST_CODE_FORM_BANQUE);
+    }
+
+
+    public void modifierQteEnStockArticle() {
+        List<Integer> idChaqueArticle = new ArrayList<>() ;
+        ListView listView = findViewById(R.id.lv_articles_validation);
+
+        ArticleRepository articleRepository = new ArticleRepository();
+        ContientRepository contientRepository = new ContientRepository() ;
+
+        articleRepository.query().observe(this, new Observer<List<Article>>() {
+            @Override
+            public void onChanged(List<Article> articlesApi) {
+                Toast.makeText(FormPaiementValidationActivity.this, "rentre dans la méthode", Toast.LENGTH_SHORT).show() ;
+                contientRepository.query(idUser).observe(FormPaiementValidationActivity.this, new Observer<List<Contient>>() {
+                    @Override
+                    public void onChanged(List<Contient> contientsApi) {
+                        for(int i=0; i<articlesApi.size(); i++){
+                            for(int j=0; j<contientsApi.size();j++){
+                                if(articlesApi.get(i).getIdArticle()==contientsApi.get(j).getArticle().getIdArticle()){
+                                    articlesApi.get(i).setQteEnStock(articlesApi.get(i).getQteEnStock()-contientsApi.get(j).getArticle().getQteEnStock());
+                                    articleRepository.update(articlesApi.get(i).getIdArticle(), articlesApi.get(i)) ;
+                                    Log.i("C'est bon ça marche", articlesApi.get(i).toString()) ;
+                                }
+                            }
+                        }
+                    }
+                });
+
+
+            }/*
+            articleRepository
+                    .update(idChaqueArticle, Article article).observe(this, new Observer<Article>() {
+
+                @Override
+                public void onChanged(Article article) {
+
+                }
+            });*/
+
+        });
+
+
     }
 }
