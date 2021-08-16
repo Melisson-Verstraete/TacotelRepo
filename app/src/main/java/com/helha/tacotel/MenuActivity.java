@@ -2,6 +2,7 @@ package com.helha.tacotel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,9 +14,11 @@ import java.util.Date;
 import java.util.List;
 
 import model.Client;
+import model.Contient;
 import model.Panier;
 import model.Utilisateur;
 import repository.ClientRepository;
+import repository.ContientRepository;
 import repository.PanierRepository;
 import repository.UtilisateurRepository;
 

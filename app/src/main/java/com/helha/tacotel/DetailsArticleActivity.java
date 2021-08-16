@@ -35,9 +35,8 @@ public class DetailsArticleActivity extends AppCompatActivity {
     Article article;
     String libelle, description, marque, couleur,imageURL;
     double ecran, memoire, prix;
-    int idArticle, idUser = FormConnexionActivity.getIdUserConnected();
+    int idArticle, idUser = FormConnexionActivity.getIdUserConnected(), quantite = 0, existe = 0;
     PanierRepository panierRepository = new PanierRepository();
-    int quantite = 0;
     ContientRepository contientRepository = new ContientRepository();
     Contient contient = new Contient();
 
@@ -117,25 +116,36 @@ public class DetailsArticleActivity extends AppCompatActivity {
             quantite = Integer.parseInt(etQuantiteValue);
         }
 
-
-
-        // AJOUT DE L'ARTICLE DANS LE PANIER
-        panierRepository
-                .query().observe(this, new Observer<List<Panier>>() {
+        panierRepository.getArticles(idUser).observe(this, new Observer<List<Article>>() {
             @Override
-            public void onChanged(List<Panier> paniers) {
-                if(paniers!=null && paniers.size()!=0){
-                    for (Panier panier:paniers
-                         ) {
-                        if(panier.getIdPanier() == idUser){
-                            contient.setQteArticleChoisi(quantite);
-                            contientRepository.create(contient,idUser,article.getIdArticle());
-                        }
+            public void onChanged(List<Article> articlesApi) {
+                for (int j = 0; j < articlesApi.size(); j++) {
+                    if (articlesApi.get(j).getIdArticle() == article.getIdArticle()) {
+                        ajouterQuantite(quantite);
+                        existe = 1;
+                        break;
                     }
-
+                }
+                if (existe == 0) {
+                    panierRepository.query().observe(DetailsArticleActivity.this, new Observer<List<Panier>>() {
+                        @Override
+                        public void onChanged(List<Panier> paniers) {
+                            if (paniers!=null && paniers.size()!=0) {
+                                for (Panier panier:paniers) {
+                                    if (panier.getIdPanier() == idUser) {
+                                        contient.setQteArticleChoisi(quantite);
+                                        contientRepository.create(contient,idUser,article.getIdArticle());
+                                    }
+                                }
+                                String message = "L'article a bien été ajouté au panier!";
+                                Toast.makeText(DetailsArticleActivity.this, message, Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
                 }
             }
         });
+
         Intent intent = new Intent(DetailsArticleActivity.this, MagasinActivity.class);
         startActivityForResult(intent, REQUEST_CODE_MAGASIN);
         // DELETE DU PANIER
@@ -152,5 +162,19 @@ public class DetailsArticleActivity extends AppCompatActivity {
     public void goToMagasinFromDetails(View view) {
         Intent intent = new Intent(DetailsArticleActivity.this, MagasinActivity.class);
         startActivityForResult(intent, REQUEST_CODE_MAGASIN);
+    }
+
+    private void ajouterQuantite(int quantite) {
+        contientRepository.query(idUser).observe(DetailsArticleActivity.this, new Observer<List<Contient>>() {
+            @Override
+            public void onChanged(List<Contient> contientsApi) {
+                for (int j = 0; j < contientsApi.size(); j++) {
+                    if (contientsApi.get(j).getArticle().getIdArticle() == article.getIdArticle()) {
+                        int qte = contientsApi.get(j).getQteArticleChoisi() + quantite;
+                        contientRepository.update(idUser, article.getIdArticle(), qte);
+                    }
+                }
+            }
+        });
     }
 }

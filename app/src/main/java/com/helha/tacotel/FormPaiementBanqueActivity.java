@@ -143,6 +143,9 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
             editor.putString(NUM_COMPTE, str_num_compte) ;
             editor.putString(CVV, str_cvv) ;
 
+            int checkedRadioButtonId = radioGroup_carte.getCheckedRadioButtonId() ;
+            editor.putInt("checkRadioButtonId", checkedRadioButtonId) ;
+
             editor.commit() ;
 
             //intent.putExtra("tv_nom1_validation", str)

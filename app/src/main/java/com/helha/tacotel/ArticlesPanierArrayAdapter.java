@@ -77,6 +77,7 @@ public class ArticlesPanierArrayAdapter extends ArrayAdapter<Article> {
         tvPrixTotItem.setText("€ " + df.format(prixTotal) + " HTVA");
         tvQteItem.setText("x" + quantite);
 
+
         ImageView img_supprimer = view.findViewById(R.id.img_supprimer_item_panier);
         ContientRepository contientRepository = new ContientRepository();
         img_supprimer.setOnClickListener(new View.OnClickListener() {
@@ -116,10 +117,14 @@ public class ArticlesPanierArrayAdapter extends ArrayAdapter<Article> {
                     @Override
                     public void onClick(View view) {
 
-                        int qte = Integer.parseInt(etQteItem.getText().toString());Log.i("QUANTITE", ""+qte);
-                        contientRepository.update(idUser,article.getIdArticle(),qte);
-                        etQteItem.setVisibility(View.GONE);
-                        tvQteItem.setVisibility(View.VISIBLE);
+                        if(!(etQteItem.getText().toString().isEmpty())){
+
+                            int qte = Integer.parseInt(etQteItem.getText().toString());Log.i("QUANTITE", ""+qte);
+                            contientRepository.update(idUser,article.getIdArticle(),qte);
+
+                            etQteItem.setVisibility(View.GONE);
+                            tvQteItem.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
             }
