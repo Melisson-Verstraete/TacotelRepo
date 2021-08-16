@@ -55,10 +55,8 @@ public class ArticlesPanierArrayAdapter extends ArrayAdapter<Article> {
                 prixTotal = article.getPrix() * quantite;
                 PanierActivity.sousTotalStatic += prixTotal;
             }
-            Log.i("SOUSTOTAL",""+PanierActivity.sousTotalStatic);
         }
 
-        ImageView imgItem = view.findViewById(R.id.img_item_panier);
         TextView tvNomItem = view.findViewById(R.id.tv_nom_item_panier);
         TextView tvPrixUniItem = view.findViewById(R.id.tv_prix_item_panier);
         TextView tvPrixTotItem = view.findViewById(R.id.tv_prix_total_item_panier);
@@ -78,7 +76,6 @@ public class ArticlesPanierArrayAdapter extends ArrayAdapter<Article> {
         img_supprimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("Supprimer",article.getLibelle());
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 builder.setTitle("Voulez-vous vraiment supprimer cet article?");
                 builder.setMessage("L'article sera supprimé de votre panier.")
@@ -86,6 +83,8 @@ public class ArticlesPanierArrayAdapter extends ArrayAdapter<Article> {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 contientRepository.deleteArticle(idUser, article.getIdArticle());
+                                Intent intent = new Intent(getContext(),PanierActivity.class);
+                                getContext().startActivity(intent);
                             }
                         })
                         .setNegativeButton("Non", new DialogInterface.OnClickListener() {

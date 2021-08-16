@@ -40,7 +40,9 @@ public class PanierActivity extends AppCompatActivity {
         List<Article> articles = new ArrayList<>();
         ListView listView = findViewById(R.id.lv_articles_panier);
         ArticlesPanierArrayAdapter articlesPanierArrayAdapter = new ArticlesPanierArrayAdapter(this, R.id.lv_articles_panier, articles);
-// CHANGEMENT DES PRIX TOTAUX DANS LA VIEW
+
+
+        // CHANGEMENT DES PRIX TOTAUX DANS LA VIEW
         TextView tvSousTotal = findViewById(R.id.tv_sous_tot_panier_result);
         TextView tvTVA = findViewById(R.id.tv_tva_panier_result);
         TextView tvTotal = findViewById(R.id.tv_total_panier_result);

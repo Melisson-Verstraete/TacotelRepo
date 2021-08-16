@@ -29,6 +29,7 @@ public class ContientRepository {
             getContientService().getContients(idPanier).enqueue(new Callback<List<Contient>>() {
                 @Override
                 public void onResponse(Call<List<Contient>> call, Response<List<Contient>> response) {
+
                     mutableLiveData.postValue(response.body());
                 }
 
@@ -61,6 +62,7 @@ public class ContientRepository {
         getContientService().deleteContient(idPanier).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
                 mutableLiveData.postValue(response.body());
             }
 
@@ -83,6 +85,7 @@ public class ContientRepository {
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
+
             }
 
         });

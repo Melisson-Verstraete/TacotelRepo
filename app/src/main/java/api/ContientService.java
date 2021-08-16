@@ -19,10 +19,11 @@ public interface ContientService {
     @POST("dbTaCoTel/Contient/Panier/{idPanier}/Article/{idArticle}")
     Call<Contient> postContient(@Body Contient contient,@Path("idPanier") int idPanier,@Path("idArticle") int idArticle);
 
-    @DELETE("{idPanier}")
+    //Il manque "dbTaCoTel/Contient
+    @DELETE("dbTaCoTel/Contient/{idPanier}")
     Call<Boolean> deleteContient(@Path("idPanier") int idPanier);
 
-    @DELETE("{idPanier}/Article/{idArticle}")
+    @DELETE("dbTaCoTel/Contient/{idPanier}/Article/{idArticle}")
     Call<Boolean> deleteArticleContient(@Path("idPanier") int idPanier, @Path("idArticle") int idArticle);
 
     @PUT ("{idPanier}/Article/{idArticle}/quantite/{qteArticleChoisi}")
