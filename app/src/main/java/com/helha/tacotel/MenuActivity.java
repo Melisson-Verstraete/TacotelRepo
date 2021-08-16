@@ -17,8 +17,10 @@ import java.util.List;
 import api.UtilisateurConnecte;
 import model.Client;
 import model.Login;
+import model.Panier;
 import model.Utilisateur;
 import repository.ClientRepository;
+import repository.PanierRepository;
 import repository.UtilisateurRepository;
 
 public class MenuActivity extends AppCompatActivity {
@@ -31,6 +33,7 @@ public class MenuActivity extends AppCompatActivity {
     int id = 0;
     Client client = null;
     ClientRepository clientRepository = new ClientRepository();
+    PanierRepository panierRepository = new PanierRepository();
     Button btn_deconnexion;
     TextView tv_nom_menu;
     //EditText et_pseudo_connexion;
@@ -89,6 +92,30 @@ public class MenuActivity extends AppCompatActivity {
                     }
                     if(existe == 0){
                         clientRepository.create(client);
+                    }
+                }
+            }
+        });
+
+        // CREATION DU PANIER S'IL N'EXISTE PAS
+        panierRepository.query().observe(this, new Observer<List<Panier>>() {
+            @Override
+            public void onChanged(List<Panier> paniersApi) {
+                int existe = 0;
+                if(paniersApi.size() == 0 ){
+
+                    panierRepository.create(new Panier(client.getIdClient()));
+                }
+                else {
+                    for (int j = 0; j < paniersApi.size(); j++) {
+
+                        if (paniersApi.get(j).getIdPanier() == client.getIdClient()) {
+                            existe = 1;
+                        }
+                    }
+                    if (existe == 0) {
+
+                        panierRepository.create(new Panier(client.getIdClient()));
                     }
                 }
             }
