@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -180,12 +181,12 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
                     ) {
                         sousTotalStatic +=contient.getQteArticleChoisi()*contient.getArticle().getPrix();
                     }
-                    tvSousTotal.setText("€ " + sousTotalStatic);
+                    DecimalFormat df = new DecimalFormat("#.00");
+                    tvSousTotal.setText("€ " + df.format(sousTotalStatic));
                     double tva = sousTotalStatic * 0.79;
-                    tvTVA.setText("€ " + tva);
+                    tvTVA.setText("€ " + df.format(tva));
                     double total = sousTotalStatic + tva;
-                    tvTotal.setText("€ " + total);
-
+                    tvTotal.setText("€ " + df.format(total));
                 }
             }
         });
