@@ -40,9 +40,9 @@ public class ContientRepository {
         return mutableLiveData;
     }
 
-    public LiveData<Contient> create(Contient contient) {
+    public LiveData<Contient> create(Contient contient,int idPanier,int idArticle) {
         final MutableLiveData<Contient> mutableLiveData = new MutableLiveData<>();
-            getContientService().postContient(contient).enqueue(new Callback<Contient>() {
+            getContientService().postContient(contient,idPanier,idArticle).enqueue(new Callback<Contient>() {
                 @Override
                 public void onResponse(Call<Contient> call, Response<Contient> response) {
                     mutableLiveData.postValue(response.body());

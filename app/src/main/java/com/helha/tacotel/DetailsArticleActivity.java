@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -34,6 +35,9 @@ public class DetailsArticleActivity extends AppCompatActivity {
     double ecran, memoire, prix;
     int idArticle, idUser = FormConnexionActivity.getIdUserConnected();
     PanierRepository panierRepository = new PanierRepository();
+    int quantite = 0;
+    ContientRepository contientRepository = new ContientRepository();
+    Contient contient = new Contient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +100,7 @@ public class DetailsArticleActivity extends AppCompatActivity {
         // RECUPERATION DE LA QUANTITE
         EditText etQuantite = findViewById(R.id.et_quantite_details_result);
         String etQuantiteValue = etQuantite.getText().toString();
-        int quantite = 0;
+
         if (etQuantiteValue.isEmpty()) {
             quantite = 1;
         } else {
@@ -107,15 +111,23 @@ public class DetailsArticleActivity extends AppCompatActivity {
 
         // AJOUT DE L'ARTICLE DANS LE PANIER
         panierRepository
-                .addArticle(article,idUser,quantite)
-                .observe(this, new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(Boolean aBoolean) {
-                        Log.i("ADDARTICLE", ""+aBoolean);
-                        goToMagasinFromDetails(view);
+                .query().observe(this, new Observer<List<Panier>>() {
+            @Override
+            public void onChanged(List<Panier> paniers) {
+                if(paniers!=null && paniers.size()!=0){
+                    for (Panier panier:paniers
+                         ) {
+                        if(panier.getIdPanier() == idUser){
+                            contient.setQteArticleChoisi(quantite);
+                            contientRepository.create(contient,idUser,article.getIdArticle());
+                        }
                     }
-                });
 
+                }
+            }
+        });
+        Intent intent = new Intent(DetailsArticleActivity.this, MagasinActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_MAGASIN);
         // DELETE DU PANIER
 //        panierRepository.delete(idUser);
     }

@@ -16,8 +16,8 @@ public interface ContientService {
     @GET("dbTaCoTel/Contient/{idPanier}")
     Call<List<Contient>> getContients(@Path("idPanier") int idPanier);
 
-    @POST("dbTaCoTel/Contient")
-    Call<Contient> postContient(@Body Contient contient);
+    @POST("dbTaCoTel/Contient/Panier/{idPanier}/Article/{idArticle}")
+    Call<Contient> postContient(@Body Contient contient,@Path("idPanier") int idPanier,@Path("idArticle") int idArticle);
 
     @DELETE("{idPanier}")
     Call<Boolean> deleteContient(@Path("idPanier") int idPanier);
