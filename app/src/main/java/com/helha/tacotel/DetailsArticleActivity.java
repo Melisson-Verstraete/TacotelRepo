@@ -2,7 +2,6 @@ package com.helha.tacotel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,18 +11,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import model.Article;
-import model.CategorieArticle;
 import model.Contient;
 import model.DownloadImageTask;
 import model.Panier;
-import repository.CategorieArticleRepository;
 import repository.ContientRepository;
 import repository.PanierRepository;
 

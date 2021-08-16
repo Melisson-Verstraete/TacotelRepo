@@ -30,9 +30,6 @@ public class FormPaiementAdressesActivity extends AppCompatActivity implements L
     private static final int REQUEST_CODE_MENU = 1;
     private static final int REQUEST_CODE_PAIEMENT_BANQUE = 1;
 
-    private Button btn_suivant_adresses ;
-    private Button btn_adresses_similaires ;
-
     private EditText et_nom1_adresses ;
     private EditText et_prenom1_adresses ;
     private EditText et_rue1_adresses ;
@@ -74,9 +71,6 @@ public class FormPaiementAdressesActivity extends AppCompatActivity implements L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_paiement_adresses);
 
-        btn_suivant_adresses = (Button) findViewById(R.id.btn_suivant_adresses);
-        btn_adresses_similaires =(Button) findViewById(R.id.btn_adresses_similaires) ;
-
         et_nom1_adresses = (EditText) findViewById(R.id.et_nom1_adresses);
         et_prenom1_adresses = (EditText) findViewById(R.id.et_prenom1_adresses);
         et_rue1_adresses = (EditText) findViewById(R.id.et_rue1_adresses);
@@ -92,8 +86,6 @@ public class FormPaiementAdressesActivity extends AppCompatActivity implements L
         et_ville2_adresses = (EditText) findViewById(R.id.et_ville2_adresses);
         et_pays2_adresses = (EditText) findViewById(R.id.et_pays2_adresses);
 
-        btn_adresses_similaires = (Button) findViewById(R.id.btn_adresses_similaires) ;
-        btn_suivant_adresses = (Button) findViewById(R.id.btn_suivant_adresses) ;
         btnLocation = (Button) findViewById(R.id.btn_set_location);
 
         if(ContextCompat.checkSelfPermission(FormPaiementAdressesActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -163,9 +155,7 @@ public class FormPaiementAdressesActivity extends AppCompatActivity implements L
         }
         if (sharedpreferences.contains(PAYS2_ADRESSES)) {
             et_pays2_adresses.setText(sharedpreferences.getString(PAYS2_ADRESSES, ""));
-
         }
-
     }
 
     @SuppressLint("MissingPermission")

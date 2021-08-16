@@ -1,7 +1,5 @@
 package repository;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -10,7 +8,6 @@ import java.util.List;
 import api.ApiClient;
 import api.ArticleService;
 import model.Article;
-import model.Categorie;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -134,7 +131,6 @@ public class ArticleRepository {
             public void onFailure(Call<Integer> call, Throwable t) {
 
             }
-
         });
         return mutableLiveData;
     }
@@ -152,7 +148,6 @@ public class ArticleRepository {
             public void onFailure(Call<Boolean> call, Throwable t) {
 
             }
-
         });
         return mutableLiveData;
     }

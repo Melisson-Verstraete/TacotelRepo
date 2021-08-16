@@ -4,14 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,14 +27,6 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
     private EditText et_num_compte ;
     private EditText et_cvv ;
 
-    private Button btn_retour_banque ;
-    private Button btn_suivant_banque ;
-
-    private TextView tv_nom1_validation ;
-    private TextView tv_adresse1_validation ;
-    private TextView tv_pays1_validation ;
-    private TextView tv_mode_validation ;
-
     SharedPreferences sharedpreferences2;
     public static final String SHARED_PREFS2 = "sharedPrefs2";
 
@@ -50,9 +39,6 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_paiement_banque);
-
-        btn_retour_banque = (Button) findViewById(R.id.btn_retour_banque);
-        btn_suivant_banque = (Button) findViewById(R.id.btn_suivant_banque);
 
         et_titulaire_compte = (EditText) findViewById(R.id.et_titulaire_compte);
         et_num_compte = (EditText) findViewById(R.id.et_num_compte);
@@ -96,7 +82,6 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
             radioButton_credit.setChecked(sharedpreferences2.getBoolean("TYPE_CARTE", false));
             radioButton_debit.setChecked(sharedpreferences2.getBoolean("TYPE_CARTE", false));
         }
-
     }
 
     public void goToMenuFromPaiementBanque(View view) {
@@ -117,7 +102,6 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = sharedpreferences2.edit();
 
-
         if(((str_titulaire_compte.isEmpty()||str_num_compte.isEmpty()||str_cvv.isEmpty())&&radioButton_credit.isChecked())||((str_titulaire_compte.isEmpty()||str_num_compte.isEmpty())&&radioButton_debit.isChecked()))
         {
             Toast.makeText(FormPaiementBanqueActivity.this, "Tout les champs doivent être remplis", Toast.LENGTH_SHORT).show() ;
@@ -135,7 +119,6 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
             editor.putInt("checkRadioButtonId", checkedRadioButtonId) ;
 
             editor.commit() ;
-
         }
     }
 

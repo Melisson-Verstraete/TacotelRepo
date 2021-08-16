@@ -2,7 +2,6 @@ package com.helha.tacotel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,11 +13,9 @@ import java.util.Date;
 import java.util.List;
 
 import model.Client;
-import model.Contient;
 import model.Panier;
 import model.Utilisateur;
 import repository.ClientRepository;
-import repository.ContientRepository;
 import repository.PanierRepository;
 import repository.UtilisateurRepository;
 
@@ -49,7 +46,6 @@ public class MenuActivity extends AppCompatActivity {
 
         if(bundle != null){
              id = bundle.getInt("pseudo");
-
         }
 
         UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
@@ -73,7 +69,6 @@ public class MenuActivity extends AppCompatActivity {
 
         btn_deconnexion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //startActivity(new Intent(Users.this, For.class));
                 Intent intent = new Intent(MenuActivity.this,MainActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_MAIN);
                 finish();
@@ -136,10 +131,5 @@ public class MenuActivity extends AppCompatActivity {
     public void goToPaiement(View view) {
         Intent intent = new Intent(MenuActivity.this,FormPaiementAdressesActivity.class);
         startActivityForResult(intent, REQUEST_CODE_FORM_PAIEMENT_ADRESSES);
-    }
-
-    public void goToDetails(View view) {
-        Intent intent = new Intent(MenuActivity.this,DetailsArticleActivity.class);
-        startActivityForResult(intent, REQUEST_CODE_DETAILS_ARTICLE);
     }
 }

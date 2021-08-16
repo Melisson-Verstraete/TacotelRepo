@@ -77,7 +77,6 @@ public class FormConnexionActivity extends AppCompatActivity {
                 .subscribe(new Consumer<Utilisateur>() {
                     @Override
                     public void accept(Utilisateur u) throws Exception {
-                        //Toast.makeText(FormConnexionActivity.this, u.toString(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(FormConnexionActivity.this, MenuActivity.class);
                         intent.putExtra("pseudo", u.getIdUser());
                         startActivityForResult(intent, REQUEST_CODE_FORM_CONNEXION_MENU);
@@ -117,5 +116,4 @@ public class FormConnexionActivity extends AppCompatActivity {
         Intent intent = new Intent(FormConnexionActivity.this, MenuActivity.class);
         startActivityForResult(intent, REQUEST_CODE_FORM_CONNEXION_MENU);
     }
-
 }

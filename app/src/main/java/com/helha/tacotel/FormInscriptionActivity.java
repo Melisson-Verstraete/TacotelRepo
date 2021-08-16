@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
-import java.util.Date;
 import java.util.List;
 
 import api.ApiClient;
@@ -70,7 +69,6 @@ public class FormInscriptionActivity extends AppCompatActivity {
         tv_mdp_inscription = (TextView)findViewById(R.id.tv_mdp_inscription);
 
         //Event
-
         btn_valider_inscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,8 +88,6 @@ public class FormInscriptionActivity extends AppCompatActivity {
                         null
                 );
                 Toast.makeText(FormInscriptionActivity.this, user.toString(), Toast.LENGTH_SHORT).show();
-                        // new Utilisateur(et_nom.getText().toString(), et_prenom.getText().toString(), et_pseudo_inscription.getText().toString(), et_email.getText().toString(), et_mdp_inscription.getText().toString());
-
                         compositeDisposable.add(utilisateurConnecte.registerUser(user)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -102,7 +98,6 @@ public class FormInscriptionActivity extends AppCompatActivity {
                                 {
                                     finish();
                                 }
-                                //Toast.makeText(FormInscriptionActivity.this, u.toString(), Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(FormInscriptionActivity.this, FormConnexionActivity.class);
                                 startActivityForResult(intent, REQUEST_CODE_FORM_CONNEXION_MENU);
                                 dialog.dismiss();
@@ -116,14 +111,7 @@ public class FormInscriptionActivity extends AppCompatActivity {
                         }));
             }
         });
-        /*btn_valider_inscription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(FormInscriptionActivity.this, UtilisateurConnecte.class));
-            }
-        });*/
 
-//
         ClientRepository clientRepository = new ClientRepository();
 
         clientRepository.query().observe(this, new Observer<List<Client>>() {
@@ -132,19 +120,6 @@ public class FormInscriptionActivity extends AppCompatActivity {
                 Log.i("Clients", clients.toString());
             }
         });
-
-//
-
-//        NE FONCTIONNE PAS... Peut-être pcq liste vide??
-//
-//        clientRepository
-//                .create(new Client("Madame", "Nom", "Prenom", "e-mail", "tel", "motdepasse"))
-//                .observe(this, new Observer<Client>() {
-//                    @Override
-//                    public void onChanged(Client client) {
-//                        Log.i("Client", client.toString());
-//                    }
-//                });
     }
 
     public void goToFormConnexion(View view) {

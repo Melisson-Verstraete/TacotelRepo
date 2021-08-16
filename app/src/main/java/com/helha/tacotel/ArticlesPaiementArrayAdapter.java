@@ -73,7 +73,5 @@ public class ArticlesPaiementArrayAdapter extends ArrayAdapter<Article> {
             new DownloadImageTask(imgItem)
                     .execute(article.getImageURL());
         }
-
-
     }
 }

@@ -2,15 +2,10 @@ package com.helha.tacotel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
@@ -20,7 +15,6 @@ import java.util.List;
 
 import model.Article;
 import model.Contient;
-import model.Panier;
 import repository.ContientRepository;
 import repository.PanierRepository;
 

@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -36,8 +35,6 @@ import static com.helha.tacotel.FormPaiementBanqueActivity.SHARED_PREFS2;
 import static com.helha.tacotel.FormPaiementBanqueActivity.TITULAIRE_COMPTE;
 import static com.helha.tacotel.FormPaiementBanqueActivity.TYPE_CARTE;
 
-//import static final com.helha.tacotel.FormPaiementAdressesActivity.SHARED_PREFS;
-
 
 public class FormPaiementValidationActivity extends AppCompatActivity {
 
@@ -58,20 +55,10 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
     private TextView tv_mode_validation ;
     private TextView tv_titulaire_compte_validation ;
     private TextView tv_num_compte_validation ;
-    private TextView tv_cvv_validation ;
 
     private Button btn_payer_validation ;
     private Button btn_retour_validation ;
     static double sousTotalStatic;
-
-    //SharedPreferences Sprefs;
-    // private String prefName = "report" ;
-/*
-    SharedPreferences sharedpreferences;
-    public static final String SHARED_PREFS = "sharedPrefs";
-    SharedPreferences sharedpreferences2;
-    public static final String SHARED_PREFS2 = "sharedPrefs2";
-*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +79,6 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
         tv_mode_validation = (TextView) findViewById(R.id.tv_mode_validation) ;
         tv_titulaire_compte_validation = (TextView) findViewById(R.id.tv_titulaire_compte_validation) ;
         tv_num_compte_validation = (TextView) findViewById(R.id.tv_num_compte_validation) ;
-        //tv_cvv_validation = (TextView) findViewById(R.id.tv_cvv_validation) ;
 
         SharedPreferences sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         SharedPreferences sharedpreferences2 = getSharedPreferences(SHARED_PREFS2, Context.MODE_PRIVATE);
@@ -123,33 +109,7 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
         }
         if (sharedpreferences2.contains(NUM_COMPTE)) {
             tv_num_compte_validation.setText(sharedpreferences2.getString(NUM_COMPTE, ""));
-        }/*
-        if(sharedpreferences2.contains(checkedRadioButtonId)){
-
-        }*/
-
-/*
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        String text_nom1 = sharedPreferences.getString(STR_NOM1, "");
-
-        tv_nom1_validation.setText(text_nom1);*/
-/*
-        Intent intent = getIntent();
-        if (intent != null){
-            Toast.makeText(FormPaiementValidationActivity.this, "le intent fonctionne", Toast.LENGTH_SHORT).show() ;
-
-            //tv_nom1_validation.setText(intent.getStringExtra("tv_nom1_validation"));
-            tv_adresse1_validation.setText(intent.getStringExtra("tv_adresse1_validation"));
-            tv_pays1_validation.setText(intent.getStringExtra("tv_pays1_validation"));
-            tv_nom2_validation.setText(intent.getStringExtra("tv_nom2_validation"));
-            tv_adresse2_validation.setText(intent.getStringExtra("tv_adresse2_validation"));
-            tv_pays2_validation.setText(intent.getStringExtra("tv_pays2_validation"));
-
-            tv_mode_validation.setText(intent.getStringExtra("tv_mode_validation"));
-            tv_titulaire_compte_validation.setText(intent.getStringExtra("tv_titulaire_compte_validation"));
-            tv_num_compte_validation.setText(intent.getStringExtra("tv_num_compte_validation"));
-
-        }*/
+        }
     }
 
     public void afficherArticlesPanier() {

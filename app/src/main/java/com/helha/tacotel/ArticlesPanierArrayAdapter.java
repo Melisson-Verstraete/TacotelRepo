@@ -3,13 +3,11 @@ package com.helha.tacotel;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +20,6 @@ import java.util.List;
 
 import model.Article;
 import model.DownloadImageTask;
-import model.Panier;
 import repository.ContientRepository;
 
 public class ArticlesPanierArrayAdapter extends ArrayAdapter<Article> {

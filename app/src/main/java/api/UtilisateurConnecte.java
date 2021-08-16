@@ -16,12 +16,10 @@ public interface UtilisateurConnecte {
     Call<List<Utilisateur>> getUtilisateurs();
 
     @POST("dbTaCoTel/UtilisateurConnecte")
-    //Observable<String>  registerUser(@Body Utilisateur user);
     Observable<Utilisateur> registerUser(@Body Utilisateur user);
 
     @POST("dbTaCoTel/UtilisateurConnecte/authenticate")
     Observable<Utilisateur>  loginUser(@Body Login login);
-    //Observable<String> loginUser(@Body Utilisateur user);
 
     @GET("dbTaCoTel/UtilisateurConnecte/{idUser}")
     Call<Utilisateur> getSpeudo(@Path("idUser") int id);

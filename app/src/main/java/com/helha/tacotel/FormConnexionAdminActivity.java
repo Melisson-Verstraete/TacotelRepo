@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,12 +18,8 @@ import java.util.List;
 import api.AdminService;
 import api.ApiClient;
 import dmax.dialog.SpotsDialog;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import model.Admin;
-import model.Utilisateur;
 import repository.AdminRepository;
 
 public class FormConnexionAdminActivity extends AppCompatActivity {
@@ -75,28 +70,6 @@ public class FormConnexionAdminActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-                //create Admin to login
-//                Admin admin = new Admin(et_pseudo_admin.getText().toString(), et_mdp_admin.getText().toString());
-//
-//                compositeDisposable.add(adminService.loginAdmin(admin)
-//                        .subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(new Consumer<Admin>() {
-//                            @Override
-//                            public void accept(Admin a) throws Exception {
-//                                Toast.makeText(FormConnexionAdminActivity.this, a.toString(), Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(FormConnexionAdminActivity.this, AdminListArticlesActivity.class);
-//                                startActivityForResult(intent, REQUEST_CODE_ADMIN_LIST_ARTICLES);
-//                                dialog.dismiss();
-//                            }
-//                        }, new Consumer<Throwable>() {
-//                            @Override
-//                            public void accept(Throwable throwable) throws Exception {
-//                                dialog.dismiss();
-//                                Toast.makeText(FormConnexionAdminActivity.this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
-//                            }
-//                        }));
             }
         });
     }
@@ -116,5 +89,4 @@ public class FormConnexionAdminActivity extends AppCompatActivity {
         Intent intent = new Intent(FormConnexionAdminActivity.this,FormConnexionActivity.class);
         startActivityForResult(intent, REQUEST_CODE_FORM_CONNEXION);
     }
-
 }

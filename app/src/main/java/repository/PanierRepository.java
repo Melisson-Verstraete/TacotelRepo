@@ -1,17 +1,13 @@
 package repository;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import java.io.IOException;
 import java.util.List;
 
 import api.ApiClient;
 import api.PanierService;
 import model.Article;
-import model.Contient;
 import model.Panier;
 import retrofit2.Call;
 import retrofit2.Callback;

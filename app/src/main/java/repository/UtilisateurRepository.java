@@ -3,9 +3,6 @@ package repository;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import java.util.List;
-
-import model.Utilisateur;
 import model.Utilisateur;
 import retrofit2.Call;
 import retrofit2.Callback;

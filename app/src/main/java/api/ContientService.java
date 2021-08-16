@@ -19,7 +19,6 @@ public interface ContientService {
     @POST("dbTaCoTel/Contient/Panier/{idPanier}/Article/{idArticle}")
     Call<Contient> postContient(@Body Contient contient,@Path("idPanier") int idPanier,@Path("idArticle") int idArticle);
 
-    //Il manque "dbTaCoTel/Contient
     @DELETE("dbTaCoTel/Contient/{idPanier}")
     Call<Boolean> deleteContient(@Path("idPanier") int idPanier);
 

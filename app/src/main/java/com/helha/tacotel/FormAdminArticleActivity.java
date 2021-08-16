@@ -2,9 +2,7 @@ package com.helha.tacotel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,7 +10,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
 
 import java.util.ArrayList;
@@ -93,34 +90,28 @@ public class FormAdminArticleActivity extends AppCompatActivity {
             tvTitle.setText("Modification Article");
             btnAdd.setText("Modifier");
 
-
-            Log.i("Test",article.toString());
             articleRepository.getCategorieByArticle(article.getIdArticle()).observe(this, new Observer<Integer>() {
                 @Override
                 public void onChanged(Integer idFound) {
 
-                    if(idFound != 0){
+                    if (idFound != 0) {
                        spCategorie.setSelection(adapter.getPosition(adapter.getItem(idFound-1)));
                        nameCategorie = adapter.getItem(idFound-1) ;
                        isNew = 1;
 
-                    }
-                    else{
+                    } else{
                         isNew = 0;
                     }
                     adapter.notifyDataSetChanged();
 
                 }
             });
-
-
-
         }
+
         if(btnAdd.getText().equals("Modifier")){
             tvCategorie.setVisibility(View.VISIBLE);
             spCategorie.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else{
 
             tvCategorie.setVisibility(View.GONE);
             spCategorie.setVisibility(View.GONE);
@@ -157,7 +148,7 @@ public class FormAdminArticleActivity extends AppCompatActivity {
                 article.setQteEnStock(Integer.valueOf(tvStock.getText().toString()));
                 article.setTailleEcran(Double.valueOf(tvEcran.getText().toString()));
                 article.setTailleMemoire(Double.valueOf(tvMemoire.getText().toString()));
-                for(int i=0;i<categories.size();i++){
+                for (int i=0;i<categories.size();i++) {
                     if(categories.get(i).getNomCategorie().equals(nameCategorie)){
 
                         article.setCategorie(categories.get(i));
@@ -170,15 +161,11 @@ public class FormAdminArticleActivity extends AppCompatActivity {
                     if(isNew != 0){
                         articleRepository.deleteCategorieFromArticle(article.getIdArticle());
                         articleRepository.setCategorie(article.getIdArticle(),article.getCategorie().getIdCategorie());
-                    }
-                    else{
+                    } else{
                         articleRepository.setCategorie(article.getIdArticle(),article.getCategorie().getIdCategorie());
                     }
-
-                }
-                else{
+                } else {
                     articleRepository.create(article);
-
                 }
                 startActivityForResult(intent,REQUEST_CODE_FORM_ADD_ARTICLE);
             }
