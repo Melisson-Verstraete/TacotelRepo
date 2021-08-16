@@ -68,8 +68,6 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
                 if(isChecked){
                     et_cvv.setVisibility(View.INVISIBLE);
                     TYPE_CARTE = "débit";
-                    //String str_mode_paiement = "carte débit" ;
-                    //rb2.setChecked(false);
                 }
             }
         });
@@ -80,8 +78,6 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
                 if(isChecked){
                     et_cvv.setVisibility(View.VISIBLE);
                     TYPE_CARTE = "crédit";
-                    //String str_mode_paiement = "carte crédit" ;
-                    //rb2.setChecked(false);
                 }
             }
         });
@@ -101,14 +97,6 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
             radioButton_debit.setChecked(sharedpreferences2.getBoolean("TYPE_CARTE", false));
         }
 
-/*
-        Intent intent = getIntent();
-        if (intent != null){
-            Toast.makeText(FormPaiementBanqueActivity.this, "le intent fonctionne", Toast.LENGTH_SHORT).show() ;
-            tv_nom1_validation.setText(intent.getStringExtra("tv_nom1_validation"));
-            tv_adresse1_validation.setText(intent.getStringExtra("tv_adresse1_validation"));
-            tv_pays1_validation.setText(intent.getStringExtra("tv_pays1_validation"));
-        }*/
     }
 
     public void goToMenuFromPaiementBanque(View view) {
@@ -148,14 +136,6 @@ public class FormPaiementBanqueActivity extends AppCompatActivity {
 
             editor.commit() ;
 
-            //intent.putExtra("tv_nom1_validation", str)
- /*           tv_nom1_validation.setText(intent.getStringExtra("tv_nom1_validation"));
-
-            //intent.putExtra("tv_mode_validation", str_mode_paiement) ;
-            intent.putExtra("tv_titulaire_compte_validation", str_titulaire_compte) ;
-            intent.putExtra("tv_num_compte_validation", str_num_compte) ;
-
-            startActivity(intent);*/
         }
     }
 

@@ -69,10 +69,6 @@ public class FormPaiementAdressesActivity extends AppCompatActivity implements L
     private Button btnLocation;
     private LocationManager locationManager;
 
-/*
-    SharedPreferences Sprefs;
-    public static final String prefName = "report" ;*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +92,6 @@ public class FormPaiementAdressesActivity extends AppCompatActivity implements L
         et_ville2_adresses = (EditText) findViewById(R.id.et_ville2_adresses);
         et_pays2_adresses = (EditText) findViewById(R.id.et_pays2_adresses);
 
-        //findViewById(R.id.btn_suivant_adresses).setOnClickListener(this);
         btn_adresses_similaires = (Button) findViewById(R.id.btn_adresses_similaires) ;
         btn_suivant_adresses = (Button) findViewById(R.id.btn_suivant_adresses) ;
         btnLocation = (Button) findViewById(R.id.btn_set_location);
@@ -114,11 +109,6 @@ public class FormPaiementAdressesActivity extends AppCompatActivity implements L
                 getLocation();
             }
         });
-/*
-        Intent intent_validation = new Intent(FormPaiementAdressesActivity.this,FormPaiementValidationActivity.class);
-        intent_validation.putExtra("tv_nom1_validation", str_prenom1+" "+str_nom1) ;
-
-        startActivity(intent_validation);*/
 
         sharedpreferences = getSharedPreferences(SHARED_PREFS,Context.MODE_PRIVATE);
         if (sharedpreferences.contains(NOM1_ADRESSES)) {
@@ -176,7 +166,6 @@ public class FormPaiementAdressesActivity extends AppCompatActivity implements L
 
         }
 
-
     }
 
     @SuppressLint("MissingPermission")
@@ -210,7 +199,6 @@ public class FormPaiementAdressesActivity extends AppCompatActivity implements L
         String str_ville2 = et_ville2_adresses.getText().toString();
         String str_pays2 = et_pays2_adresses.getText().toString();
 
-        //Sprefs = getSharedPreferences(prefName, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
         if (str_nom1.isEmpty()||str_nom2.isEmpty()||str_prenom1.isEmpty()||str_prenom2.isEmpty()||str_rue1.isEmpty()||
@@ -223,40 +211,14 @@ public class FormPaiementAdressesActivity extends AppCompatActivity implements L
             Intent intent = new Intent(FormPaiementAdressesActivity.this, FormPaiementBanqueActivity.class);
             startActivityForResult(intent, REQUEST_CODE_PAIEMENT_BANQUE);
 
-            //SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-            //SharedPreferences.Editor editor = sharedPreferences.edit();
-
             editor.putString(NOM1_ADRESSES, str_nom1 + " " + str_prenom1) ;
-            //editor.putString(PRENOM1_ADRESSES, str_prenom1) ;
             editor.putString(RUE1_ADRESSES, str_rue1 +" "+str_numero1+" "+str_codePostal1+ " "+str_ville1) ;
-            //editor.putString(NUMERO1_ADRESSES, str_numero1) ;
-            // editor.putString(CODEPOSTAL1_ADRESSES, str_codePostal1) ;
-            //editor.putString(VILLE1_ADRESSES, str_ville1) ;
             editor.putString(PAYS1_ADRESSES, str_pays1) ;
             editor.putString(NOM2_ADRESSES, str_nom2+ " " + str_prenom2) ;
-            //editor.putString(PRENOM2_ADRESSES, str_prenom2) ;
             editor.putString(RUE2_ADRESSES, str_rue2+" "+str_numero2+" "+str_codePostal2+ " "+str_ville2) ;
-            //editor.putString(NUMERO2_ADRESSES, str_numero2) ;
-            //editor.putString(CODEPOSTAL2_ADRESSES, str_codePostal2) ;
-            //editor.putString(VILLE2_ADRESSES, str_ville2) ;
             editor.putString(PAYS2_ADRESSES, str_pays2) ;
 
             editor.commit();
-
-            //Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show();*/
-/*
-            editor.putString("str_nom1"+et_nom1_adresses.getText().toString(), et_nom1_adresses.getText().toString()) ;
-
-            editor.commit() ;*/
-
-            //Intent intent_validation = new Intent(FormPaiementAdressesActivity.this, FormPaiementValidationActivity.class);
-
-            //intent.putExtra("tv_nom1_validation", str_prenom1+" "+str_nom1) ;
-            //intent.putExtra("et_prenom1_adresses", str_prenom1) ;
-            //intent.putExtra("et_rue1_adresses", str_rue1) ;
-
-
-            //startActivity(intent_validation);
         }
     }
 
@@ -307,96 +269,4 @@ public class FormPaiementAdressesActivity extends AppCompatActivity implements L
     public void onProviderDisabled(@NonNull String provider) {
 
     }
-/*
-    public void formulaireLivraison () {
-        String str_nom1 ="" ;
-        String str_prenom1 ="";
-        String str_rue1 ="" ;
-        String str_numero1 ="" ;
-        String str_codePostal1 ="" ;
-        String str_ville1 ="" ;
-        String str_pays1 ="" ;
-        String str_nom2 ="" ;
-        String str_prenom2 ="";
-        String str_rue2 ="" ;
-        String str_numero2 ="" ;
-        String str_codePostal2 ="" ;
-        String str_ville2 ="" ;
-        String str_pays2 ="" ;
-
-        //Validation
-        boolean info_valable=true;
-
-        //s'assurer que ce n'est pas vide
-        if(et_nom1_adresses.getText().toString().trim().equals("")||et_nom2_adresses.getText().toString().trim().equals("")==false){
-            str_nom1=et_nom1_adresses.getText().toString().trim();
-            str_nom2=et_nom2_adresses.getText().toString().trim();
-        }else{
-            info_valable=false;
-        }
-
-        if(et_prenom1_adresses.getText().toString().trim().equals("")||et_prenom2_adresses.getText().toString().trim().equals("")==false){
-            str_prenom1=et_prenom1_adresses.getText().toString().trim();
-            str_prenom2=et_prenom2_adresses.getText().toString().trim();
-        }else{
-            info_valable=false;
-        }
-
-        if(et_rue1_adresses.getText().toString().trim().equals("")||et_rue2_adresses.getText().toString().trim().equals("")==false){
-            str_rue1=et_rue1_adresses.getText().toString().trim();
-            str_rue2=et_rue2_adresses.getText().toString().trim();
-        }else{
-            info_valable=false;
-        }
-
-        if(et_numero1_adresses.getText().toString().trim().equals("")||et_numero2_adresses.getText().toString().trim().equals("")==false){
-            str_numero1=et_numero1_adresses.getText().toString().trim();
-            str_numero2=et_numero2_adresses.getText().toString().trim();
-        }else{
-            info_valable=false;
-        }
-
-        if(et_codePostal1_adresses.getText().toString().trim().equals("")||et_codePostal2_adresses.getText().toString().trim().equals("")==false){
-            str_codePostal1=et_codePostal1_adresses.getText().toString().trim();
-            str_codePostal2=et_codePostal2_adresses.getText().toString().trim();
-        }else{
-            info_valable=false;
-        }
-
-        if(et_ville1_adresses.getText().toString().trim().equals("")||et_ville2_adresses.getText().toString().trim().equals("")==false){
-            str_ville1=et_ville1_adresses.getText().toString().trim();
-            str_ville2=et_ville2_adresses.getText().toString().trim();
-        }else{
-            info_valable=false;
-        }
-
-        if(et_pays1_adresses.getText().toString().trim().equals("")||et_pays2_adresses.getText().toString().trim().equals("")==false){
-            str_pays1=et_pays1_adresses.getText().toString().trim();
-            str_pays2=et_pays2_adresses.getText().toString().trim();
-        }else{
-            info_valable=false;
-        }
-
-        if (info_valable==false){
-            Toast.makeText(getApplicationContext(),"Il manque des informations", Toast.LENGTH_SHORT).show();
-        }/*else{
-                    Intent intent = new Intent(getApplicationContext(), ViewInfoActivity.class);
-                    intent.putExtra("nom",str_nom);
-                    intent.putExtra("prenom",str_prenom);
-                    finish();
-                    startActivity(intent);
-                }
-    }
-
-
-    //@Override
-    public void onClick(View view) {
-        switch(view.getId()) {
-
-            case R.id.btn_suivant_adresses:
-                formulaireLivraison() ;
-                break;
-
-        }
-    }*/
 }
