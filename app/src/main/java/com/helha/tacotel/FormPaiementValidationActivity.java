@@ -182,8 +182,7 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
                 if(contientsApi != null){
                     contients.clear();
                     contients.addAll(contientsApi);
-                    for (Contient contient:contients
-                    ) {
+                    for (Contient contient:contients) {
                         sousTotalStatic +=contient.getQteArticleChoisi()*contient.getArticle().getPrix();
                     }
                     DecimalFormat df = new DecimalFormat("#.00");
@@ -198,57 +197,45 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
     }
 
     public void goToMenuFromPaiementValidation(View view) {
+        modifierQteEnStockArticle();
+
+        // DELETE DU PANIER
+        PanierRepository panierRepository = new PanierRepository();
+        panierRepository.delete(idUser);
+
         Intent intent = new Intent(FormPaiementValidationActivity.this,MenuActivity.class);
         startActivityForResult(intent, REQUEST_CODE_MENU);
     }
 
     public void goToPaiementBanqueFromPaiementValidation(View view) {
-        modifierQteEnStockArticle();
-
         Intent intent = new Intent(FormPaiementValidationActivity.this,FormPaiementBanqueActivity.class);
         startActivityForResult(intent, REQUEST_CODE_FORM_BANQUE);
     }
 
-
     public void modifierQteEnStockArticle() {
-        List<Integer> idChaqueArticle = new ArrayList<>() ;
-        ListView listView = findViewById(R.id.lv_articles_validation);
-
         ArticleRepository articleRepository = new ArticleRepository();
-        ContientRepository contientRepository = new ContientRepository() ;
+        ContientRepository contientRepository = new ContientRepository();
 
         articleRepository.query().observe(this, new Observer<List<Article>>() {
             @Override
             public void onChanged(List<Article> articlesApi) {
-                Toast.makeText(FormPaiementValidationActivity.this, "rentre dans la méthode", Toast.LENGTH_SHORT).show() ;
                 contientRepository.query(idUser).observe(FormPaiementValidationActivity.this, new Observer<List<Contient>>() {
                     @Override
                     public void onChanged(List<Contient> contientsApi) {
-                        for(int i=0; i<articlesApi.size(); i++){
-                            for(int j=0; j<contientsApi.size();j++){
-                                if(articlesApi.get(i).getIdArticle()==contientsApi.get(j).getArticle().getIdArticle()){
-                                    articlesApi.get(i).setQteEnStock(articlesApi.get(i).getQteEnStock()-contientsApi.get(j).getArticle().getQteEnStock());
-                                    articleRepository.update(articlesApi.get(i).getIdArticle(), articlesApi.get(i)) ;
-                                    Log.i("C'est bon ça marche", articlesApi.get(i).toString()) ;
+                        for (int i = 0; i < articlesApi.size(); i++) {
+                            for (int j = 0; j < contientsApi.size(); j++) {
+                                if (articlesApi.get(i).getIdArticle() == contientsApi.get(j).getArticle().getIdArticle()) {
+                                    int nouvelleQuantite = articlesApi.get(i).getQteEnStock() - contientsApi.get(j).getQteArticleChoisi();
+                                    Log.i("nouvelle", ""+nouvelleQuantite);
+                                    articlesApi.get(i).setQteEnStock(nouvelleQuantite);
+                                    articleRepository.update(articlesApi.get(i).getIdArticle(), articlesApi.get(i));
+                                    break;
                                 }
                             }
                         }
                     }
                 });
-
-
-            }/*
-            articleRepository
-                    .update(idChaqueArticle, Article article).observe(this, new Observer<Article>() {
-
-                @Override
-                public void onChanged(Article article) {
-
-                }
-            });*/
-
+            }
         });
-
-
     }
 }

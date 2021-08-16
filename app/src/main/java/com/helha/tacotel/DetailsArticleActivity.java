@@ -148,8 +148,6 @@ public class DetailsArticleActivity extends AppCompatActivity {
 
         Intent intent = new Intent(DetailsArticleActivity.this, MagasinActivity.class);
         startActivityForResult(intent, REQUEST_CODE_MAGASIN);
-        // DELETE DU PANIER
-//        panierRepository.delete(idUser);
     }
 
     // REDIRECTION VERS MENU
