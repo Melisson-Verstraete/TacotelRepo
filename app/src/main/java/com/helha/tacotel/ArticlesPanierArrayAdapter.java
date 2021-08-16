@@ -112,10 +112,14 @@ public class ArticlesPanierArrayAdapter extends ArrayAdapter<Article> {
                     @Override
                     public void onClick(View view) {
 
-                        int qte = Integer.parseInt(etQteItem.getText().toString());Log.i("QUANTITE", ""+qte);
-                        contientRepository.update(idUser,article.getIdArticle(),qte);
-                        etQteItem.setVisibility(View.GONE);
-                        tvQteItem.setVisibility(View.VISIBLE);
+                        if(!(etQteItem.getText().toString().isEmpty())){
+
+                            int qte = Integer.parseInt(etQteItem.getText().toString());Log.i("QUANTITE", ""+qte);
+                            contientRepository.update(idUser,article.getIdArticle(),qte);
+
+                            etQteItem.setVisibility(View.GONE);
+                            tvQteItem.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
             }
