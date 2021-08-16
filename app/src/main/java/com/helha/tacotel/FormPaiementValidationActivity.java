@@ -74,9 +74,9 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
 
         List<Article> articles = new ArrayList<>();
         ListView listView = findViewById(R.id.lv_articles_validation);
-        ArticlesPanierArrayAdapter articlesPanierArrayAdapter = new ArticlesPanierArrayAdapter(this, R.id.lv_articles_validation, articles);
+        ArticlesPaiementArrayAdapter articlesPaiementArrayAdapter = new ArticlesPaiementArrayAdapter(this, R.id.lv_articles_validation, articles);
 
-        listView.setAdapter(articlesPanierArrayAdapter);
+        listView.setAdapter(articlesPaiementArrayAdapter);
 
         PanierRepository panierRepository = new PanierRepository();
 
@@ -86,7 +86,7 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
             public void onChanged(List<Article> articlesApi) {
                 articles.clear();
                 articles.addAll(articlesApi);
-                articlesPanierArrayAdapter.notifyDataSetChanged();
+                articlesPaiementArrayAdapter.notifyDataSetChanged();
             }
         });
 
