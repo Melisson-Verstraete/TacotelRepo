@@ -107,17 +107,26 @@ public class DetailsArticleActivity extends AppCompatActivity {
         panierRepository.query().observe(this, new Observer<List<Panier>>() {
             @Override
             public void onChanged(List<Panier> paniersApi) {
-                Log.i("paniers", paniersApi.toString());
                 int existe = 0;
-                for (int j = 0; j < paniersApi.size(); j++) {
-                    if (paniersApi.get(j).getIdPanier() == idUser) {
-                        existe = 1;
-                    }
-                }
-                if (existe == 0) {
+                if(paniersApi.size() == 0 ){
+
+                    Log.i("paniers","Je suis ici");
                     panierRepository.create(new Panier(idUser));
-                } else {
-                    existe = 0;
+                }
+                else {
+                    for (int j = 0; j < paniersApi.size(); j++) {
+
+                        if (paniersApi.get(j).getIdPanier() == idUser) {
+                            existe = 1;
+                        }
+                    }
+                    if (existe == 0) {
+
+                        Log.i("paniers", "Je suis ici");
+                        panierRepository.create(new Panier(idUser));
+                    } else {
+
+                    }
                 }
             }
         });

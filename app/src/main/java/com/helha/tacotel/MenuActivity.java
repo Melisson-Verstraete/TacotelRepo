@@ -11,9 +11,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import java.util.Date;
+import java.util.List;
+
 import api.UtilisateurConnecte;
+import model.Client;
 import model.Login;
 import model.Utilisateur;
+import repository.ClientRepository;
 import repository.UtilisateurRepository;
 
 public class MenuActivity extends AppCompatActivity {
@@ -23,7 +28,9 @@ public class MenuActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_DETAILS_ARTICLE = 1;
     private static final int REQUEST_CODE_FORM_PAIEMENT_ADRESSES = 1;
     private static final int REQUEST_CODE_MAIN = 1;
-
+    int id = 0;
+    Client client = null;
+    ClientRepository clientRepository = new ClientRepository();
     Button btn_deconnexion;
     TextView tv_nom_menu;
     //EditText et_pseudo_connexion;
@@ -36,7 +43,7 @@ public class MenuActivity extends AppCompatActivity {
         btn_deconnexion = (Button)findViewById(R.id.btn_deconnexion);
         tv_nom_menu = (TextView)findViewById(R.id.tv_nom_menu);
         Bundle bundle = getIntent().getExtras();
-        int id = 0;
+
         if(bundle != null){
              id = bundle.getInt("pseudo");
 
@@ -52,16 +59,38 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
         UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
+
         utilisateurRepository.query(id).observe(this, new Observer<Utilisateur>() {
             @Override
             public void onChanged(Utilisateur utilisateur) {
                 if(utilisateur != null)
                 {
                     tv_nom_menu.setText(utilisateur.getPseudo());
+                    client = new Client(id,"M",utilisateur.getNom(),utilisateur.getPrenom(),new Date(),utilisateur.getMail(),"tel",utilisateur.getMdp());
                 }else{
-                    Log.i("utilisateur","hello");
-                }
+                    }
 
+            }
+        });
+
+        clientRepository.query().observe(this, new Observer<List<Client>>() {
+            @Override
+            public void onChanged(List<Client> clients) {
+                int existe = 0;
+                if(clients.size()==0){
+                    clientRepository.create(client);
+                }
+                else{
+                    for (Client clientFound:clients
+                         ) {
+                        if(clientFound.getIdClient() == client.getIdClient()){
+                            existe = 1;
+                        }
+                    }
+                    if(existe == 0){
+                        clientRepository.create(client);
+                    }
+                }
             }
         });
 

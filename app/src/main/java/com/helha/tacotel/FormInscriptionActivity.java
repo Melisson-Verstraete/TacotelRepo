@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import java.util.Date;
 import java.util.List;
 
 import api.ApiClient;
@@ -102,7 +103,7 @@ public class FormInscriptionActivity extends AppCompatActivity {
                                     finish();
                                 }
                                 //Toast.makeText(FormInscriptionActivity.this, u.toString(), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(FormInscriptionActivity.this, MenuActivity.class);
+                                Intent intent = new Intent(FormInscriptionActivity.this, FormConnexionActivity.class);
                                 startActivityForResult(intent, REQUEST_CODE_FORM_CONNEXION_MENU);
                                 dialog.dismiss();
                             }

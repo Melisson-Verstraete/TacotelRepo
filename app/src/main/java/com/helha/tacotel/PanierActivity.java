@@ -60,8 +60,10 @@ public class PanierActivity extends AppCompatActivity {
         contientRepository.query(idUser).observe(this, new Observer<List<Contient>>() {
             @Override
             public void onChanged(List<Contient> contientsApi) {
-                contients.clear();
-                contients.addAll(contientsApi);
+                if(contientsApi != null){
+                    contients.clear();
+                    contients.addAll(contientsApi);
+                }
             }
         });
 
