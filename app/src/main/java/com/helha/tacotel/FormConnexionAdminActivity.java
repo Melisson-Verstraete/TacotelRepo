@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -34,40 +33,20 @@ public class FormConnexionAdminActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_FORM_CONNEXION = 1;
 
     AdminService adminService;
-    Utilisateur utilisateur;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
-
-    TextView tv_tacotel_admin,tv_admin,tv_pseudo_admin,tv_mdp_admin,tv_connexion_client;
-    EditText et_pseudo_admin,et_mdp_admin;
-    Button btn_valider_admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_connexion_admin);
 
-        AdminRepository adminRepository = new AdminRepository();
-
-       /* adminRepository.query().observe(this, new Observer<List<Admin>>() {
-            @Override
-            public void onChanged(List<Admin> admins) {
-                Log.i("Admins", admins.toString());
-            }
-        });*/
-
-
-        //Init Api
-        adminService = ApiClient.getClient().create(AdminService.class);
+       //Init Api
+       adminService = ApiClient.getClient().create(AdminService.class);
 
         //views
-        et_pseudo_admin = (EditText)findViewById(R.id.et_pseudo_admin);
-        et_mdp_admin = (EditText)findViewById(R.id.et_mdp_admin);
-        btn_valider_admin = (Button)findViewById(R.id.btn_valider_admin);
-        tv_tacotel_admin = (TextView)findViewById(R.id.tv_tacotel_admin);
-        tv_admin = (TextView)findViewById(R.id.tv_admin);
-        tv_pseudo_admin = (TextView)findViewById(R.id.tv_pseudo_admin);
-        tv_mdp_admin = (TextView)findViewById(R.id.tv_mdp_admin);
-        tv_connexion_client = (TextView)findViewById(R.id.tv_connexion_client);
+        EditText et_pseudo_admin = findViewById(R.id.et_pseudo_admin);
+        EditText et_mdp_admin = findViewById(R.id.et_mdp_admin);
+        Button btn_valider_admin = findViewById(R.id.btn_valider_admin);
 
         //Event
         btn_valider_admin.setOnClickListener(new View.OnClickListener() {
@@ -79,27 +58,45 @@ public class FormConnexionAdminActivity extends AppCompatActivity {
                         .build();
                 dialog.show();
 
-                //create Admin to login
-                Admin admin = new Admin(et_pseudo_admin.getText().toString(), et_mdp_admin.getText().toString());
-
-                compositeDisposable.add(adminService.loginAdmin(admin)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<Admin>() {
-                            @Override
-                            public void accept(Admin a) throws Exception {
-                                Toast.makeText(FormConnexionAdminActivity.this, a.toString(), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(FormConnexionAdminActivity.this, AdminListArticlesActivity.class);
+                AdminRepository adminRepository = new AdminRepository();
+                adminRepository.query().observe(FormConnexionAdminActivity.this, new Observer<List<Admin>>() {
+                    @Override
+                    public void onChanged(List<Admin> adminsApi) {
+                        for (int j=0;j<adminsApi.size();j++) {
+                            if ((et_pseudo_admin.getText().toString().equals(adminsApi.get(j).getLogin())) && (et_mdp_admin.getText().toString().equals(adminsApi.get(j).getMdpAdmin()))) {
+                                Intent intent = new Intent(FormConnexionAdminActivity.this,AdminListArticlesActivity.class);
                                 startActivityForResult(intent, REQUEST_CODE_ADMIN_LIST_ARTICLES);
-                                dialog.dismiss();
+                            } else {
+                                String message = "Le login et/ou le mot de passe est incorrecte. Veuillez svp ré-essayer.";
+                                Toast.makeText(FormConnexionAdminActivity.this, message, Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(FormConnexionAdminActivity.this,FormConnexionAdminActivity.class);
+                                startActivityForResult(intent, REQUEST_CODE_ADMIN_LIST_ARTICLES);
                             }
-                        }, new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
-                                dialog.dismiss();
-                                Toast.makeText(FormConnexionAdminActivity.this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }));
+                        }
+                    }
+                });
+
+                //create Admin to login
+//                Admin admin = new Admin(et_pseudo_admin.getText().toString(), et_mdp_admin.getText().toString());
+//
+//                compositeDisposable.add(adminService.loginAdmin(admin)
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(new Consumer<Admin>() {
+//                            @Override
+//                            public void accept(Admin a) throws Exception {
+//                                Toast.makeText(FormConnexionAdminActivity.this, a.toString(), Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(FormConnexionAdminActivity.this, AdminListArticlesActivity.class);
+//                                startActivityForResult(intent, REQUEST_CODE_ADMIN_LIST_ARTICLES);
+//                                dialog.dismiss();
+//                            }
+//                        }, new Consumer<Throwable>() {
+//                            @Override
+//                            public void accept(Throwable throwable) throws Exception {
+//                                dialog.dismiss();
+//                                Toast.makeText(FormConnexionAdminActivity.this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+//                            }
+//                        }));
             }
         });
     }

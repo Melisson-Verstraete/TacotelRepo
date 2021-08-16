@@ -4,8 +4,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import model.Admin;
-import model.Login;
-import model.Utilisateur;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;

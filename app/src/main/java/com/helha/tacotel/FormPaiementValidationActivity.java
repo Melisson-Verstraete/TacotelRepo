@@ -72,33 +72,7 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_paiement_validation);
 
-        List<Article> articles = new ArrayList<>();
-        ListView listView = findViewById(R.id.lv_articles_validation);
-        ArticlesPaiementArrayAdapter articlesPaiementArrayAdapter = new ArticlesPaiementArrayAdapter(this, R.id.lv_articles_validation, articles);
-
-        listView.setAdapter(articlesPaiementArrayAdapter);
-
-        PanierRepository panierRepository = new PanierRepository();
-
-        // RECUPERATION DE LA LISTE DES ARTICLES DANS LE PANIER
-        panierRepository.getArticles(idUser).observe(this, new Observer<List<Article>>() {
-            @Override
-            public void onChanged(List<Article> articlesApi) {
-                articles.clear();
-                articles.addAll(articlesApi);
-                articlesPaiementArrayAdapter.notifyDataSetChanged();
-            }
-        });
-
-        ContientRepository contientRepository = new ContientRepository();
-
-        contientRepository.query(idUser).observe(this, new Observer<List<Contient>>() {
-            @Override
-            public void onChanged(List<Contient> contientsApi) {
-                contients.clear();
-                contients.addAll(contientsApi);
-            }
-        });
+        afficherArticlesPanier();
 
         btn_payer_validation = (Button) findViewById(R.id.btn_payer_validation);
         btn_retour_validation = (Button) findViewById(R.id.btn_retour_validation);
@@ -167,9 +141,36 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
             tv_num_compte_validation.setText(intent.getStringExtra("tv_num_compte_validation"));
 
         }*/
+    }
 
+    public void afficherArticlesPanier() {
+        List<Article> articles = new ArrayList<>();
+        ListView listView = findViewById(R.id.lv_articles_validation);
+        ArticlesPaiementArrayAdapter articlesPaiementArrayAdapter = new ArticlesPaiementArrayAdapter(this, R.id.lv_articles_validation, articles);
 
+        listView.setAdapter(articlesPaiementArrayAdapter);
 
+        PanierRepository panierRepository = new PanierRepository();
+
+        // RECUPERATION DE LA LISTE DES ARTICLES DANS LE PANIER
+        panierRepository.getArticles(idUser).observe(this, new Observer<List<Article>>() {
+            @Override
+            public void onChanged(List<Article> articlesApi) {
+                articles.clear();
+                articles.addAll(articlesApi);
+                articlesPaiementArrayAdapter.notifyDataSetChanged();
+            }
+        });
+
+        ContientRepository contientRepository = new ContientRepository();
+
+        contientRepository.query(idUser).observe(this, new Observer<List<Contient>>() {
+            @Override
+            public void onChanged(List<Contient> contientsApi) {
+                contients.clear();
+                contients.addAll(contientsApi);
+            }
+        });
     }
 
     public void goToMenuFromPaiementValidation(View view) {
@@ -181,5 +182,4 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
         Intent intent = new Intent(FormPaiementValidationActivity.this,FormPaiementBanqueActivity.class);
         startActivityForResult(intent, REQUEST_CODE_FORM_BANQUE);
     }
-
 }
