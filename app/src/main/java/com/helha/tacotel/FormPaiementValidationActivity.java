@@ -57,6 +57,7 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
 
     private Button btn_payer_validation ;
     private Button btn_retour_validation ;
+    static double sousTotalStatic;
 
     //SharedPreferences Sprefs;
     // private String prefName = "report" ;
@@ -144,6 +145,11 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
     }
 
     public void afficherArticlesPanier() {
+        TextView tvSousTotal = findViewById(R.id.tv_sous_total_result_validation);
+        TextView tvTVA = findViewById(R.id.tv_tva_result_validation);
+        TextView tvTotal = findViewById(R.id.tv_total_result_validation);
+
+
         List<Article> articles = new ArrayList<>();
         ListView listView = findViewById(R.id.lv_articles_validation);
         ArticlesPaiementArrayAdapter articlesPaiementArrayAdapter = new ArticlesPaiementArrayAdapter(this, R.id.lv_articles_validation, articles);
@@ -167,8 +173,20 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
         contientRepository.query(idUser).observe(this, new Observer<List<Contient>>() {
             @Override
             public void onChanged(List<Contient> contientsApi) {
-                contients.clear();
-                contients.addAll(contientsApi);
+                if(contientsApi != null){
+                    contients.clear();
+                    contients.addAll(contientsApi);
+                    for (Contient contient:contients
+                    ) {
+                        sousTotalStatic +=contient.getQteArticleChoisi()*contient.getArticle().getPrix();
+                    }
+                    tvSousTotal.setText("€ " + sousTotalStatic);
+                    double tva = sousTotalStatic * 0.79;
+                    tvTVA.setText("€ " + tva);
+                    double total = sousTotalStatic + tva;
+                    tvTotal.setText("€ " + total);
+
+                }
             }
         });
     }

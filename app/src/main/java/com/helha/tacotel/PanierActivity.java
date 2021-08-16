@@ -70,7 +70,6 @@ public class PanierActivity extends AppCompatActivity {
                     contients.addAll(contientsApi);
                     for (Contient contient:contients
                          ) {
-                        Log.i("Test","Quantite : " + contient.getQteArticleChoisi()+", prix : "+contient.getArticle().getPrix());
                         sousTotalStatic +=contient.getQteArticleChoisi()*contient.getArticle().getPrix();
                     }
                     tvSousTotal.setText("€ " + sousTotalStatic);
