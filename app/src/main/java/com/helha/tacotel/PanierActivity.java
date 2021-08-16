@@ -79,12 +79,9 @@ public class PanierActivity extends AppCompatActivity {
                     tvTVA.setText("€ " + tva);
                     double total = sousTotalStatic + tva;
                     tvTotal.setText("€ " + total);
-
                 }
             }
         });
-
-
     }
 
     public void goToMenuFromPanier(View view) {
