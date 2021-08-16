@@ -47,6 +47,8 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
     int idUser = FormConnexionActivity.getIdUserConnected();
     static List<Contient> contients = new ArrayList<>();
 
+    ContientRepository contientRepository = new ContientRepository();
+
     private TextView tv_nom1_validation ;
     private TextView tv_adresse1_validation ;
     private TextView tv_pays1_validation ;
@@ -201,6 +203,7 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
 
         // DELETE DU PANIER
         PanierRepository panierRepository = new PanierRepository();
+        contientRepository.delete(idUser);
         panierRepository.delete(idUser);
 
         Intent intent = new Intent(FormPaiementValidationActivity.this,MenuActivity.class);
@@ -214,7 +217,6 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
 
     public void modifierQteEnStockArticle() {
         ArticleRepository articleRepository = new ArticleRepository();
-        ContientRepository contientRepository = new ContientRepository();
 
         articleRepository.query().observe(this, new Observer<List<Article>>() {
             @Override
@@ -226,7 +228,6 @@ public class FormPaiementValidationActivity extends AppCompatActivity {
                             for (int j = 0; j < contientsApi.size(); j++) {
                                 if (articlesApi.get(i).getIdArticle() == contientsApi.get(j).getArticle().getIdArticle()) {
                                     int nouvelleQuantite = articlesApi.get(i).getQteEnStock() - contientsApi.get(j).getQteArticleChoisi();
-                                    Log.i("nouvelle", ""+nouvelleQuantite);
                                     articlesApi.get(i).setQteEnStock(nouvelleQuantite);
                                     articleRepository.update(articlesApi.get(i).getIdArticle(), articlesApi.get(i));
                                     break;
